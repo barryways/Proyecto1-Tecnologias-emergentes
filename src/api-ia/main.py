@@ -1,16 +1,22 @@
-# This is a sample Python script.
+from fastapi import FastAPI
+from scalar_fastapi import get_scalar_api_reference
+from dotenv import load_dotenv
+from routers import chat_router
 
-# Press Mayús+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+load_dotenv()
 
+app = FastAPI(
+    docs_url="/api/docs",
+    title="Chat API",
+    description="API con Claude",
+    version="0.0.1"
+)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+@app.get("/", include_in_schema=False)
+def scalar_docs():
+    return get_scalar_api_reference(
+        openapi_url="/openapi.json",
+        title="Chat con Claude"
+    )
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+app.include_router(chat_router.router)
