@@ -47,3 +47,24 @@ export function sendChatMessage(token, payload) {
     body: payload,
   })
 }
+
+export async function transcribeAudio(token, audioBlob) {
+  const formData = new FormData()
+  formData.append('audio', audioBlob, 'dictado.wav')
+
+  const response = await fetch(`${API_BASE_URL}/chat/transcriptions`, {
+    method: 'POST',
+    headers: {
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+    body: formData,
+  })
+
+  const data = await response.json().catch(() => ({}))
+
+  if (!response.ok) {
+    throw new Error(data.detail || 'No fue posible transcribir el audio.')
+  }
+
+  return data
+}
