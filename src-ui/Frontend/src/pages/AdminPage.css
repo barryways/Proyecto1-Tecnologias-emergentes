@@ -1,0 +1,66 @@
+.admin-page {
+  padding: 1.5rem;
+}
+
+.admin-page__shell {
+  width: min(100%, var(--shell-width));
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.admin-page__content {
+  display: grid;
+  min-height: 60vh;
+  place-items: center;
+}
+
+.admin-page__card {
+  width: min(100%, 640px);
+  padding: 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(9, 20, 37, 0.96), rgba(15, 28, 51, 0.92));
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+}
+
+.admin-page__eyebrow {
+  margin: 0 0 0.6rem;
+  color: var(--color-accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+}
+
+.admin-page__card h2,
+.admin-page__card p {
+  margin: 0;
+}
+
+.admin-page__card p:last-of-type {
+  margin-top: 0.9rem;
+  color: var(--color-text-soft);
+}
+
+.admin-page__card button {
+  margin-top: 1.5rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.95rem 1.15rem;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: #07111f;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .admin-page {
+    padding: 1rem;
+  }
+
+  .admin-page__card {
+    padding: 1.5rem;
+  }
+}

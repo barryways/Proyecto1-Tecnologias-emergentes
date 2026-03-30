@@ -1,0 +1,99 @@
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 100%;
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(8, 18, 33, 0.95), rgba(13, 25, 47, 0.9));
+  box-shadow: var(--shadow-soft);
+}
+
+.side-panel__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.side-panel__brand p {
+  margin: 0.2rem 0 0;
+  color: var(--color-text-soft);
+  font-size: 0.82rem;
+}
+
+.side-panel__dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  box-shadow: 0 0 24px rgba(92, 179, 255, 0.4);
+}
+
+.side-panel__button {
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 1rem;
+  background: linear-gradient(135deg, rgba(92, 179, 255, 0.15), rgba(233, 191, 94, 0.15));
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.side-panel__section {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1;
+}
+
+.side-panel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.9rem;
+  color: var(--color-text-soft);
+}
+
+.side-panel__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  overflow-y: auto;
+}
+
+.side-panel__item,
+.side-panel__empty {
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 0.9rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.side-panel__item {
+  text-align: left;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.side-panel__item strong,
+.side-panel__item span {
+  display: block;
+}
+
+.side-panel__item strong {
+  margin-bottom: 0.35rem;
+}
+
+.side-panel__item span,
+.side-panel__empty {
+  color: var(--color-text-soft);
+  font-size: 0.84rem;
+}
+
+.side-panel__item:hover,
+.side-panel__item.is-active {
+  transform: translateY(-1px);
+  border-color: var(--color-border-strong);
+  background: rgba(92, 179, 255, 0.08);
+}
