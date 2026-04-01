@@ -2,7 +2,7 @@ import os
 import re
 from pptx import Presentation
 
-def extract(path_file: str) -> list:
+def extract(path_file: str) -> dict:
     extension = os.path.splitext(path_file)[1]
     name = os.path.splitext(os.path.basename(path_file))[0]
     match extension:
@@ -56,30 +56,27 @@ def clear_text(text: str) -> str:
                 .strip()
            )
 
-def group_content_by_theme(slides_content: list) -> list:
+def group_content_by_theme(slides_content: list) -> dict:
     if len(slides_content) == 0:
-        return []
+        return {}
 
     topic = slides_content[0]['title']
-    topic_content = []
-    topic_children = []
+    topic_sub_themes = []
 
     for slide_content in slides_content[1:]:
         theme = slide_content['title']
         content = slide_content['content']
         if len(content) == 0:
             continue
-        topic_children.append({
+        topic_sub_themes.append({
             'title': theme,
             'content': content
         })
 
-    topic_content.append({
+    return  {
         'topic': topic,
-        'content': topic_children
-    })
-
-    return topic_content
+        'themes': topic_sub_themes
+    }
 
 # TODO: Implement PDF extraction
 def content_in_txt() -> list:

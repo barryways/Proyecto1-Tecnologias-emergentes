@@ -1,0 +1,157 @@
+{
+  "topic": "Modificadores de acceso",
+  "questions": [
+    {
+      "pregunta": "¿Qué son los modificadores de acceso en la programación orientada a objetos?",
+      "respuesta": "Los modificadores de acceso son elementos fundamentales en la POO que permiten controlar la visibilidad y accesibilidad de los métodos y atributos de las clases, determinando qué tan accesibles son algunas partes del código dentro de las clases."
+    },
+    {
+      "pregunta": "¿Por qué son importantes los modificadores de acceso en la programación orientada a objetos?",
+      "respuesta": "Son importantes porque permiten al programador controlar y gestionar la visibilidad de los componentes de las clases, determinando qué partes del código pueden ser accedidas desde diferentes contextos, lo que contribuye a la encapsulación y seguridad del código."
+    },
+    {
+      "pregunta": "¿Cuáles son los tres principales modificadores de acceso en C++?",
+      "respuesta": "Los tres principales modificadores de acceso en C++ son: public, protected y private. Estos controlan la visibilidad y accesibilidad de los miembros de una clase desde diferentes contextos del programa."
+    },
+    {
+      "pregunta": "¿Cuál es la diferencia entre los modificadores de acceso public y private en C++?",
+      "respuesta": "El modificador public permite que los miembros de la clase sean accesibles desde cualquier parte del programa, mientras que private restringe el acceso únicamente a los métodos dentro de la misma clase, protegiendo así los datos de accesos externos no autorizados."
+    },
+    {
+      "pregunta": "¿Qué significa que un bloque de código sea declarado como public?",
+      "respuesta": "Significa que ese bloque de código es accesible desde cualquier parte del programa, sin ninguna restricción sobre quién puede visualizarlo o acceder a él."
+    },
+    {
+      "pregunta": "¿Cuándo se utiliza el modificador de acceso public en una clase?",
+      "respuesta": "Se utiliza cuando se necesita que haya acceso desde fuera de la clase, permitiendo que otros componentes del programa puedan interactuar con ese código sin limitaciones."
+    },
+    {
+      "pregunta": "¿Qué es el modificador de acceso protected en programación orientada a objetos?",
+      "respuesta": "Protected es un modificador de acceso que permite que los bloques de código sean accesibles desde la propia clase donde se declaran y también desde las clases que heredan de ella, pero no desde fuera de estas clases."
+    },
+    {
+      "pregunta": "¿Cuándo es recomendable utilizar el modificador protected?",
+      "respuesta": "Se utiliza cuando se tienen componentes o métodos que deben estar disponibles para las clases heredadas pero no se desea que sean accesibles desde fuera de la jerarquía de herencia, manteniendo así un nivel intermedio de encapsulamiento."
+    },
+    {
+      "pregunta": "¿Desde dónde son accesibles los bloques de código declarados como private?",
+      "respuesta": "Los bloques de código declarados como private son únicamente accesibles desde la propia clase donde se están creando. No son accesibles desde clases heredadas ni desde otras clases externas."
+    },
+    {
+      "pregunta": "¿Cuál es el propósito principal de utilizar el modificador de acceso private en una clase?",
+      "respuesta": "El modificador private se utiliza principalmente para el encapsulamiento de código y para implementar funcionalidades internas de la clase, protegiendo así los datos y métodos que no deben ser accedidos desde fuera de la clase."
+    },
+    {
+      "pregunta": "¿Cuál es la función principal del método constructor en C++?",
+      "respuesta": "El método constructor en C++ permite la inicialización de un objeto cuando este es creado, estableciendo los valores iniciales de sus atributos y preparando el objeto para su uso."
+    },
+    {
+      "pregunta": "¿Qué diferencia existe entre el método constructor y el método destructor en C++?",
+      "respuesta": "El método constructor se encarga de inicializar un objeto cuando es creado, mientras que el método destructor se encarga de la limpieza de recursos cuando el objeto es destruido, liberando memoria y cerrando conexiones si es necesario."
+    },
+    {
+      "pregunta": "¿Qué es un método constructor y cuándo se ejecuta?",
+      "respuesta": "Un método constructor es una función especial que se llama automáticamente cuando se crea una instancia de una clase. Su propósito es inicializar los objetos de esa clase con valores específicos."
+    },
+    {
+      "pregunta": "¿Cuáles son las tres características principales de un método constructor?",
+      "respuesta": "Las tres características principales son: 1) Tiene el mismo nombre que la clase, 2) No tiene un tipo de retorno (ni siquiera void), y 3) Permite la sobrecarga, es decir, puede haber múltiples constructores con diferentes parámetros en la misma clase."
+    },
+    {
+      "pregunta": "¿Qué es un método constructor en programación orientada a objetos?",
+      "respuesta": "Un método constructor es una función especial de una clase que se ejecuta automáticamente cuando se crea un objeto. Su propósito es inicializar los atributos del objeto con valores predeterminados o personalizados. En el ejemplo, la clase Persona tiene dos constructores: uno sin parámetros que asigna valores por defecto ('nombre' y edad 0), y otro con parámetros que permite inicializar el objeto con valores específicos."
+    },
+    {
+      "pregunta": "¿Cuál es la diferencia entre los dos constructores mostrados en la clase Persona?",
+      "respuesta": "El primer constructor persona() no recibe parámetros y asigna valores por defecto (nombre = 'nombre' y edad = 0). El segundo constructor Persona(string n, int e) recibe dos parámetros y permite inicializar el objeto con valores personalizados que el usuario proporciona al momento de crear la instancia. Esto se conoce como sobrecarga de constructores, permitiendo mayor flexibilidad en la creación de objetos."
+    },
+    {
+      "pregunta": "¿Qué es un método destructor y cuál es su principal propósito?",
+      "respuesta": "Es una función especial que se llama automáticamente cuando se desea destruir una instancia de una clase. Su principal propósito es liberar recursos de un objeto que ya no se utilizará y liberar memoria."
+    },
+    {
+      "pregunta": "¿Cuáles son las tres características principales de un método destructor?",
+      "respuesta": "Las tres características principales son: 1) Su nombre es el mismo que la clase pero precedido por el símbolo ~ (alt + 126), 2) No tiene un tipo de retorno, y 3) No tiene parámetros."
+    },
+    {
+      "pregunta": "¿Qué es un destructor en C++ y cómo se declara?",
+      "respuesta": "Un destructor es un método especial de una clase que se ejecuta automáticamente cuando un objeto es destruido o sale de su ámbito. Se declara con el símbolo ~ seguido del nombre de la clase, no tiene parámetros ni tipo de retorno. Por ejemplo: ~persona() { }"
+    },
+    {
+      "pregunta": "¿Cuándo se llama el destructor en la clase persona del ejemplo y qué hace?",
+      "respuesta": "El destructor ~persona() se llama automáticamente cuando el objeto de tipo persona es destruido. En el ejemplo, imprime un mensaje en consola mostrando 'destructor llamado para' seguido del nombre de la persona, permitiendo realizar tareas de limpieza antes de que el objeto deje de existir."
+    },
+    {
+      "pregunta": "¿Qué es una instancia de una clase en programación?",
+      "respuesta": "Una instancia de una clase es un objeto creado que cumple con las características de la definición de una clase. Mientras que la clase define el tipo de datos y las funciones de manera general, la instancia asigna valores específicos a esa plantilla."
+    },
+    {
+      "pregunta": "¿Desde dónde se inicializa regularmente una instancia de clase?",
+      "respuesta": "Una instancia se inicializa regularmente desde el constructor de la clase, que es el método especial encargado de crear el objeto y asignar sus valores iniciales."
+    },
+    {
+      "pregunta": "¿Qué es un constructor en C++ y cuál es su propósito en la clase persona?",
+      "respuesta": "Un constructor es un método especial que se ejecuta automáticamente al crear un objeto de una clase. En la clase persona, el constructor persona(string n, int e) inicializa los atributos nombre y edad con los valores proporcionados como parámetros n y e al momento de instanciar el objeto."
+    },
+    {
+      "pregunta": "¿Qué hace el método mostrarinformacion() de la clase persona?",
+      "respuesta": "El método mostrarinformacion() es una función void que imprime en consola los valores de los atributos del objeto. Específicamente, muestra el nombre y la edad de la persona utilizando cout, presentando cada atributo en una línea diferente con su etiqueta correspondiente."
+    },
+    {
+      "pregunta": "¿Qué es una instancia de una clase en programación orientada a objetos?",
+      "respuesta": "Una instancia de una clase es un objeto concreto creado a partir de una clase. En el ejemplo, persona1 y persona2 son instancias de la clase persona, cada una con sus propios valores (Juan de 30 años y Ana de 25 años)."
+    },
+    {
+      "pregunta": "¿Cómo se crean las instancias persona1 y persona2 en el código mostrado?",
+      "respuesta": "Las instancias se crean mediante el constructor de la clase persona, pasando dos parámetros: el nombre y la edad. Por ejemplo, persona1 se crea con persona1(\"juan\", 30) y persona2 con persona2(\"ana\", 25)."
+    },
+    {
+      "pregunta": "¿Qué es la sobrecarga de métodos en programación?",
+      "respuesta": "La sobrecarga de métodos es una característica de la programación orientada a objetos que permite definir múltiples métodos con el mismo nombre en una clase, pero con diferentes parámetros (diferente número, tipo o orden). El compilador determina qué método ejecutar según los argumentos proporcionados en la llamada."
+    },
+    {
+      "pregunta": "¿Cuáles son las principales ventajas de utilizar sobrecarga de métodos?",
+      "respuesta": "Las principales ventajas son: mejora la legibilidad del código al usar nombres consistentes para operaciones similares, proporciona flexibilidad al permitir diferentes formas de invocar una funcionalidad, y facilita el polimorfismo en tiempo de compilación, haciendo el código más intuitivo y fácil de mantener."
+    },
+    {
+      "pregunta": "¿Qué es la sobrecarga de métodos en programación?",
+      "respuesta": "La sobrecarga de métodos es una característica que permite definir múltiples funciones con el mismo nombre pero con diferentes parámetros. Esto permite que un mismo método realice diferentes tareas según los parámetros que reciba."
+    },
+    {
+      "pregunta": "¿Qué ventaja ofrece la sobrecarga de métodos en la organización del código?",
+      "respuesta": "La sobrecarga de métodos ayuda a organizar el código al permitir usar el mismo nombre para un método que puede realizar diferentes tareas, lo que hace el código más legible y mantiene la coherencia en la nomenclatura de funciones relacionadas."
+    },
+    {
+      "pregunta": "¿Cuáles son las condiciones que se deben cumplir para que la sobrecarga de métodos funcione correctamente?",
+      "respuesta": "Para que la sobrecarga funcione se deben cumplir tres condiciones: los métodos deben llamarse igual, los métodos deben tener diferente cantidad de parámetros, y una diferencia solo en el tipo de parámetros no es suficiente para considerar una sobrecarga válida."
+    },
+    {
+      "pregunta": "¿Es suficiente cambiar únicamente el tipo de parámetros para realizar una sobrecarga de métodos?",
+      "respuesta": "No, una diferencia solo en el tipo de parámetros no es suficiente para realizar una sobrecarga de métodos. Es necesario que exista una diferencia en la cantidad de parámetros, aunque los métodos tengan el mismo nombre."
+    },
+    {
+      "pregunta": "¿Cuáles son las principales ventajas de la sobrecarga de métodos en programación?",
+      "respuesta": "Las principales ventajas son: claridad del código al utilizar el mismo nombre para operaciones similares, reutilización de código al no necesitar nombres únicos para cada acción de un parámetro, y facilidad de uso ya que los usuarios pueden entender fácilmente el funcionamiento de un método sin buscar nombres diferentes para cada variación de parámetros."
+    },
+    {
+      "pregunta": "¿Por qué la sobrecarga de métodos mejora la facilidad de uso para los programadores?",
+      "respuesta": "La sobrecarga de métodos mejora la facilidad de uso porque permite que un programador entienda rápidamente la razón de funcionamiento de un método sin tener que buscar o recordar nombres diferentes para cada parámetro distinto que pueda recibir, simplificando así la interfaz de programación."
+    },
+    {
+      "pregunta": "¿Qué concepto de programación orientada a objetos se está demostrando en la clase calculadora con los dos métodos llamados 'suma'?",
+      "respuesta": "Se está demostrando la sobrecarga de métodos (method overloading), que permite tener múltiples métodos con el mismo nombre pero diferentes parámetros. En este caso, hay un método suma que recibe 2 parámetros y otro que recibe 3 parámetros."
+    },
+    {
+      "pregunta": "¿Cuál sería el resultado de llamar calculadora.suma(5, 3, 2) usando la clase del ejemplo?",
+      "respuesta": "El resultado sería 10, ya que se invocaría la versión del método suma que acepta tres parámetros enteros (int a, int b, int c) y retorna la suma de los tres valores: 5 + 3 + 2 = 10."
+    },
+    {
+      "pregunta": "¿Qué es la sobrecarga de métodos en C++ y cómo se demuestra en la clase calculadora?",
+      "respuesta": "La sobrecarga de métodos es la capacidad de definir múltiples funciones con el mismo nombre pero diferentes parámetros. En la clase calculadora se muestra con dos métodos 'suma': uno que recibe dos parámetros int y otro que recibe dos parámetros float, permitiendo sumar diferentes tipos de datos numéricos."
+    },
+    {
+      "pregunta": "¿Qué error tiene el segundo método suma de la clase calculadora?",
+      "respuesta": "El segundo método suma tiene un error en su implementación: intenta retornar 'a + b + c', pero solo recibe dos parámetros (a y b). La variable 'c' no está definida ni declarada, lo que causará un error de compilación. Debería retornar solo 'a + b'."
+    }
+  ]
+}

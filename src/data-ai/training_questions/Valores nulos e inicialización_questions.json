@@ -1,0 +1,85 @@
+{
+  "topic": "Valores nulos e inicialización",
+  "questions": [
+    {
+      "pregunta": "¿A qué concepto está asociado directamente los valores nulos en C++?",
+      "respuesta": "Los valores nulos están asociados directamente a los punteros en C++. Se utilizan cuando se necesita que un puntero no apunte a nada o no esté asignado a ninguna dirección de memoria."
+    },
+    {
+      "pregunta": "¿Cuál es el uso fundamental de los valores nulos con punteros?",
+      "respuesta": "El uso fundamental es indicar que un puntero no apunta a nada o que no está asignado a ninguna dirección de memoria válida, permitiendo así identificar punteros no inicializados o liberados."
+    },
+    {
+      "pregunta": "¿Qué es un valor nulo o null pointer en programación?",
+      "respuesta": "Un valor nulo o null pointer es cuando se le asigna la constante 'nullptr' a un puntero, indicando que no está apuntando a ningún objeto o a ninguna dirección de memoria válida. Básicamente, se limpia el puntero."
+    },
+    {
+      "pregunta": "¿Qué sucede cuando se asigna nullptr a un puntero?",
+      "respuesta": "Cuando se asigna nullptr a un puntero, se le indica que no apunta a ninguna dirección de memoria válida ni a ningún objeto, dejando el puntero en un estado limpio y seguro."
+    },
+    {
+      "pregunta": "¿Qué es un puntero apuntando a null?",
+      "respuesta": "Es un puntero que no apunta a ninguna dirección de memoria válida. Se utiliza para indicar que el puntero no está referenciando ningún objeto o variable en ese momento."
+    },
+    {
+      "pregunta": "¿Por qué se considera buena práctica usar nullptr en lugar de null para punteros?",
+      "respuesta": "Aunque previamente se asignaba el valor null a los punteros, se considera buena práctica usar nullptr porque proporciona mayor seguridad de tipos y evita ambigüedades en el código moderno de C++, siendo más específico para punteros."
+    },
+    {
+      "pregunta": "¿Por qué es una buena práctica inicializar los punteros con nullptr?",
+      "respuesta": "Es una buena práctica inicializar los punteros con nullptr para evitar que estén asignados a una dirección de memoria desconocida o aleatoria al tener su primer valor. Esto previene errores de acceso a memoria no válida y hace el código más seguro y predecible."
+    },
+    {
+      "pregunta": "¿Cómo se declara e inicializa correctamente un puntero a entero usando nullptr?",
+      "respuesta": "Se declara e inicializa de la siguiente manera: int* puntero = nullptr; donde 'int*' indica que es un puntero a entero, 'puntero' es el nombre de la variable, y 'nullptr' es el valor nulo que indica que no apunta a ninguna dirección de memoria válida."
+    },
+    {
+      "pregunta": "¿Por qué se recomienda inicializar los punteros como buena práctica en programación?",
+      "respuesta": "Se recomienda inicializar los punteros para evitar que apunten a direcciones de memoria indeterminadas o basura. Esto mejora la seguridad del código y permite validar posteriormente si un puntero está en uso o no mediante condiciones que verifican si es nulo."
+    },
+    {
+      "pregunta": "¿Qué validación se debe realizar antes de asignar un valor a un puntero por primera vez?",
+      "respuesta": "Se debe validar si el puntero es nulo antes de asignar un valor por primera vez. Esta validación mediante condición permite verificar el estado del puntero y garantizar que se encuentra en un estado seguro para operar, evitando errores de acceso a memoria no válida."
+    },
+    {
+      "pregunta": "¿Por qué es importante inicializar los punteros a nullptr antes de usarlos en un programa de gestión de cuentas bancarias?",
+      "respuesta": "Inicializar los punteros a nullptr es importante porque proporciona un estado conocido y seguro. Permite validar si un puntero está vacío antes de asignarle memoria, evitando sobrescribir datos existentes o acceder a direcciones de memoria no válidas. Esto previene comportamientos indefinidos y errores difíciles de detectar como fugas de memoria o accesos a memoria corrupta."
+    },
+    {
+      "pregunta": "¿Cuál es la secuencia correcta de pasos para gestionar memoria dinámica en el programa de saldos bancarios?",
+      "respuesta": "La secuencia correcta es: 1) Inicializar los punteros a nullptr, 2) Solicitar al usuario cuántas cuentas desea almacenar, 3) Validar que los punteros estén vacíos (nullptr) antes de asignar memoria, 4) Asignar memoria dinámicamente para almacenar los saldos, 5) Solicitar e ingresar los saldos de cada cuenta, 6) Utilizar los datos según sea necesario, y 7) Liberar la memoria asignada usando delete o delete[] para evitar fugas de memoria."
+    },
+    {
+      "pregunta": "¿Qué son los punteros a funciones en C++?",
+      "respuesta": "Los punteros a funciones son una característica avanzada de C++ que permite almacenar la dirección de memoria de una función en una variable. Esto posibilita referenciar y llamar funciones de manera indirecta a través de dicha variable."
+    },
+    {
+      "pregunta": "¿Qué ventaja principal ofrecen los punteros a funciones en C++?",
+      "respuesta": "La principal ventaja es que aumentan la flexibilidad del programa mediante la selección dinámica de funciones en tiempo de ejecución, permitiendo decidir qué función ejecutar durante la ejecución del programa en lugar de definirlo de manera estática en tiempo de compilación."
+    },
+    {
+      "pregunta": "¿Qué es C++ y para qué se utiliza en programación avanzada?",
+      "respuesta": "C++ es un lenguaje de programación de propósito general que combina características de bajo y alto nivel. En programación avanzada se utiliza para desarrollar sistemas operativos, aplicaciones de alto rendimiento, videojuegos, y software que requiere control directo sobre los recursos del sistema y máxima eficiencia."
+    },
+    {
+      "pregunta": "¿Cuáles son las ventajas principales de utilizar C++ frente a otros lenguajes de programación?",
+      "respuesta": "Las principales ventajas de C++ son: alto rendimiento y velocidad de ejecución, control directo sobre la memoria y recursos del sistema, soporte para programación orientada a objetos y genérica, amplia biblioteca estándar (STL), y portabilidad entre diferentes plataformas manteniendo eficiencia."
+    },
+    {
+      "pregunta": "¿Qué son los punteros a funciones con parámetros?",
+      "respuesta": "Son punteros que apuntan a funciones que aceptan parámetros, permitiendo almacenar la dirección de funciones parametrizadas y ejecutarlas dinámicamente pasándoles argumentos en tiempo de ejecución."
+    },
+    {
+      "pregunta": "¿Cuál es la principal ventaja de usar punteros a funciones con parámetros?",
+      "respuesta": "La principal ventaja es la flexibilidad para enviar parámetros en tiempo real, lo que permite crear código más dinámico y adaptable, facilitando la implementación de callbacks, funciones de orden superior y patrones de diseño como Strategy."
+    },
+    {
+      "pregunta": "¿Qué ventaja ofrecen los punteros a funciones asociados a arreglos en la programación?",
+      "respuesta": "Los punteros a funciones asociados a arreglos facilitan el código cuando se tienen menús de opciones, permitiendo reducir significativamente el uso de estructuras repetitivas como switch-case o múltiples if-else, haciendo el código más limpio y mantenible."
+    },
+    {
+      "pregunta": "¿En qué situación es recomendable utilizar un arreglo de punteros a funciones?",
+      "respuesta": "Es recomendable utilizar un arreglo de punteros a funciones cuando se implementan menús de opciones, ya que permite mapear cada opción del menú directamente a una función, eliminando la necesidad de estructuras condicionales complejas y mejorando la organización del código."
+    }
+  ]
+}

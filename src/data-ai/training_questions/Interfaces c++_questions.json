@@ -1,0 +1,45 @@
+{
+  "topic": "Interfaces c++",
+  "questions": [
+    {
+      "pregunta": "¿Qué es una interfaz en C++ y cómo se implementa?",
+      "respuesta": "En C++ no existe una palabra clave 'interface' como en otros lenguajes, pero se implementa mediante clases abstractas puras. Una interfaz es una clase que contiene únicamente métodos virtuales puros (=0) sin implementación, obligando a las clases derivadas a implementar todos estos métodos. Ejemplo: 'virtual void metodo() = 0;'"
+    },
+    {
+      "pregunta": "¿Cuáles son las ventajas de usar interfaces en C++?",
+      "respuesta": "Las principales ventajas son: 1) Permiten el polimorfismo y la abstracción, separando la declaración de la implementación. 2) Facilitan el diseño modular y flexible del código. 3) Permiten que múltiples clases no relacionadas implementen el mismo comportamiento. 4) Mejoran la mantenibilidad al establecer contratos claros entre componentes del sistema."
+    },
+    {
+      "pregunta": "¿Qué es una interfaz en programación orientada a objetos?",
+      "respuesta": "Una interfaz es un contrato que define lo que hace una clase, pero no cómo lo hace. Declara funciones o métodos sin implementarlos, obligando a las clases derivadas a proporcionar su propia implementación de estos métodos."
+    },
+    {
+      "pregunta": "¿Cuál es la principal diferencia entre lo que define una interfaz y lo que define una clase?",
+      "respuesta": "La interfaz define QUÉ hace una clase (declara los métodos), mientras que la clase define CÓMO lo hace (implementa los métodos). La interfaz establece el contrato sin proporcionar la implementación concreta."
+    },
+    {
+      "pregunta": "¿Qué es una función pura virtual y cómo se declara?",
+      "respuesta": "Una función pura virtual es aquella que se declara con = 0 al final de su firma. Esta función no tiene implementación en la clase base y obliga a las clases derivadas a proporcionar su propia implementación."
+    },
+    {
+      "pregunta": "¿Qué condición convierte a una clase en abstracta y cuál es su restricción principal?",
+      "respuesta": "Una clase se considera abstracta cuando tiene al menos una función pura virtual. Su restricción principal es que no se puede instanciar de manera directa, solo se pueden crear instancias de sus clases derivadas que implementen todas las funciones puras virtuales."
+    },
+    {
+      "pregunta": "¿Qué condiciones debe cumplir una clase para ser considerada abstracta pura?",
+      "respuesta": "Una clase abstracta pura debe cumplir tres condiciones: 1) Tener al menos una función pura virtual declarada con =0, 2) No puede ser instanciada directamente, y 3) Debe servir como clase base para otras clases que sí definan la funcionalidad concreta."
+    },
+    {
+      "pregunta": "¿Por qué una clase abstracta pura no puede ser instanciada directamente?",
+      "respuesta": "Una clase abstracta pura no puede ser instanciada directamente porque contiene al menos una función pura virtual (=0) que carece de implementación. Su propósito es servir como interfaz o plantilla base para que las clases derivadas proporcionen las implementaciones específicas de esas funciones."
+    },
+    {
+      "pregunta": "¿Qué beneficio aportan las interfaces en cuanto a la arquitectura del software?",
+      "respuesta": "Las interfaces permiten la separación entre el 'qué hace' y el 'cómo lo hace', fomentando el desarrollo en capas y el desacoplamiento entre componentes del sistema. Esto resulta en una arquitectura más modular y flexible."
+    },
+    {
+      "pregunta": "¿Cómo mejoran las interfaces el mantenimiento y escalabilidad de un programa?",
+      "respuesta": "Las interfaces mejoran la escalabilidad al permitir agregar nuevas implementaciones sin modificar el código existente, y facilitan el mantenimiento al fomentar el polimorfismo y el desacoplamiento, lo que hace que los cambios sean más localizados y menos propensos a errores."
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "topic": "Ordenamiento",
+  "questions": [
+    {
+      "pregunta": "¿Qué son los algoritmos de ordenamiento?",
+      "respuesta": "Son métodos que permiten organizar los elementos que pertenecen a una estructura de datos, de forma que se puede tener un orden específico, ya sea numérico o lexicográfico."
+    },
+    {
+      "pregunta": "¿Qué librería proporciona C++ para implementar algoritmos de ordenamiento?",
+      "respuesta": "C++ proporciona la librería std::sort que permite implementar algoritmos de ordenamiento de manera eficiente."
+    },
+    {
+      "pregunta": "¿Qué es la función Swap y cuál es su utilidad principal?",
+      "respuesta": "Swap es una función que permite el intercambio de dos valores dentro de una estructura de datos. Su utilidad principal es facilitar los métodos de ordenamiento, ya que permite intercambiar posiciones de elementos de manera eficiente."
+    },
+    {
+      "pregunta": "¿Cómo funciona el mecanismo de intercambio en la función Swap?",
+      "respuesta": "La función Swap toma el elemento 'a' y lo coloca en la posición del elemento 'b', mientras que simultáneamente toma el elemento 'b' y lo coloca en la posición del elemento 'a', realizando así un intercambio completo de posiciones entre ambos elementos."
+    },
+    {
+      "pregunta": "¿Qué es la función Swap en programación?",
+      "respuesta": "Es una función que permite el intercambio de dos valores dentro de una estructura de datos. Toma el elemento a y lo coloca en la posición del elemento b, mientras que toma el elemento b y lo coloca en la posición del elemento a."
+    },
+    {
+      "pregunta": "¿En qué contexto se utiliza frecuentemente la función Swap?",
+      "respuesta": "La función Swap se utiliza frecuentemente en los métodos de ordenamiento, ya que permite intercambiar la posición de dos elementos dentro de una estructura de datos de manera eficiente."
+    },
+    {
+      "pregunta": "¿Qué es el algoritmo Bubble Sort?",
+      "respuesta": "El Bubble Sort, también conocido como ordenamiento de burbuja, es un algoritmo de ordenamiento que compara elementos en pares adyacentes y los intercambia si están en el orden incorrecto. Este proceso se repite hasta que no sea necesario realizar más intercambios, lo que indica que la lista está ordenada."
+    },
+    {
+      "pregunta": "¿Cuál es el criterio de parada del algoritmo Bubble Sort?",
+      "respuesta": "El algoritmo Bubble Sort se detiene cuando no hay necesidad de realizar más intercambios durante una iteración completa. Esto significa que todos los elementos están en su posición correcta y la lista se encuentra completamente ordenada."
+    },
+    {
+      "pregunta": "¿Qué es el algoritmo Bubble Sort y cómo funciona?",
+      "respuesta": "El Bubble Sort, también conocido como ordenamiento de burbuja, es un algoritmo de ordenamiento que compara elementos en pares adyacentes y los intercambia si están en el orden incorrecto. Este proceso se repite hasta que no sea necesario realizar más intercambios, lo que indica que la lista está ordenada."
+    },
+    {
+      "pregunta": "¿Cuál es el criterio de parada del algoritmo Bubble Sort?",
+      "respuesta": "El algoritmo Bubble Sort se detiene cuando completa una iteración completa sin realizar ningún intercambio de elementos, lo que significa que todos los pares adyacentes ya están en el orden correcto y la lista está completamente ordenada."
+    },
+    {
+      "pregunta": "¿Cuáles son las principales ventajas del algoritmo Bubble Sort?",
+      "respuesta": "Las principales ventajas del Bubble Sort son que es sencillo de implementar y resulta adecuado para ordenar listas pequeñas debido a su simplicidad conceptual."
+    },
+    {
+      "pregunta": "¿Por qué no se recomienda utilizar Bubble Sort para listas grandes?",
+      "respuesta": "No se recomienda Bubble Sort para listas grandes porque es un algoritmo ineficiente en estos casos, ya que su complejidad temporal es O(n²), lo que resulta en un rendimiento muy bajo cuando aumenta el tamaño de los datos."
+    },
+    {
+      "pregunta": "¿Qué es el algoritmo Selection Sort?",
+      "respuesta": "Selection Sort, conocido como ordenamiento por selección, es un algoritmo que encuentra el elemento mínimo del arreglo, lo coloca al inicio y repite el proceso iterativamente para el resto del arreglo hasta ordenarlo completamente."
+    },
+    {
+      "pregunta": "¿Cómo funciona el proceso de ordenamiento en Selection Sort?",
+      "respuesta": "Selection Sort funciona buscando el elemento más pequeño en todo el arreglo, intercambiándolo con el primer elemento, luego busca el segundo elemento más pequeño en el resto del arreglo y lo coloca en la segunda posición, repitiendo este proceso hasta ordenar todos los elementos."
+    },
+    {
+      "pregunta": "¿Cuáles son las ventajas del algoritmo Selection Sort?",
+      "respuesta": "Las principales ventajas del Selection Sort son que es fácil de entender y fácil de programar, lo que lo hace ideal para propósitos educativos y para implementaciones simples donde la eficiencia no es crítica."
+    },
+    {
+      "pregunta": "¿Por qué no se recomienda usar Selection Sort para listas grandes?",
+      "respuesta": "No se recomienda usar Selection Sort para listas grandes porque no es eficiente en estos casos. Su complejidad temporal es O(n²), lo que significa que el tiempo de ejecución crece considerablemente a medida que aumenta el tamaño de la lista."
+    },
+    {
+      "pregunta": "¿Cómo funciona el algoritmo de Insertion Sort?",
+      "respuesta": "Insertion Sort funciona tomando cada elemento de la lista y insertándolo en su posición correcta dentro de una porción de la lista que ya está ordenada. Este proceso se repite para cada elemento hasta que toda la lista queda ordenada."
+    },
+    {
+      "pregunta": "¿Cuál es la principal característica del método de ordenamiento por inserción?",
+      "respuesta": "La principal característica de Insertion Sort es que mantiene una sublista ordenada y va insertando cada nuevo elemento en la posición que le corresponde dentro de esa sublista ordenada, similar a cómo ordenamos cartas en la mano."
+    },
+    {
+      "pregunta": "¿Cuál es la principal ventaja del algoritmo Insertion Sort?",
+      "respuesta": "La principal ventaja del Insertion Sort es que es muy eficiente para listas pequeñas, ofreciendo un buen rendimiento en estos casos."
+    },
+    {
+      "pregunta": "¿En qué situaciones el Insertion Sort resulta ineficiente?",
+      "respuesta": "El Insertion Sort resulta muy ineficiente cuando se trabaja con listas muy grandes o con muchos elementos repetidos, lo que hace que su rendimiento disminuya considerablemente."
+    },
+    {
+      "pregunta": "¿Qué es el algoritmo Shell sort y quién lo diseñó?",
+      "respuesta": "Shell sort es una extensión del insertion sort diseñado por Donald Shell. Consiste en dividir la lista en sublistas utilizando un 'gap' (intervalo) que se reduce progresivamente hasta llegar a 1, aplicando insertion sort en cada iteración."
+    },
+    {
+      "pregunta": "¿Cuál es el principio de funcionamiento del Shell sort?",
+      "respuesta": "El Shell sort divide el arreglo en subarreglos basándose en un gap (distancia entre elementos) que disminuye progresivamente. Aplica insertion sort en cada subarreglo hasta que el gap llega a 1, momento en el cual realiza un insertion sort final sobre todo el arreglo ya parcialmente ordenado."
+    },
+    {
+      "pregunta": "¿Cuáles son las principales ventajas del algoritmo Shell sort?",
+      "respuesta": "Shell sort tiene dos ventajas principales: es más eficiente que insertion sort para listas grandes y es fácil de implementar."
+    },
+    {
+      "pregunta": "¿Cuál es la principal desventaja del algoritmo Shell sort?",
+      "respuesta": "La principal desventaja de Shell sort es que su complejidad depende del esquema de división del gap, lo que hace que su rendimiento varíe según la secuencia de incrementos utilizada."
+    },
+    {
+      "pregunta": "¿Cómo funciona el algoritmo Quick Sort?",
+      "respuesta": "Quick Sort funciona dividiendo el arreglo usando un valor pivote. En base a ese pivote, reordena los elementos colocando los menores a un lado y los mayores al otro, y luego aplica recursividad para ordenar los subarreglos resultantes hasta que todo el arreglo quede ordenado."
+    },
+    {
+      "pregunta": "¿Qué papel cumple el pivote en Quick Sort?",
+      "respuesta": "El pivote es un valor de referencia seleccionado del arreglo que se utiliza para dividir y reordenar los elementos. Los elementos menores que el pivote se colocan a su izquierda y los mayores a su derecha, permitiendo así la partición del arreglo en subarreglos más pequeños que se ordenan recursivamente."
+    },
+    {
+      "pregunta": "¿Cuál es la principal ventaja del algoritmo Quick Sort?",
+      "respuesta": "Quick Sort es muy eficiente para conjuntos grandes de datos, lo que lo hace uno de los algoritmos de ordenamiento más utilizados en la práctica cuando se trabaja con grandes volúmenes de información."
+    },
+    {
+      "pregunta": "¿Qué desventaja tiene Quick Sort relacionada con la elección del pivote?",
+      "respuesta": "Si no se elige correctamente el pivote, la complejidad del algoritmo podría aumentar significativamente, degradando su rendimiento y alejándose de su eficiencia óptima esperada."
+    },
+    {
+      "pregunta": "¿Qué es Visual Studio y para qué se utiliza en programación?",
+      "respuesta": "Visual Studio es un entorno de desarrollo integrado (IDE) creado por Microsoft que se utiliza para desarrollar aplicaciones de software. Permite escribir, depurar y compilar código en múltiples lenguajes como C#, C++, Python, JavaScript, entre otros, facilitando el desarrollo de aplicaciones web, móviles, de escritorio y en la nube."
+    },
+    {
+      "pregunta": "¿Cuáles son las principales ventajas de usar Visual Studio para programación avanzada?",
+      "respuesta": "Las principales ventajas incluyen: IntelliSense para autocompletado inteligente de código, herramientas avanzadas de depuración y diagnóstico, integración con sistemas de control de versiones como Git, extensibilidad mediante plugins, refactorización automática de código, y soporte para desarrollo colaborativo en equipo, lo que mejora significativamente la productividad del programador."
+    },
+    {
+      "pregunta": "¿Qué es el Bogo sort y por qué se le conoce como 'stupid sort' o 'monkey sort'?",
+      "respuesta": "El Bogo sort es un algoritmo de ordenamiento muy ineficiente que genera permutaciones aleatorias de un arreglo y verifica si están ordenadas. Se le llama 'stupid sort' o 'monkey sort' porque su método consiste simplemente en barajear aleatoriamente los elementos y verificar si quedaron ordenados, repitiendo este proceso hasta encontrar el orden correcto, lo cual es extremadamente ineficiente."
+    },
+    {
+      "pregunta": "¿Cómo funciona el proceso de ordenamiento del algoritmo Bogo sort?",
+      "respuesta": "El Bogo sort funciona realizando un 'barajeo' o permutación aleatoria de los elementos del arreglo, luego verifica si el arreglo resultante está ordenado. Si no lo está, repite el proceso de barajeo aleatorio y verificación una y otra vez hasta que finalmente encuentra una permutación que esté ordenada correctamente."
+    },
+    {
+      "pregunta": "¿Cuáles son las ventajas del algoritmo Bogo sort?",
+      "respuesta": "Las ventajas del Bogo sort son que es simple de implementar y simple de entender, lo que lo hace útil con fines didácticos para explicar conceptos básicos de algoritmos de ordenamiento."
+    },
+    {
+      "pregunta": "¿Por qué el Bogo sort solo se utiliza para fines didácticos?",
+      "respuesta": "El Bogo sort solo se utiliza para fines didácticos porque es extremadamente ineficiente. Aunque es fácil de entender e implementar, su rendimiento lo hace impráctica para aplicaciones reales de ordenamiento de datos."
+    },
+    {
+      "pregunta": "¿Qué es Visual Studio y para qué se utiliza en programación?",
+      "respuesta": "Visual Studio es un entorno de desarrollo integrado (IDE) de Microsoft utilizado para crear aplicaciones, sitios web y servicios. Proporciona herramientas avanzadas como depuración, autocompletado de código, control de versiones integrado y soporte para múltiples lenguajes de programación como C#, C++, Python y JavaScript."
+    },
+    {
+      "pregunta": "¿Cuáles son las principales ventajas de usar Visual Studio en programación avanzada?",
+      "respuesta": "Las principales ventajas incluyen: IntelliSense para autocompletado inteligente de código, depurador potente con inspección de variables en tiempo real, integración con Git y Azure, extensibilidad mediante plugins, soporte para desarrollo multiplataforma, herramientas de análisis de rendimiento y refactorización automática de código, lo que aumenta significativamente la productividad del programador."
+    },
+    {
+      "pregunta": "¿Qué es Quickselect y para qué se utiliza?",
+      "respuesta": "Quickselect es un algoritmo que se utiliza para extraer el k-ésimo elemento de un arreglo de manera rápida y eficiente. Se emplea cuando no es necesario ordenar todo el arreglo completo, sino únicamente localizar un elemento en una posición específica (el k-ésimo elemento)."
+    },
+    {
+      "pregunta": "¿Cuál es la principal ventaja de usar Quickselect en comparación con ordenar todo un arreglo?",
+      "respuesta": "La principal ventaja de Quickselect es su eficiencia cuando solo necesitamos encontrar un elemento en una posición específica. En lugar de ordenar todo el arreglo, Quickselect se enfoca únicamente en localizar el k-ésimo elemento, lo que resulta en un mejor rendimiento al evitar ordenar elementos innecesarios."
+    },
+    {
+      "pregunta": "¿Cuál es el principio fundamental del algoritmo Quickselect?",
+      "respuesta": "Quickselect elige un pivote y genera una partición colocando los elementos menores a un lado y los mayores al otro. Luego verifica la posición del pivote y continúa la búsqueda solo en uno de los lados según sea necesario, garantizando que el pivote siempre quede en su posición correcta."
+    },
+    {
+      "pregunta": "¿Qué diferencia principal existe entre Quickselect y Quicksort?",
+      "respuesta": "La diferencia principal es que Quickselect solo ordena y busca en una parte del arreglo (un solo lado de la partición), mientras que Quicksort ordena recursivamente ambos lados de la partición. Esto hace que Quickselect sea más eficiente cuando solo se necesita encontrar un elemento específico en una posición determinada."
+    },
+    {
+      "pregunta": "¿Qué es el algoritmo Bubble Sort y cómo funciona?",
+      "respuesta": "Bubble Sort es un algoritmo de ordenamiento simple que compara elementos adyacentes en un array y los intercambia si están en el orden incorrecto. Este proceso se repite iterativamente hasta que todo el array queda ordenado, haciendo que los elementos más grandes 'burbujeen' hacia el final del array en cada pasada."
+    },
+    {
+      "pregunta": "¿Cuál es la complejidad temporal del algoritmo Bubble Sort y cuándo es recomendable usarlo?",
+      "respuesta": "Bubble Sort tiene una complejidad temporal de O(n²) en el peor y caso promedio, y O(n) en el mejor caso cuando el array ya está ordenado. Es recomendable usarlo solo con conjuntos de datos pequeños o con fines educativos, ya que existen algoritmos más eficientes como Quick Sort o Merge Sort para datasets grandes."
+    },
+    {
+      "pregunta": "¿Cómo se puede ordenar una lista de estudiantes de mayor a menor nota en Python?",
+      "respuesta": "Se puede ordenar usando el método sort() con un parámetro key que especifique el criterio de ordenamiento por nota, y reverse=True para orden descendente. Por ejemplo: estudiantes.sort(key=lambda x: x['nota'], reverse=True). También se puede usar la función sorted() que retorna una nueva lista ordenada."
+    },
+    {
+      "pregunta": "¿Qué estructura de datos es más adecuada para almacenar estudiantes con nombre y nota, y por qué?",
+      "respuesta": "Se puede usar una lista de diccionarios donde cada diccionario contiene las claves 'nombre' y 'nota', por ejemplo: [{'nombre': 'Ana', 'nota': 9.5}, {'nombre': 'Luis', 'nota': 8.0}]. Alternativamente, se puede usar una lista de tuplas o una clase Estudiante. Los diccionarios son versátiles y permiten acceso claro a los atributos por nombre de clave."
+    }
+  ]
+}

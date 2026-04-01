@@ -1,0 +1,93 @@
+{
+  "topic": "Abstracción",
+  "questions": [
+    {
+      "pregunta": "¿Qué es la abstracción en programación orientada a objetos?",
+      "respuesta": "La abstracción es el proceso de ocultar los detalles internos de una clase y mostrar únicamente la información esencial para la utilización de un objeto, permitiendo trabajar con conceptos de alto nivel sin preocuparse por la implementación interna."
+    },
+    {
+      "pregunta": "¿Cuál es el propósito principal de aplicar abstracción en el diseño de clases?",
+      "respuesta": "El propósito principal es simplificar la interacción con los objetos al exponer solo la interfaz necesaria y ocultar la complejidad de la implementación interna, facilitando el uso y mantenimiento del código."
+    },
+    {
+      "pregunta": "¿Qué ventajas ofrece la encapsulación en programación orientada a objetos?",
+      "respuesta": "La encapsulación protege la información de modificaciones externas y permite realizar cambios internos en una clase sin afectar a otras clases que la utilicen, facilitando así el mantenimiento del código."
+    },
+    {
+      "pregunta": "¿Cómo contribuye la abstracción a la reutilización del código?",
+      "respuesta": "La abstracción permite reutilizar código al usar clases sin necesidad de conocer sus implementaciones internas, reduciendo la complejidad al eliminar detalles innecesarios para el usuario de la clase."
+    },
+    {
+      "pregunta": "¿Qué aspectos del automóvil están ocultos en este ejemplo de encapsulamiento?",
+      "respuesta": "Los detalles del funcionamiento del motor están ocultos. Esto significa que el usuario del objeto automóvil no necesita conocer la complejidad interna de cómo funciona el motor para poder utilizarlo."
+    },
+    {
+      "pregunta": "¿Cuáles son los métodos expuestos del objeto automóvil y qué representa esto en programación orientada a objetos?",
+      "respuesta": "Los métodos expuestos son encender(), acelerar() y frenar(). Esto representa la interfaz pública del objeto, que son las operaciones que los usuarios pueden realizar con el automóvil sin necesidad de conocer su implementación interna, lo cual es un principio fundamental del encapsulamiento."
+    },
+    {
+      "pregunta": "¿Qué es el modelado de clases en programación?",
+      "respuesta": "Es un proceso por medio del cual se diseñan clases que trasladan objetos del mundo real a un mundo lógico dentro del software, definiendo los atributos y métodos que debe tener una clase para que tenga propósito."
+    },
+    {
+      "pregunta": "¿Qué elementos se deben definir al realizar el modelado de una clase?",
+      "respuesta": "Se deben definir dos elementos principales: los atributos (características o propiedades del objeto) y los métodos (comportamientos o acciones que puede realizar el objeto) para que la clase tenga un propósito claro dentro del software."
+    },
+    {
+      "pregunta": "¿Cuáles son los pasos fundamentales para realizar el modelado de clases en programación orientada a objetos?",
+      "respuesta": "Los pasos fundamentales son: 1) Identificar la entidad que se va a modelar, 2) Definir los atributos que describen la entidad, 3) Definir los métodos o comportamientos de la clase, 4) Establecer el control de acceso (público, privado, protegido) para encapsular datos, y 5) Relacionar las clases mediante herencia (relación 'es-un') o composición (relación 'tiene-un')."
+    },
+    {
+      "pregunta": "¿Qué diferencia existe entre relacionar clases mediante herencia y mediante composición?",
+      "respuesta": "La herencia establece una relación 'es-un' donde una clase hija hereda características de una clase padre, promoviendo la reutilización de código y jerarquías. La composición establece una relación 'tiene-un' donde una clase contiene instancias de otras clases como atributos, favoreciendo la flexibilidad y el bajo acoplamiento entre componentes."
+    },
+    {
+      "pregunta": "¿Qué criterio de visibilidad se recomienda aplicar al modelar clases según las mejores prácticas?",
+      "respuesta": "Se recomienda usar encapsulamiento, estableciendo los atributos como privados (private) para proteger los datos internos de la clase, y los métodos como públicos (public) para permitir la interacción controlada con los objetos desde el exterior."
+    },
+    {
+      "pregunta": "¿Por qué es importante separar responsabilidades y evitar las clases gigantes en el modelado orientado a objetos?",
+      "respuesta": "Separar responsabilidades y evitar clases gigantes es fundamental porque cada clase debe tener una única responsabilidad bien definida (principio de responsabilidad única). Las clases gigantes son difíciles de mantener, entender y probar, además de violar este principio. Mantener clases pequeñas y enfocadas mejora la legibilidad, facilita el mantenimiento y promueve la reutilización del código."
+    },
+    {
+      "pregunta": "¿Qué es un constructor en programación orientada a objetos?",
+      "respuesta": "Es un método especial que se ejecuta automáticamente al crear una instancia de una clase. Debe tener el mismo nombre de la clase, no tiene tipo de retorno (ni siquiera void) y su función principal es inicializar los atributos y el estado inicial del objeto."
+    },
+    {
+      "pregunta": "¿Cuáles son las características principales que debe cumplir un constructor?",
+      "respuesta": "Un constructor debe cumplir tres características principales: 1) Debe tener exactamente el mismo nombre que la clase, 2) No tiene tipo de retorno, ni siquiera void, y 3) Se ejecuta automáticamente cuando se crea una nueva instancia de la clase, permitiendo inicializar sus atributos."
+    },
+    {
+      "pregunta": "¿Qué es un constructor y cuándo se ejecuta?",
+      "respuesta": "Un constructor es un método especial que se ejecuta de manera automática al crear una instancia de una clase. Su propósito principal es inicializar los atributos y preparar el objeto para su uso."
+    },
+    {
+      "pregunta": "¿Cuáles son las características principales que debe cumplir un constructor?",
+      "respuesta": "Un constructor debe tener el mismo nombre que la clase, no tiene tipo de retorno (ni siquiera void), y sirve para inicializar una instancia de la clase cuando se crea un objeto."
+    },
+    {
+      "pregunta": "¿Qué es la herencia en programación orientada a objetos?",
+      "respuesta": "La herencia es un mecanismo que permite que una subclase adquiera los atributos y métodos de otra clase llamada superclase, facilitando la reutilización de código y estableciendo una relación jerárquica entre clases."
+    },
+    {
+      "pregunta": "¿Cuál es la ventaja principal de utilizar herencia en el desarrollo de software?",
+      "respuesta": "La principal ventaja de la herencia es la reutilización de código, ya que permite que las subclases hereden automáticamente los atributos y métodos de la superclase, evitando duplicación de código y facilitando el mantenimiento del software."
+    },
+    {
+      "pregunta": "¿Qué significa la palabra clave 'public' en la declaración 'class clasederivada : public clasebase'?",
+      "respuesta": "La palabra clave 'public' indica el tipo de herencia y especifica que los miembros públicos y protegidos de la clase base se mantendrán con la misma visibilidad en la clase derivada. Los miembros públicos de clasebase seguirán siendo públicos en clasederivada, y los protegidos seguirán siendo protegidos."
+    },
+    {
+      "pregunta": "¿Cuál es la sintaxis correcta en C++ npara crear una clase derivada que herede de una clase base?",
+      "respuesta": "La sintaxis es: 'class ClaseDerivada : tipoHerencia ClaseBase { };' donde tipoHerencia puede ser public, protected o private. Por ejemplo: 'class clasederivada : public clasebase { // atributos y métodos adicionales };' permite que clasederivada herede todos los miembros de clasebase y pueda añadir sus propios atributos y métodos adicionales."
+    },
+    {
+      "pregunta": "¿Qué sucede con los modificadores de acceso cuando se utiliza herencia pública en C++?",
+      "respuesta": "Cuando se declara una clase derivada con herencia pública (class B: public A), los miembros públicos de la clase base permanecen públicos en la subclase, y los miembros protegidos permanecen protegidos en la subclase."
+    },
+    {
+      "pregunta": "¿Cuál es la diferencia entre herencia protegida y herencia privada respecto a los miembros de la clase base?",
+      "respuesta": "En herencia protegida (class B: protected A), los miembros públicos y protegidos de la clase base se convierten en protegidos en la subclase. En herencia privada (class B: private A), tanto los miembros públicos como protegidos de la clase base se convierten en privados en la subclase."
+    }
+  ]
+}

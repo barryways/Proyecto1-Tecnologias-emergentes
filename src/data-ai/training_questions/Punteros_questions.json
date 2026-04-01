@@ -1,0 +1,69 @@
+{
+  "topic": "Punteros",
+  "questions": [
+    {
+      "pregunta": "¿Qué es un puntero en C++?",
+      "respuesta": "Un puntero es una variable que almacena la dirección de memoria de otra variable, permitiendo trabajar directamente con las direcciones de memoria en lugar de únicamente con los valores de las variables."
+    },
+    {
+      "pregunta": "¿Qué ventaja ofrece el uso de punteros en C++?",
+      "respuesta": "Los punteros permiten trabajar directamente con las direcciones de memoria, lo que proporciona mayor control y eficiencia en la gestión de datos, permitiendo manipular la memoria de forma directa en lugar de trabajar solamente con los valores de las variables."
+    },
+    {
+      "pregunta": "¿Qué ventaja ofrece el paso por referencia en programación?",
+      "respuesta": "El paso por referencia permite enviar datos a funciones sin necesidad de copiarlos, lo que mejora la eficiencia y el rendimiento del programa al evitar la duplicación de información en memoria."
+    },
+    {
+      "pregunta": "¿Cómo contribuye la memoria dinámica a la gestión de recursos en un programa?",
+      "respuesta": "La memoria dinámica facilita la gestión de la memoria al permitir asignar y liberar espacio en tiempo de ejecución según las necesidades del programa, optimizando así el uso de recursos y adaptándose a diferentes situaciones durante la ejecución."
+    },
+    {
+      "pregunta": "¿Qué es una fuga de memoria y qué problema causa en un programa?",
+      "respuesta": "Una fuga de memoria ocurre cuando un programa no libera la memoria que ya no utiliza, causando que el programa consuma cada vez más memoria de forma innecesaria, lo que puede llevar a una degradación del rendimiento o incluso al agotamiento de los recursos del sistema."
+    },
+    {
+      "pregunta": "¿Qué es un puntero colgante (dangling pointer) en el contexto de memoria mal asignada?",
+      "respuesta": "Un puntero colgante es un puntero que apunta a una dirección de memoria que ya ha sido liberada. Esto representa un error grave ya que intentar acceder a esa memoria puede causar comportamiento indefinido, corrupción de datos o fallos en el programa."
+    },
+    {
+      "pregunta": "¿Por qué es importante inicializar los punteros y cómo se hace correctamente?",
+      "respuesta": "Es importante inicializar los punteros para evitar que tomen direcciones de memoria aleatorias, lo cual puede causar errores impredecibles en el programa. La forma correcta de inicializarlos es asignándoles el valor nullptr, por ejemplo: int* puntero = nullptr;"
+    },
+    {
+      "pregunta": "¿Con qué elementos pueden combinarse los punteros en programación?",
+      "respuesta": "Los punteros pueden combinarse con tres elementos principales: arreglos, otros punteros (punteros a punteros) y funciones (punteros a funciones), lo que permite crear estructuras de datos más complejas y flexibles."
+    },
+    {
+      "pregunta": "¿Qué permiten hacer los punteros con los elementos de un arreglo?",
+      "respuesta": "Los punteros permiten manipular los elementos de un arreglo, facilitando el acceso directo a las posiciones de memoria donde se almacenan los datos del arreglo."
+    },
+    {
+      "pregunta": "¿Cuál es la ventaja de usar punteros para trabajar con arreglos en programación?",
+      "respuesta": "La ventaja principal es que los punteros proporcionan acceso directo y eficiente a la memoria del arreglo, permitiendo recorrer, modificar y manipular sus elementos de forma más flexible y con mejor rendimiento que usando únicamente índices."
+    },
+    {
+      "pregunta": "¿Qué función cumple el operador & en programación?",
+      "respuesta": "El operador & (ampersand) se utiliza para obtener la dirección de memoria de una variable. Es decir, devuelve la ubicación en la memoria RAM donde está almacenado el valor de esa variable."
+    },
+    {
+      "pregunta": "¿Cuál es la diferencia entre los operadores & y * en el manejo de punteros?",
+      "respuesta": "El operador & obtiene la dirección de memoria de una variable, mientras que el operador * (asterisco) realiza la operación inversa: obtiene el valor almacenado en una dirección de memoria específica. Son operadores complementarios en el trabajo con punteros."
+    },
+    {
+      "pregunta": "¿Para qué se utilizan los punteros como parámetros en funciones?",
+      "respuesta": "Los punteros se utilizan como parámetros en funciones para permitir que el valor de una variable pueda ser modificado directamente dentro de la función, ya que se pasa la dirección de memoria en lugar de una copia del valor."
+    },
+    {
+      "pregunta": "¿Cuál es la ventaja de pasar punteros a una función en lugar de pasar valores por copia?",
+      "respuesta": "La ventaja principal es que permite modificar el valor original de la variable desde dentro de la función, evitando la creación de copias innecesarias y permitiendo que los cambios realizados persistan después de que la función termine su ejecución."
+    },
+    {
+      "pregunta": "¿Cuál es una de las grandes ventajas de la utilización de punteros en programación?",
+      "respuesta": "Una de las grandes ventajas de la utilización de punteros es la posibilidad de usar memoria dinámica, lo que permite reservar y liberar memoria durante la ejecución del programa según las necesidades."
+    },
+    {
+      "pregunta": "¿Cómo se reserva y libera memoria dinámica para un entero en C++?",
+      "respuesta": "Para reservar memoria dinámica se utiliza 'int* p = new int;' que crea un puntero y asigna memoria para un entero. Para liberar esa memoria se utiliza 'delete p;' lo que previene fugas de memoria."
+    }
+  ]
+}

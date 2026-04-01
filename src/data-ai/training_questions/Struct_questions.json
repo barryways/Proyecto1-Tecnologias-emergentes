@@ -1,0 +1,61 @@
+{
+  "topic": "Struct",
+  "questions": [
+    {
+      "pregunta": "¿Qué es un Struct en programación?",
+      "respuesta": "Es una abreviatura de la palabra structure (estructura) que permite a los programadores agrupar múltiples variables donde cada una puede ser de un diferente tipo de dato. Funciona como plantilla para encapsular variables."
+    },
+    {
+      "pregunta": "¿Cuál es el principal uso de un Struct?",
+      "respuesta": "Su principal uso está asociado a organizar datos complejos, ya que permite agrupar variables de diferentes tipos de datos en una sola estructura, facilitando la organización y el manejo de información relacionada."
+    },
+    {
+      "pregunta": "¿Qué es un Struct y cuál es su principal función en programación?",
+      "respuesta": "Un Struct es una estructura de datos que permite agrupar varias variables bajo un solo nombre, facilitando su acceso y organización. Su principal función es crear tipos de datos personalizados que pueden contener diferentes variables relacionadas entre sí."
+    },
+    {
+      "pregunta": "¿Qué ventaja ofrece un Struct al convertirse en un tipo de datos?",
+      "respuesta": "Al convertirse en un tipo de datos, los Struct permiten crear matrices o arreglos de estructuras, lo que facilita el manejo de múltiples conjuntos de datos con la misma estructura de forma organizada y eficiente."
+    },
+    {
+      "pregunta": "¿Cuál es el nivel de acceso predeterminado en las estructuras de programación?",
+      "respuesta": "Por defecto, el acceso en las estructuras es público, lo que significa que todos sus miembros son accesibles desde cualquier parte del programa sin restricciones."
+    },
+    {
+      "pregunta": "¿Qué similitudes y compatibilidades tienen las estructuras en programación?",
+      "respuesta": "Las estructuras son compatibles con el lenguaje C y tienen un comportamiento similar a las clases, permitiendo agrupar datos relacionados bajo un mismo nombre, aunque con algunas diferencias en cuanto a características orientadas a objetos."
+    },
+    {
+      "pregunta": "¿Cuáles son las principales ventajas de utilizar estructuras de datos en programación?",
+      "respuesta": "Las principales ventajas son: facilitan la organización y acceso a los datos, simplifican el código, proporcionan flexibilidad para la administración de datos, permiten acceso fácil a múltiples datos y son especialmente útiles cuando se desea trabajar con datos simples."
+    },
+    {
+      "pregunta": "¿En qué situación se recomienda utilizar estas estructuras de datos?",
+      "respuesta": "Se recomienda utilizar estas estructuras de datos cuando se desea trabajar con datos simples y se necesita un acceso fácil y organizado a múltiples datos, lo que simplifica el código y facilita su administración."
+    },
+    {
+      "pregunta": "¿Qué riesgo de seguridad presenta el ser público por defecto?",
+      "respuesta": "Podría abrir brechas de seguridad, ya que al ser público por defecto, los elementos están expuestos sin restricciones de acceso, lo que puede permitir modificaciones no autorizadas o acceso indebido a datos sensibles."
+    },
+    {
+      "pregunta": "¿Qué características importantes de la programación orientada a objetos no están disponibles?",
+      "respuesta": "No tiene características como la herencia y el polimorfismo, dos pilares fundamentales de la programación orientada a objetos que permiten la reutilización de código y el comportamiento dinámico de las clases."
+    },
+    {
+      "pregunta": "¿Cuáles son los componentes clave necesarios para declarar una estructura (struct) en programación?",
+      "respuesta": "Los componentes clave son: la palabra reservada 'struct', el nombre de la estructura, llave de apertura '{', los datos con sus tipos de datos correspondientes, y la llave de cierre '}'."
+    },
+    {
+      "pregunta": "¿Qué palabra reservada se utiliza para definir una estructura de datos en lenguajes como C o C++?",
+      "respuesta": "Se utiliza la palabra reservada 'struct' para definir una estructura de datos, la cual permite agrupar diferentes tipos de datos bajo un mismo nombre."
+    },
+    {
+      "pregunta": "¿En qué situaciones es recomendable usar una estructura de datos sin métodos en programación?",
+      "respuesta": "Es recomendable cuando solo hay datos y no lógica de métodos, cuando el acceso puede ser público y no se necesita encapsulamiento, y cuando no hay una arquitectura de múltiples objetos que requiera complejidad adicional."
+    },
+    {
+      "pregunta": "¿Por qué no sería necesario el encapsulamiento en ciertos casos de programación?",
+      "respuesta": "El encapsulamiento no es necesario cuando el acceso a los datos puede ser público sin riesgos, es decir, cuando no hay lógica sensible que proteger y la estructura es simple, conteniendo únicamente datos sin métodos que requieran control de acceso."
+    }
+  ]
+}

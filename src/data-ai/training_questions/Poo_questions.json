@@ -1,0 +1,125 @@
+{
+  "topic": "Poo",
+  "questions": [
+    {
+      "pregunta": "¿Qué es un paradigma de programación?",
+      "respuesta": "Un paradigma de programación es un enfoque o estilo de programación que es adoptado por una comunidad de programadores. Presenta un estilo único sobre cómo estructurar y organizar el código fuente de un programa."
+    },
+    {
+      "pregunta": "¿Cuál es el objetivo principal de los paradigmas de programación?",
+      "respuesta": "El objetivo principal es proporcionar una forma estructurada de organizar el código fuente del programa para poder solucionar problemas comunes de manera efectiva."
+    },
+    {
+      "pregunta": "¿Cuáles son las características principales del paradigma imperativo?",
+      "respuesta": "El paradigma imperativo tiene un nivel bajo de abstracción, está muy enfocado en las instrucciones que la computadora debe seguir paso a paso, no está diseñado para seguir una lógica humana intuitiva, y surgió en la década de 1940. Su lenguaje más conocido es Assembly."
+    },
+    {
+      "pregunta": "¿Cuál es el lenguaje más conocido del paradigma imperativo y en qué década surgió este paradigma?",
+      "respuesta": "El lenguaje más conocido del paradigma imperativo es Assembly, y este paradigma surgió en la década de 1940."
+    },
+    {
+      "pregunta": "¿Cuáles son las características principales de la programación no estructurada que surgió en los años 1960?",
+      "respuesta": "La programación no estructurada de los años 1960 se caracteriza por tener un nivel medio de abstracción, estar muy enfocada en el uso de instrucciones goto, presentar dificultades de mantenimiento del código, y tener como lenguaje más conocido a FORTRAN."
+    },
+    {
+      "pregunta": "¿Por qué la programación no estructurada presentaba dificultades de mantenimiento?",
+      "respuesta": "La programación no estructurada presentaba dificultades de mantenimiento principalmente debido a su enfoque excesivo en las instrucciones goto, lo que generaba código difícil de seguir, entender y modificar, creando lo que se conoce como 'código espagueti' con saltos de control desordenados."
+    },
+    {
+      "pregunta": "¿Cuál es el lenguaje más conocido de la programación estructurada?",
+      "respuesta": "El lenguaje más conocido de la programación estructurada es Fortran, que surgió en la década de 1960."
+    },
+    {
+      "pregunta": "¿Cuáles son las características principales de la programación estructurada?",
+      "respuesta": "La programación estructurada se caracteriza por tener un nivel medio de abstracción, estar muy enfocada en las instrucciones if y else, y presentar menor dificultad de mantenimiento en comparación con otros paradigmas."
+    },
+    {
+      "pregunta": "¿Qué es el paradigma de programación procedural o modular?",
+      "respuesta": "Es un paradigma de programación que surgió en los años 1980 y se basa en la ejecución de una secuencia de acciones determinada por módulos o procedimientos. Está muy enfocado en estructurar la programación en procedimientos o subrutinas, representando el primer acercamiento a la modularidad y reutilización de código."
+    },
+    {
+      "pregunta": "¿Qué lenguaje de programación es un ejemplo del paradigma procedural?",
+      "respuesta": "Fortran es un ejemplo de lenguaje de programación que utiliza el paradigma procedural o modular."
+    },
+    {
+      "pregunta": "¿Qué es un objeto en el paradigma de programación orientado a objetos?",
+      "respuesta": "Un objeto es una entidad que contiene atributos (datos o propiedades) y métodos (funciones o comportamientos) relacionados entre sí, formando la base del paradigma orientado a objetos."
+    },
+    {
+      "pregunta": "¿En qué década se popularizó el uso de la programación orientada a objetos?",
+      "respuesta": "La programación orientada a objetos se popularizó en los años 90s (década de 1990), aunque su desarrollo comenzó en las décadas anteriores."
+    },
+    {
+      "pregunta": "¿Qué es la Programación Orientada a Objetos (POO)?",
+      "respuesta": "Es un paradigma de programación que utiliza objetos y sus interacciones como elemento fundamental para el desarrollo de software. Tiene una analogía con el mundo real, donde un objeto es cualquier entidad que posee atributos y métodos, y estos objetos se agrupan mediante clases."
+    },
+    {
+      "pregunta": "¿Qué elementos componen un objeto en POO y cómo se organizan?",
+      "respuesta": "Un objeto en POO está compuesto por atributos (características o propiedades) y métodos (acciones o comportamientos). Los objetos se organizan y agrupan a través de clases, que actúan como plantillas o moldes para crear instancias de objetos con características similares."
+    },
+    {
+      "pregunta": "¿Qué ventaja ofrece la programación orientada a objetos en términos de reutilización de código?",
+      "respuesta": "La reutilización de código permite reducir la duplicación de código, evitando escribir el mismo código varias veces y facilitando su uso en diferentes partes del programa o en otros proyectos."
+    },
+    {
+      "pregunta": "¿Cómo beneficia la modularidad al desarrollo de software en programación orientada a objetos?",
+      "respuesta": "La modularidad permite dividir los programas en objetos autónomos y modulares, lo que facilita la organización del código, mejora su comprensión y permite trabajar en diferentes partes del sistema de forma independiente sin afectar al resto del programa."
+    },
+    {
+      "pregunta": "¿Qué lenguajes de programación se mencionan en esta clase?",
+      "respuesta": "Los lenguajes de programación mencionados son: Java, Ruby, Python, Visual Basic .NET y C++."
+    },
+    {
+      "pregunta": "¿Cuál es la diferencia principal entre Python y C++ en términos de tipado y gestión de memoria?",
+      "respuesta": "Python es un lenguaje de tipado dinámico con gestión automática de memoria (garbage collector), mientras que C++ es de tipado estático y requiere gestión manual de memoria, lo que le da mayor control pero también mayor complejidad."
+    },
+    {
+      "pregunta": "¿Qué es el encapsulamiento en programación orientada a objetos?",
+      "respuesta": "El encapsulamiento es un principio fundamental que consiste en ocultar los detalles internos de implementación de una clase y exponer solo la interfaz necesaria. Permite proteger los datos mediante modificadores de acceso (público, privado, protegido) y garantiza que los atributos solo se modifiquen a través de métodos controlados, mejorando la seguridad y el mantenimiento del código."
+    },
+    {
+      "pregunta": "¿Cuál es la diferencia entre herencia y polimorfismo?",
+      "respuesta": "La herencia es un mecanismo que permite crear nuevas clases basadas en clases existentes, heredando sus atributos y métodos, promoviendo la reutilización de código. El polimorfismo, por otro lado, es la capacidad de objetos de diferentes clases de responder al mismo mensaje o método de manera diferente, permitiendo que una misma interfaz tenga múltiples implementaciones según el tipo de objeto que la utilice."
+    },
+    {
+      "pregunta": "¿Qué son las clases en programación?",
+      "respuesta": "Las clases son plantillas, moldes o contenedores que permiten crear objetos. En ellas se definen los atributos y métodos, funcionando principalmente como una abstracción de un concepto de la vida real."
+    },
+    {
+      "pregunta": "¿Qué característica tienen los objetos que pertenecen a una misma clase?",
+      "respuesta": "Los objetos de una misma clase son del mismo tipo, pero pueden tener características y acciones distintas entre sí, aunque compartan la misma estructura definida por la clase."
+    },
+    {
+      "pregunta": "¿Qué es un objeto en programación?",
+      "respuesta": "Un objeto es una instancia individual de una clase que representa una entidad específica con características y comportamientos propios."
+    },
+    {
+      "pregunta": "¿Qué elementos definen a un objeto?",
+      "respuesta": "Un objeto se define por sus atributos, que representan su estado, y sus métodos, que modifican tanto su estado como su comportamiento."
+    },
+    {
+      "pregunta": "¿Qué es el encapsulamiento en programación orientada a objetos?",
+      "respuesta": "El encapsulamiento es el proceso o procedimiento de ocultar detalles que son internos para un objeto y la capacidad de exponer únicamente aquellos detalles que se considere necesarios. Está directamente relacionado con los modificadores de acceso: privado, público y protegido."
+    },
+    {
+      "pregunta": "¿Con qué conceptos está directamente relacionado el encapsulamiento?",
+      "respuesta": "El encapsulamiento está directamente relacionado con los modificadores de acceso: privado (private), público (public) y protegido (protected), que permiten controlar qué detalles internos de un objeto se ocultan y cuáles se exponen."
+    },
+    {
+      "pregunta": "¿Qué es la herencia en programación orientada a objetos?",
+      "respuesta": "La herencia es el proceso que permite crear una nueva clase tomando como base una clase ya existente, heredando sus atributos y métodos de la clase base o superclase. Esto facilita la reutilización de código y establece jerarquías entre clases."
+    },
+    {
+      "pregunta": "¿Cuáles son las principales ventajas de utilizar herencia en programación?",
+      "respuesta": "Las principales ventajas de la herencia son: promover la reutilización de código al evitar duplicación, y permitir establecer jerarquías entre clases que reflejan relaciones lógicas entre diferentes tipos de objetos en el programa."
+    },
+    {
+      "pregunta": "¿Qué es el polimorfismo en programación orientada a objetos?",
+      "respuesta": "El polimorfismo es la capacidad que permite que múltiples objetos puedan ser tratados de una misma manera a través de una interfaz común, facilitando la flexibilidad y reutilización del código."
+    },
+    {
+      "pregunta": "¿Cuáles son las dos formas en que se manifiesta el polimorfismo y en qué momento ocurren?",
+      "respuesta": "El polimorfismo se manifiesta de dos formas: en tiempo de compilación mediante la sobrecarga de métodos (compile-time polymorphism) y en tiempo de ejecución mediante la sobrescritura de métodos (runtime polymorphism)."
+    }
+  ]
+}

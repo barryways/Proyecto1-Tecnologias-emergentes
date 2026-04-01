@@ -1,6 +1,6 @@
 import os
 import json
-from services import extract_service
+from services import extract_service, save_service
 from pathlib import Path
 
 def extract_course_information():
@@ -22,13 +22,6 @@ def save_information_json(path_file: str) -> str:
     content = extract_service.extract(path_file)
     if len(content) == 0:
         return ''
-
-    output_path = build_output_path(path_file, 'json')
-    with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(content, f, ensure_ascii=False, indent=2)
-    return output_path
-
-def build_output_path(path_file: str, extension: str) -> str:
     name = os.path.splitext(os.path.basename(path_file))[0]
-    os.makedirs('json', exist_ok=True)
-    return os.path.join('json', f"{name}.json")
+    folder = 'course_information'
+    return save_service.save_json(name, content, folder)

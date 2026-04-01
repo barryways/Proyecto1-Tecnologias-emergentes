@@ -1,0 +1,37 @@
+{
+  "topic": "Arreglos multidimensionales",
+  "questions": [
+    {
+      "pregunta": "¿Qué es un arreglo multidimensional?",
+      "respuesta": "Un arreglo multidimensional es una extensión de un arreglo que permite almacenar datos en múltiples dimensiones, en lugar de una sola fila. Funciona como una tabla con filas y columnas, siendo lo más común trabajar con dos o tres dimensiones, aunque es posible usar más."
+    },
+    {
+      "pregunta": "¿Cuál es la diferencia principal entre un arreglo unidimensional y uno multidimensional?",
+      "respuesta": "La diferencia principal es que un arreglo unidimensional maneja una sola dimensión (una fila de datos), mientras que un arreglo multidimensional permite almacenar múltiples filas organizadas en tablas, permitiendo trabajar con estructuras de datos más complejas como matrices."
+    },
+    {
+      "pregunta": "¿Cómo se accede a los elementos en una matriz bidimensional y qué tipo de ciclos se requieren para recorrerla?",
+      "respuesta": "El acceso a los elementos se realiza mediante índices [i][j], donde i representa la fila y j la columna. Para recorrer todos sus elementos se requieren ciclos dobles (anidados), uno para iterar las filas y otro para las columnas."
+    },
+    {
+      "pregunta": "¿Cuáles son los principales usos de las matrices bidimensionales en programación?",
+      "respuesta": "Las matrices bidimensionales se utilizan principalmente para representar tableros de juego (como ajedrez o tres en raya), juegos que requieren cuadrículas, y cualquier estructura de datos que necesite organizarse en dos dimensiones, como tablas o imágenes pixeladas."
+    },
+    {
+      "pregunta": "¿Cómo se declara y se inicializa una matriz de enteros de dos filas y tres columnas en programación?",
+      "respuesta": "Se declara especificando el tipo de dato (int), seguido del nombre de la matriz y las dimensiones entre corchetes [2][3]. Luego se asignan valores usando índices, por ejemplo: int matriz[2][3] = {{1,2,3}, {4,5,6}}; o accediendo a cada posición individualmente como matriz[0][0] = 1;"
+    },
+    {
+      "pregunta": "¿Qué ventajas tiene utilizar matrices bidimensionales en lugar de variables individuales para almacenar datos relacionados?",
+      "respuesta": "Las matrices bidimensionales permiten organizar datos en formato tabular de manera estructurada, facilitan el acceso mediante índices, simplifican operaciones mediante bucles anidados, reducen la cantidad de variables necesarias y mejoran la legibilidad del código al agrupar datos relacionados en una única estructura de datos."
+    },
+    {
+      "pregunta": "¿Qué modificación se debe realizar al programa para permitir la entrada de datos del usuario?",
+      "respuesta": "Se debe modificar el programa para que la información sea ingresada desde el teclado por el usuario, utilizando funciones de entrada como scanf() en C, input() en Python, o Scanner en Java, según el lenguaje de programación utilizado."
+    },
+    {
+      "pregunta": "¿Cuál es la ventaja de modificar un programa para que acepte entrada del usuario por teclado en lugar de tener datos predefinidos?",
+      "respuesta": "La principal ventaja es que el programa se vuelve más flexible e interactivo, permitiendo que cada ejecución procese datos diferentes sin necesidad de modificar el código fuente. Esto hace que el programa sea más dinámico, reutilizable y útil para diversos casos de uso."
+    }
+  ]
+}

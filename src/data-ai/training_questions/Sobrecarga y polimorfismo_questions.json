@@ -1,0 +1,61 @@
+{
+  "topic": "Sobrecarga y polimorfismo",
+  "questions": [
+    {
+      "pregunta": "¿Qué es la sobrecarga en programación?",
+      "respuesta": "La sobrecarga es un concepto de programación orientada a objetos que permite definir múltiples métodos o funciones con el mismo nombre pero con diferentes parámetros (distinto número, tipo o orden). Esto permite que un mismo método pueda realizar operaciones similares pero adaptadas a diferentes tipos de datos de entrada."
+    },
+    {
+      "pregunta": "¿Cuál es la principal ventaja de utilizar sobrecarga de métodos?",
+      "respuesta": "La principal ventaja es mejorar la legibilidad y usabilidad del código, ya que permite usar un mismo nombre de método para operaciones conceptualmente similares, en lugar de crear múltiples métodos con nombres diferentes. Esto hace el código más intuitivo y fácil de mantener, permitiendo al programador usar una interfaz consistente para diferentes tipos de datos."
+    },
+    {
+      "pregunta": "¿Qué es la sobrecarga de métodos en C++?",
+      "respuesta": "La sobrecarga de métodos en C++ ocurre cuando dos o más métodos tienen el mismo nombre dentro de una clase o programa. Estos métodos deben diferenciarse en el número o tipo de parámetros que reciben, lo que permite al compilador distinguir cuál método invocar según los argumentos proporcionados."
+    },
+    {
+      "pregunta": "¿Qué condiciones deben cumplir los métodos sobrecargados en C++ para diferenciarse entre sí?",
+      "respuesta": "Los métodos sobrecargados en C++ deben diferenciarse en el número de parámetros que reciben o en el tipo de datos de esos parámetros. Aunque compartan el mismo nombre, estas diferencias en la firma del método permiten al compilador identificar cuál versión del método debe ejecutarse según los argumentos pasados en la llamada."
+    },
+    {
+      "pregunta": "¿Qué es la sobrecarga de funciones en C++?",
+      "respuesta": "La sobrecarga de funciones en C++ es la capacidad de definir múltiples funciones con el mismo nombre pero con diferentes parámetros (diferente cantidad, tipo o ambos). El compilador selecciona automáticamente la función correcta según los argumentos proporcionados en la llamada."
+    },
+    {
+      "pregunta": "¿Cuál es la diferencia entre sobrecarga de funciones y sobrecarga de métodos en C++?",
+      "respuesta": "La sobrecarga de funciones se refiere a funciones independientes con el mismo nombre pero diferentes parámetros, mientras que la sobrecarga de métodos se aplica específicamente a funciones miembro de una clase. Ambas siguen el mismo principio de polimorfismo en tiempo de compilación, pero los métodos operan dentro del contexto de objetos de clase."
+    },
+    {
+      "pregunta": "¿Qué significa polimorfismo en programación?",
+      "respuesta": "Polimorfismo significa 'muchas formas' y se refiere a la capacidad de un mismo método de comportarse de forma diferente dependiendo del tipo de objeto que lo utilice."
+    },
+    {
+      "pregunta": "¿Cómo se comporta un método polimórfico según el contexto?",
+      "respuesta": "Un método polimórfico se comporta de manera diferente dependiendo del tipo de objeto que lo invoque, permitiendo que objetos de distintas clases respondan de forma específica al mismo método."
+    },
+    {
+      "pregunta": "¿Qué palabra clave se utiliza en C++ para declarar métodos en una clase base que permitan el polimorfismo?",
+      "respuesta": "Se utiliza la palabra clave 'virtual' para declarar métodos en la clase base. Esto permite que las clases derivadas puedan sobrescribir estos métodos y que se invoque dinámicamente la versión correcta del método según el tipo real del objeto en tiempo de ejecución."
+    },
+    {
+      "pregunta": "¿Cómo se logra invocar dinámicamente el método correcto en el polimorfismo de C++?",
+      "respuesta": "Se logra mediante el uso de punteros o referencias al tipo base. Cuando se utiliza un puntero o referencia de la clase base para apuntar a un objeto de la clase derivada, C++ determina en tiempo de ejecución qué versión del método virtual debe ejecutarse, invocando la implementación correspondiente de la clase derivada."
+    },
+    {
+      "pregunta": "¿Qué es una clase abstracta y por qué se utiliza en un sistema de procesamiento de pagos?",
+      "respuesta": "Una clase abstracta es una clase que no puede ser instanciada directamente y sirve como plantilla para otras clases. En un sistema de procesamiento de pagos se utiliza para definir un comportamiento común (como el método procesarPago) que todas las formas de pago deben implementar, permitiendo tratar de forma genérica tarjetas de crédito, transferencias bancarias y efectivo, mientras cada una mantiene su propia implementación específica."
+    },
+    {
+      "pregunta": "¿Cómo implementarías la estructura básica de clases para el sistema de procesamiento de pagos con tarjeta de crédito, transferencia bancaria y efectivo?",
+      "respuesta": "Se debe crear una clase abstracta base llamada 'MetodoPago' con un método virtual 'procesarPago'. Luego, crear tres clases derivadas: 'TarjetaCredito', 'TransferenciaBancaria' y 'Efectivo', cada una heredando de 'MetodoPago' e implementando su propia versión del método 'procesarPago' con la lógica específica de validación y procesamiento correspondiente a cada forma de pago."
+    },
+    {
+      "pregunta": "¿Qué concepto de programación orientada a objetos se está aplicando al crear tres clases derivadas (pago tarjeta, pago transferencia y pago efectivo) a partir de una clase base?",
+      "respuesta": "Se está aplicando el concepto de herencia y polimorfismo. La herencia permite crear clases derivadas que heredan propiedades y métodos de una clase base común (probablemente llamada 'Pago' o 'MetodoPago'). El polimorfismo permite que cada clase derivada implemente su propia versión de los métodos de pago, permitiendo que objetos de diferentes tipos sean tratados de manera uniforme a través de la clase base."
+    },
+    {
+      "pregunta": "¿Cómo funciona el enlace dinámico cuando se usa un puntero a la clase base para ejecutar métodos de las clases derivadas?",
+      "respuesta": "El enlace dinámico (también llamado ligadura dinámica o late binding) funciona mediante funciones virtuales. Cuando se declara un método como virtual en la clase base y se pasa un puntero de tipo clase base que apunta a un objeto de una clase derivada, el programa determina en tiempo de ejecución qué versión del método debe ejecutarse según el tipo real del objeto apuntado, no según el tipo del puntero. Esto permite ejecutar el método específico de cada forma de pago (tarjeta, transferencia o efectivo) usando el mismo puntero base."
+    }
+  ]
+}

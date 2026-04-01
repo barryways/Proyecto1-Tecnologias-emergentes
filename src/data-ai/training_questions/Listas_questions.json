@@ -1,0 +1,69 @@
+{
+  "topic": "Listas",
+  "questions": [
+    {
+      "pregunta": "¿Qué son las listas en programación?",
+      "respuesta": "Las listas son una estructura de datos que permite almacenar múltiples elementos del mismo tipo en una secuencia ordenada. Pueden crecer o reducirse de manera dinámica durante el tiempo de ejecución de un programa."
+    },
+    {
+      "pregunta": "¿Cuándo es útil utilizar listas en un programa?",
+      "respuesta": "Las listas son muy útiles cuando se necesitan datos que cambien durante la ejecución del programa, ya que permiten agregar o eliminar elementos de forma dinámica sin tener que definir un tamaño fijo desde el inicio."
+    },
+    {
+      "pregunta": "¿Cuáles son las principales ventajas de las estructuras de datos dinámicas en cuanto al manejo de memoria?",
+      "respuesta": "Las estructuras de datos dinámicas tienen tres ventajas principales en el manejo de memoria: tienen tamaño dinámico que se ajusta según las necesidades, el uso de memoria es adaptable permitiendo crecer o reducirse, y los datos no se reubican en memoria durante las operaciones, lo que mejora la eficiencia."
+    },
+    {
+      "pregunta": "¿Por qué las listas enlazadas son eficientes para operaciones de inserción y eliminación comparadas con los arreglos?",
+      "respuesta": "Las listas enlazadas son eficientes en inserción y eliminación porque solo requieren modificar los punteros o referencias entre nodos, sin necesidad de desplazar elementos en memoria. Además, son eficientes en reordenamientos ya que no implican mover datos físicamente, solo actualizar las conexiones entre nodos."
+    },
+    {
+      "pregunta": "¿Cuáles son las principales desventajas relacionadas con el uso de memoria y rendimiento en estructuras de datos enlazadas?",
+      "respuesta": "Las principales desventajas son el mayor uso de memoria debido al almacenamiento de punteros adicionales, el acceso secuencial que impide el acceso directo a elementos específicos, y el ordenamiento más costoso en comparación con estructuras contiguas como los arreglos."
+    },
+    {
+      "pregunta": "¿Por qué la complejidad de implementación y mantenimiento se considera una desventaja en ciertas estructuras de datos?",
+      "respuesta": "La complejidad de implementación y mantenimiento es una desventaja porque requiere un manejo cuidadoso de punteros y referencias, aumenta la probabilidad de errores como pérdida de memoria o referencias nulas, y demanda más tiempo de desarrollo y depuración en comparación con estructuras de datos más simples."
+    },
+    {
+      "pregunta": "¿Cuáles son los dos tipos principales de listas que se pueden manejar en C++?",
+      "respuesta": "En C++ se pueden manejar dos tipos principales de listas: std::list que son listas doblemente enlazadas, y std::forward_list que son listas simplemente enlazadas."
+    },
+    {
+      "pregunta": "¿Cuál es la diferencia principal entre std::list y std::forward_list en C++?",
+      "respuesta": "La diferencia principal es que std::list es una lista doblemente enlazada, lo que permite recorrerla en ambas direcciones (hacia adelante y hacia atrás), mientras que std::forward_list es una lista simplemente enlazada que solo permite recorrerla en una dirección (hacia adelante)."
+    },
+    {
+      "pregunta": "¿Qué característica principal define a una lista simplemente enlazada?",
+      "respuesta": "Cada nodo o elemento tiene un apuntador que referencia únicamente al siguiente nodo en la estructura, permitiendo el recorrido en una sola dirección."
+    },
+    {
+      "pregunta": "¿Cuál es la ventaja de usar listas simplemente enlazadas cuando no se requiere retroceso?",
+      "respuesta": "Son más ligeras y rápidas en sus operaciones porque solo mantienen un apuntador por nodo hacia adelante, reduciendo el uso de memoria y la complejidad comparado con estructuras que permiten navegación bidireccional."
+    },
+    {
+      "pregunta": "¿Qué característica principal distingue a una lista doblemente enlazada de una lista simplemente enlazada?",
+      "respuesta": "Cada nodo en una lista doblemente enlazada tiene dos apuntadores: uno hacia el siguiente nodo y otro hacia el nodo anterior, lo que permite el acceso bidireccional a través de la estructura de datos."
+    },
+    {
+      "pregunta": "¿Qué ventaja operacional ofrece una lista doblemente enlazada respecto a la eliminación de elementos?",
+      "respuesta": "La lista doblemente enlazada hace más eficiente la eliminación de elementos porque al tener apuntadores bidireccionales, se puede acceder directamente al nodo anterior sin necesidad de recorrer la lista desde el inicio para actualizar las referencias."
+    },
+    {
+      "pregunta": "¿Qué métodos se utilizan para insertar elementos en una std::list de C++ y cuál es la diferencia entre ellos?",
+      "respuesta": "Los métodos de inserción son push_back() y push_front(). push_back() inserta elementos al final de la lista, mientras que push_front() los inserta al principio. Ambos permiten agregar elementos de forma eficiente en tiempo constante O(1)."
+    },
+    {
+      "pregunta": "¿Cuáles son las tres operaciones disponibles para eliminar elementos de una std::list y qué hace cada una?",
+      "respuesta": "Las operaciones de eliminación son: pop_back() que elimina el último elemento, pop_front() que elimina el primer elemento, y remove(valor) que elimina todos los elementos que coincidan con el valor especificado en toda la lista."
+    },
+    {
+      "pregunta": "¿Qué es Visual Studio y para qué se utiliza en programación?",
+      "respuesta": "Visual Studio es un entorno de desarrollo integrado (IDE) de Microsoft que permite crear, editar, depurar y compilar código en múltiples lenguajes como C#, C++, Python y JavaScript. Se utiliza para desarrollar aplicaciones de escritorio, web, móviles y servicios en la nube de forma profesional."
+    },
+    {
+      "pregunta": "¿Cuáles son las principales ventajas de usar Visual Studio para programación avanzada?",
+      "respuesta": "Visual Studio ofrece autocompletado inteligente (IntelliSense), herramientas de depuración avanzadas con puntos de interrupción y análisis en tiempo real, integración con sistemas de control de versiones como Git, extensiones personalizables, y soporte nativo para frameworks modernos como .NET, lo que aumenta significativamente la productividad del desarrollador."
+    }
+  ]
+}

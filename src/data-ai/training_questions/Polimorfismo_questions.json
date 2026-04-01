@@ -1,0 +1,45 @@
+{
+  "topic": "Polimorfismo",
+  "questions": [
+    {
+      "pregunta": "¿Qué es el polimorfismo en programación orientada a objetos?",
+      "respuesta": "El polimorfismo es uno de los pilares fundamentales de la programación orientada a objetos que brinda la capacidad de que una función, método o clase pueda tomar múltiples formas, permitiendo que diferentes objetos respondan de manera distinta a una misma interfaz o llamada."
+    },
+    {
+      "pregunta": "¿Cuáles son las principales herramientas para implementar polimorfismo en C++?",
+      "respuesta": "En C++ las principales herramientas para implementar polimorfismo son las funciones virtuales y la herencia, que permiten definir comportamientos en clases base que pueden ser sobrescritos en clases derivadas."
+    },
+    {
+      "pregunta": "¿Cuáles son las principales ventajas de aplicar buenas prácticas en programación avanzada?",
+      "respuesta": "Las principales ventajas son: la reutilización de código, que permite aprovechar componentes ya desarrollados en diferentes proyectos; el mantenimiento del código, facilitando su actualización y corrección de errores; y la flexibilidad, que permite adaptar el software a nuevos requisitos con menor esfuerzo."
+    },
+    {
+      "pregunta": "¿Cómo beneficia la reutilización de código al desarrollo de software?",
+      "respuesta": "La reutilización de código beneficia al desarrollo de software al permitir aprovechar funciones, clases o módulos ya probados y validados en nuevos proyectos, reduciendo el tiempo de desarrollo, minimizando errores y aumentando la productividad del equipo de programación."
+    },
+    {
+      "pregunta": "¿Qué son las funciones virtuales en programación orientada a objetos?",
+      "respuesta": "Las funciones virtuales son funciones miembro de una clase que permiten implementar el polimorfismo en tiempo de ejecución. Se declaran utilizando la palabra clave 'virtual' y permiten que las clases derivadas sobrescriban el comportamiento de la clase base, determinándose qué versión de la función ejecutar durante la ejecución del programa según el tipo real del objeto."
+    },
+    {
+      "pregunta": "¿Qué palabra clave se utiliza para declarar una función virtual?",
+      "respuesta": "Se utiliza la palabra clave 'virtual' para declarar una función virtual en la clase base. Esta palabra se coloca antes del tipo de retorno en la declaración de la función."
+    },
+    {
+      "pregunta": "¿Qué palabra clave se utiliza en C++ para permitir que un método pueda ser sobrescrito en clases derivadas?",
+      "respuesta": "Se utiliza la palabra clave 'virtual'. En el ejemplo, el método hacersonido() está declarado como virtual, lo que permite que las clases que hereden de animal puedan sobrescribir este método y proporcionar su propia implementación específica del sonido."
+    },
+    {
+      "pregunta": "¿Cuál es la ventaja de declarar el método hacersonido() como const en la clase animal?",
+      "respuesta": "Declarar un método como const garantiza que el método no modificará el estado del objeto (sus atributos). Esto permite que el método pueda ser llamado desde objetos constantes y mejora la seguridad del código al prevenir modificaciones accidentales del objeto durante la ejecución del método."
+    },
+    {
+      "pregunta": "¿Qué significa la palabra clave 'override' en la declaración del método hacersonido() en la clase gato?",
+      "respuesta": "La palabra clave 'override' indica que el método hacersonido() está sobrescribiendo un método virtual de la clase base 'animal'. Esto permite que el compilador verifique que efectivamente existe un método virtual en la clase padre con la misma firma, evitando errores y garantizando el polimorfismo correcto."
+    },
+    {
+      "pregunta": "¿Qué tipo de herencia utiliza la clase gato y qué implica esto para el acceso a los miembros de la clase base?",
+      "respuesta": "La clase gato utiliza herencia pública (public animal), lo que significa que los miembros públicos de la clase 'animal' permanecen públicos en 'gato', y los miembros protegidos permanecen protegidos. Esto mantiene la relación 'es-un' y permite que los objetos de tipo gato sean tratados como objetos de tipo animal."
+    }
+  ]
+}
