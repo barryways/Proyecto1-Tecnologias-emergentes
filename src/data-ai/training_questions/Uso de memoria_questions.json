@@ -1,0 +1,61 @@
+{
+  "topic": "Uso de memoria",
+  "questions": [
+    {
+      "pregunta": "¿Por qué el segmento de texto es solo de lectura?",
+      "respuesta": "El segmento de texto es solo de lectura para proteger las instrucciones compiladas del programa y evitar que sean modificadas durante la ejecución, lo que garantiza la integridad del código ejecutable y previene errores o comportamientos inesperados."
+    },
+    {
+      "pregunta": "¿Dónde se almacena la instrucción cout en la memoria de un programa?",
+      "respuesta": "La instrucción cout se almacena en el segmento de texto, ya que forma parte del código ejecutable compilado del programa y contiene las instrucciones de máquina necesarias para realizar operaciones de salida."
+    },
+    {
+      "pregunta": "¿Qué son los datos inicializados en programación?",
+      "respuesta": "Los datos inicializados son las variables globales, también conocidas como variables estáticas, que tienen un valor explícito asignado desde su declaración. Estas variables se almacenan en un área de memoria fija durante la ejecución del programa."
+    },
+    {
+      "pregunta": "¿Dónde se almacenan las variables estáticas con valor explícito?",
+      "respuesta": "Las variables estáticas con valor explícito se guardan en memoria fija, específicamente en la sección de datos inicializados del programa, lo que les permite mantener su valor durante toda la ejecución del mismo."
+    },
+    {
+      "pregunta": "¿Qué sucede con las variables globales que no tienen un valor asignado en el momento de su declaración?",
+      "respuesta": "Las variables globales sin un valor asignado son inicializadas automáticamente en cero por el sistema."
+    },
+    {
+      "pregunta": "¿Cuál es la diferencia entre una variable global inicializada explícitamente y una sin inicializar?",
+      "respuesta": "Una variable global inicializada explícitamente tiene el valor que el programador le asigna, mientras que una variable global sin inicializar recibe automáticamente el valor cero por parte del sistema."
+    },
+    {
+      "pregunta": "¿Para qué se utiliza el stack en programación?",
+      "respuesta": "El stack se utiliza para almacenar variables locales y parámetros de función. Crece y decrece automáticamente según las llamadas a funciones que se realizan durante la ejecución del programa."
+    },
+    {
+      "pregunta": "¿Cuáles son las principales características del stack en términos de velocidad y capacidad?",
+      "respuesta": "El stack es una memoria muy rápida, lo que permite un acceso eficiente a los datos. Sin embargo, su principal limitación es que tiene un tamaño muy restringido, por lo que no es adecuado para almacenar grandes cantidades de información."
+    },
+    {
+      "pregunta": "¿Para qué se utiliza el heap en programación?",
+      "respuesta": "El heap se utiliza para la gestión de memoria dinámica, permitiendo asignar y liberar memoria en tiempo de ejecución mediante operadores como new y delete."
+    },
+    {
+      "pregunta": "¿Cuáles son las características principales del heap?",
+      "respuesta": "El heap es muy flexible ya que permite controlar cuándo se asigna y libera memoria, pero requiere un manejo manual por parte del programador, lo que implica mayor responsabilidad para evitar fugas de memoria."
+    },
+    {
+      "pregunta": "¿Dónde se almacenan las variables locales y los parámetros de una función en memoria?",
+      "respuesta": "Las variables locales y los parámetros de una función se almacenan en el stack (pila). Esta área de memoria se gestiona automáticamente y sigue un orden LIFO (Last In, First Out), liberándose cuando la función termina su ejecución."
+    },
+    {
+      "pregunta": "¿Cuál es la diferencia entre el heap y el stack en cuanto a la gestión de memoria?",
+      "respuesta": "El stack almacena variables locales y parámetros con gestión automática y tamaño fijo, mientras que el heap es utilizado para asignación dinámica mediante new/delete, requiere gestión manual por parte del programador y permite trabajar con tamaños variables de memoria durante la ejecución del programa."
+    },
+    {
+      "pregunta": "¿Dónde se almacenan las variables locales y los parámetros de una función en memoria?",
+      "respuesta": "Las variables locales y los parámetros de una función se almacenan en el stack (pila). Esta región de memoria se gestiona automáticamente y sigue un orden LIFO (Last In, First Out), liberándose cuando la función termina su ejecución."
+    },
+    {
+      "pregunta": "¿Cuál es la diferencia entre el segmento de datos inicializados y el segmento de datos no inicializados?",
+      "respuesta": "El segmento de datos inicializados contiene variables globales y estáticas que tienen un valor asignado en el código fuente. El segmento de datos no inicializados (también llamado BSS) contiene variables globales y estáticas que no han sido inicializadas explícitamente y se inicializan automáticamente a cero."
+    }
+  ]
+}

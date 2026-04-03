@@ -1,0 +1,149 @@
+{
+  "topic": "Arreglos c++",
+  "questions": [
+    {
+      "pregunta": "¿Qué es un arreglo en C++?",
+      "respuesta": "Un arreglo es una estructura de datos que permite el almacenamiento de un grupo de elementos del mismo tipo, bajo un mismo nombre, y que se almacenan físicamente de manera contigua en la memoria."
+    },
+    {
+      "pregunta": "¿Cuál es la característica principal del almacenamiento de datos en un arreglo?",
+      "respuesta": "La característica principal es que todos los elementos deben ser del mismo tipo y se almacenan en posiciones contiguas de memoria, es decir, uno después del otro sin espacios intermedios."
+    },
+    {
+      "pregunta": "¿Qué rango de valores tiene el índice en un arreglo de C++?",
+      "respuesta": "El índice en un arreglo de C++ va desde 0 hasta n-1, donde n es el tamaño total del arreglo. Por ejemplo, si un arreglo tiene 5 elementos, los índices válidos serán 0, 1, 2, 3 y 4."
+    },
+    {
+      "pregunta": "¿Qué estructura de control se utiliza regularmente para recorrer los datos de un arreglo?",
+      "respuesta": "Se utiliza un ciclo para recorrer los datos de un arreglo. Este ciclo permite iterar a través de todos los elementos del arreglo utilizando el índice, facilitando el acceso secuencial y ordenado a cada dato almacenado."
+    },
+    {
+      "pregunta": "¿Cuáles son las principales ventajas de los arreglos tradicionales en programación?",
+      "respuesta": "Los arreglos tradicionales tienen dos ventajas principales: son muy eficientes en el uso de memoria y ofrecen un acceso muy rápido a sus elementos. Esto los hace ideales cuando se conoce el tamaño necesario de antemano y se requiere máximo rendimiento."
+    },
+    {
+      "pregunta": "¿Qué limitación importante tienen los arreglos tradicionales respecto a la seguridad de acceso?",
+      "respuesta": "Los arreglos tradicionales no verifican los límites de acceso, lo que significa que el programa no valida automáticamente si se está intentando acceder a una posición fuera del rango válido del arreglo. Esto puede causar errores graves y vulnerabilidades de seguridad si no se maneja correctamente."
+    },
+    {
+      "pregunta": "¿Dónde almacena sus datos un std::array y qué implicación tiene esto respecto a su tamaño?",
+      "respuesta": "Un std::array almacena sus datos directamente en el stack y maneja un tamaño fijo que no puede ser redimensionado una vez declarado. El tamaño se especifica en tiempo de compilación como std::array<tipo, tamaño>."
+    },
+    {
+      "pregunta": "¿Qué ventajas tiene std::array sobre un array tradicional de C++?",
+      "respuesta": "std::array ofrece una inicialización más clara que el array tradicional y permite acceder fácilmente a su tamaño mediante el método .size(), lo que mejora la legibilidad y seguridad del código sin sacrificar el rendimiento."
+    },
+    {
+      "pregunta": "¿Qué es std::vector y cuál es su principal característica?",
+      "respuesta": "Std::vector es un contenedor dinámico en C++ que puede crecer y decrecer automáticamente. Su principal característica es que garantiza el almacenamiento contiguo de los elementos en memoria, similar a un array pero con tamaño dinámico."
+    },
+    {
+      "pregunta": "¿Qué precaución se debe tener al trabajar con std::vector cuando este crece?",
+      "respuesta": "Al crecer un std::vector, se debe tener cuidado con el manejo dinámico de memoria, ya que cuando el vector necesita más espacio puede realizar una reasignación completa, copiando todos los elementos a una nueva ubicación de memoria, lo que puede invalidar punteros o iteradores existentes."
+    },
+    {
+      "pregunta": "¿Qué es una cadena en C++?",
+      "respuesta": "Una cadena en C++ es un arreglo de caracteres de una sola dimensión que permite almacenar un conjunto de caracteres alfanuméricos de tipo char. Es básicamente un vector de caracteres donde cada carácter ocupa una posición específica del arreglo."
+    },
+    {
+      "pregunta": "¿Cómo se organiza internamente una cadena en C++?",
+      "respuesta": "Internamente, una cadena en C++ se organiza como un vector o arreglo de caracteres, donde cada carácter representa una posición indexada de ese vector, permitiendo acceder a cada elemento individual mediante su posición."
+    },
+    {
+      "pregunta": "¿Cuáles son los dos tipos de datos que se pueden utilizar para manejar cadenas en C++?",
+      "respuesta": "En C++ se pueden manejar cadenas con dos tipos de datos: std::string y char[]. El tipo std::string es una clase de la biblioteca estándar, mientras que char[] es un arreglo de caracteres del estilo C tradicional."
+    },
+    {
+      "pregunta": "¿Cómo se declara e inicializa un arreglo de caracteres (char[]) en C++ para almacenar una cadena?",
+      "respuesta": "Para declarar e inicializar un arreglo de caracteres se utiliza la sintaxis: char nombre[] = \"texto\"; donde no es necesario especificar el tamaño del arreglo, ya que el compilador lo calcula automáticamente según la longitud de la cadena inicializada. Por ejemplo: char nombre[] = \"este es mi nombre\";"
+    },
+    {
+      "pregunta": "¿Cuáles son los dos tipos de datos que se pueden utilizar para manejar cadenas en C++?",
+      "respuesta": "En C++ se pueden manejar cadenas con dos tipos de datos: std::string y char[]. El tipo std::string es una clase de la biblioteca estándar que ofrece mayor funcionalidad, mientras que char[] es un arreglo de caracteres del estilo de C tradicional."
+    },
+    {
+      "pregunta": "¿Cómo se declara e inicializa un arreglo de caracteres (char[]) en C++ y cómo se muestra en pantalla?",
+      "respuesta": "Un arreglo de caracteres se declara sin especificar tamaño explícito, inicializándolo directamente con una cadena entre comillas. Por ejemplo: char nombre[] = \"este es mi nombre\"; Para mostrarlo en pantalla se utiliza: cout << nombre << endl;"
+    },
+    {
+      "pregunta": "¿Qué función se utiliza en C++ para obtener la longitud de una cadena de caracteres?",
+      "respuesta": "La función strlen() se utiliza para obtener la longitud de una cadena de caracteres. Esta función devuelve un valor numérico que representa la cantidad de caracteres en la cadena, sin contar el carácter nulo de terminación."
+    },
+    {
+      "pregunta": "En el ejemplo 'char nombre[] = \"este es mi nombre\"; strlen(nombre);', ¿qué valor devolvería la función strlen?",
+      "respuesta": "La función strlen devolvería 17, que es el número de caracteres en la cadena \"este es mi nombre\", incluyendo los espacios pero sin contar el carácter nulo ('\\0') que marca el final de la cadena."
+    },
+    {
+      "pregunta": "¿Qué función cumple strcpy_s en C++?",
+      "respuesta": "strcpy_s es una función que copia el valor de una cadena de caracteres en otra cadena. Es la versión segura de strcpy que ayuda a prevenir desbordamientos de búfer al copiar strings."
+    },
+    {
+      "pregunta": "En el ejemplo dado, ¿qué contendrá la variable 'segundonombre' después de ejecutar strcpy_s(segundonombre, nombre)?",
+      "respuesta": "La variable 'segundonombre' contendrá el texto \"este es mi nombre\", que es una copia exacta del contenido de la variable 'nombre'."
+    },
+    {
+      "pregunta": "¿Qué valor devuelve la función strcmp cuando dos cadenas son exactamente iguales?",
+      "respuesta": "La función strcmp devuelve 0 (cero) cuando las dos cadenas comparadas son exactamente iguales."
+    },
+    {
+      "pregunta": "¿Cómo se utiliza strcmp para comparar dos cadenas de caracteres en C++?",
+      "respuesta": "Se utiliza strcmp pasando dos cadenas como parámetros: strcmp(cadena1, cadena2). Luego se evalúa el resultado, típicamente comparándolo con 0 para verificar igualdad. Por ejemplo: if (strcmp(nombre, segundonombre)==0) verificará si ambas cadenas son idénticas."
+    },
+    {
+      "pregunta": "¿Qué hace la función strncmp y qué valor devuelve cuando dos cadenas son iguales?",
+      "respuesta": "La función strncmp permite comparar si dos cadenas son exactamente iguales considerando un determinado número de caracteres. Cuando las cadenas son iguales (en los primeros n caracteres especificados), devuelve el valor 0."
+    },
+    {
+      "pregunta": "En el ejemplo dado, ¿por qué la comparación strncmp(nombre, segundonombre, 5)==0 retorna verdadero?",
+      "respuesta": "La comparación retorna verdadero porque strncmp compara solo los primeros 5 caracteres de ambas cadenas. Tanto 'nombre' como 'segundonombre' comienzan con 'este ', que son exactamente los mismos 5 caracteres, por lo que la función devuelve 0 indicando que son iguales en esa porción."
+    },
+    {
+      "pregunta": "¿Qué función cumple strcat_s en programación y cómo se utiliza?",
+      "respuesta": "strcat_s es una función que permite concatenar (unir) un texto a una variable de tipo cadena de caracteres. Se utiliza pasando como primer parámetro la variable destino y como segundo parámetro el texto que se desea agregar al final de esa variable."
+    },
+    {
+      "pregunta": "Según el ejemplo dado, ¿cuál sería el resultado de ejecutar strcat_s(nombre, segundonombre) donde nombre contiene 'nombre 1' y segundonombre contiene 'nombre2'?",
+      "respuesta": "El resultado sería que la variable 'nombre' contendría la cadena 'nombre 1nombre2', ya que strcat_s concatena el contenido de 'segundonombre' al final de 'nombre', modificando la variable original."
+    },
+    {
+      "pregunta": "¿Qué función cumple strncat_s en programación?",
+      "respuesta": "strncat_s permite concatenar un texto a una variable de tipo cadena de caracteres, con la ventaja de poder limitar la cantidad de caracteres que se van a concatenar, lo que proporciona mayor control y seguridad en la manipulación de strings."
+    },
+    {
+      "pregunta": "En el ejemplo strncat_s(nombre, segundonombre, 3), ¿qué resultado se obtiene si nombre contiene 'nombre 1' y segundonombre contiene 'nombre2'?",
+      "respuesta": "El resultado será 'nombre 1nom', ya que strncat_s concatena únicamente los primeros 3 caracteres de segundonombre ('nom') al final de la variable nombre, limitando la concatenación según el tercer parámetro especificado."
+    },
+    {
+      "pregunta": "¿Qué función cumple strchr en programación y qué retorna?",
+      "respuesta": "strchr busca la primera coincidencia de un carácter específico dentro de una cadena de texto. Retorna un puntero a la posición donde se encontró el carácter, o nullptr si el carácter no existe en la cadena."
+    },
+    {
+      "pregunta": "En el ejemplo strchr(txt, 'm') con txt = \"este es mi nombre\", ¿qué resultado se obtendría?",
+      "respuesta": "El resultado sería un puntero que apunta a la posición donde aparece por primera vez la letra 'm' en la cadena. Al imprimir 'resultado', se mostraría \"mi nombre\", es decir, la subcadena desde la 'm' encontrada hasta el final del texto."
+    },
+    {
+      "pregunta": "¿Qué hace la función strrchr en C++?",
+      "respuesta": "La función strrchr busca la última coincidencia de un carácter específico dentro de una cadena. Retorna un puntero a la última aparición del carácter buscado, o nullptr si no se encuentra."
+    },
+    {
+      "pregunta": "En el ejemplo con strrchr(txt, 'a'), ¿qué mostrará el programa si txt es 'nombre del programador'?",
+      "respuesta": "El programa mostrará 'última aparición del caracter: ador' porque strrchr encuentra la última 'a' en 'programador' y retorna un puntero desde esa posición hasta el final de la cadena."
+    },
+    {
+      "pregunta": "¿Qué hace la función strstr en C++?",
+      "respuesta": "La función strstr busca la primera coincidencia de una subcadena dentro de una cadena. Retorna un puntero a la posición donde comienza la subcadena si la encuentra, o nullptr si no existe la coincidencia."
+    },
+    {
+      "pregunta": "En el ejemplo dado, ¿qué imprimirá el código cuando se busca 'estoy' en 'ya estoy aprendiendo cadenas'?",
+      "respuesta": "El código imprimirá 'subcadena encontrada en: estoy aprendiendo cadenas', ya que strstr retorna un puntero a la posición donde comienza la coincidencia, mostrando desde 'estoy' hasta el final de la cadena."
+    },
+    {
+      "pregunta": "¿Qué función cumple strtok_s en programación y cómo se utiliza?",
+      "respuesta": "strtok_s es una función que separa una cadena de texto en fragmentos utilizando delimitadores definidos por el desarrollador. Recibe tres parámetros: la cadena a dividir, el delimitador (como un espacio \" \"), y un puntero de contexto. Devuelve cada fragmento en llamadas sucesivas hasta que retorna nullptr cuando no hay más fragmentos."
+    },
+    {
+      "pregunta": "En el ejemplo del código mostrado, ¿por qué se pasa nullptr como primer parámetro en las llamadas subsiguientes a strtok_s?",
+      "respuesta": "Se pasa nullptr en las llamadas subsiguientes porque strtok_s mantiene internamente la posición de la última división mediante el puntero de contexto. Al pasar nullptr, la función continúa procesando la misma cadena desde donde se quedó en la llamada anterior, permitiendo extraer las siguientes palabras o tokens secuencialmente."
+    }
+  ]
+}

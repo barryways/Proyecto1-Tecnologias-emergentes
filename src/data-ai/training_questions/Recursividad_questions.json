@@ -1,0 +1,173 @@
+{
+  "topic": "Recursividad",
+  "questions": [
+    {
+      "pregunta": "¿Qué es la recursividad en programación?",
+      "respuesta": "La recursividad es un concepto fundamental de programación donde una función o método se llama a sí misma para resolver un problema. Una función recursiva está definida en términos de sí misma y depende de sus propias llamadas para encontrar la solución."
+    },
+    {
+      "pregunta": "¿Cómo se caracteriza una función recursiva?",
+      "respuesta": "Una función recursiva se caracteriza por estar definida en términos de sí misma, es decir, utiliza su propia llamada dentro de su definición para resolver un problema de manera iterativa hasta alcanzar una condición de parada."
+    },
+    {
+      "pregunta": "¿En qué situaciones debe un programador decidir utilizar recursividad?",
+      "respuesta": "Un programador debe utilizar recursividad cuando se enfrenta a un problema que se descompone en subproblemas similares o cuando el problema tiene una definición recursiva inherente."
+    },
+    {
+      "pregunta": "¿Qué característica debe tener un problema para que la recursividad sea una solución apropiada?",
+      "respuesta": "El problema debe poder descomponerse en subproblemas más pequeños de naturaleza similar al problema original, o bien debe tener una definición que se exprese de manera recursiva."
+    },
+    {
+      "pregunta": "¿En qué situaciones es recomendable utilizar recursividad en programación?",
+      "respuesta": "La recursividad es recomendable en tres situaciones principales: cuando se desea un código más claro y simple, cuando se tiene un problema con operaciones repetitivas, y cuando se trabaja con estructuras de datos recursivas como árboles y grafos."
+    },
+    {
+      "pregunta": "¿Qué tipo de estructuras de datos se benefician especialmente del uso de recursividad?",
+      "respuesta": "Las estructuras de datos recursivas como los árboles y los grafos se benefician especialmente del uso de recursividad, ya que su naturaleza jerárquica y autodefinida se adapta naturalmente a soluciones recursivas."
+    },
+    {
+      "pregunta": "¿Cuáles son los dos componentes principales de un método recursivo en C++?",
+      "respuesta": "Los dos componentes principales son: 1) Una condición de terminación que evita que la recursividad sea indefinida, y 2) Un caso recursivo donde el método se llama a sí mismo."
+    },
+    {
+      "pregunta": "¿Cuál es la función de la condición de terminación en un método recursivo?",
+      "respuesta": "La condición de terminación busca que la recursividad no sea indefinida, es decir, establece el punto en el cual el método deja de llamarse a sí mismo y finaliza la ejecución recursiva."
+    },
+    {
+      "pregunta": "¿Cuáles son las ventajas de utilizar la recursividad en programación?",
+      "respuesta": "Las ventajas de utilizar la recursividad son: simplifica la solución de problemas complejos al dividirlos en problemas más pequeños, permite la reducción de código y facilita el mantenimiento del mismo."
+    },
+    {
+      "pregunta": "¿Cómo ayuda la recursividad en la resolución de problemas complejos?",
+      "respuesta": "La recursividad ayuda a simplificar la solución de problemas complejos dividiéndolos en problemas más pequeños y manejables, lo que facilita su comprensión e implementación."
+    },
+    {
+      "pregunta": "¿Cuáles son los principales riesgos de utilizar la recursividad en programación?",
+      "respuesta": "Los principales riesgos de utilizar la recursividad son: pueden consumir más memoria debido a las múltiples llamadas en la pila de ejecución, pueden ser menos eficientes por su naturaleza iterativa comparada con soluciones iterativas directas, y existe el riesgo de ejecutar un bucle infinito si no se define correctamente el caso base."
+    },
+    {
+      "pregunta": "¿Por qué la recursividad puede consumir más memoria que otras técnicas de programación?",
+      "respuesta": "La recursividad puede consumir más memoria porque cada llamada recursiva se almacena en la pila de ejecución del programa, ocupando espacio adicional para mantener el estado de cada función hasta que se complete su ejecución. Esto puede llevar a un desbordamiento de pila si hay demasiadas llamadas recursivas anidadas."
+    },
+    {
+      "pregunta": "¿Cuáles son los tipos de recursividad que existen en C++?",
+      "respuesta": "En C++ la recursividad puede clasificarse en cinco tipos principales: recursividad directa, recursividad indirecta, recursividad de cola, recursividad no de cola y recursividad mutua."
+    },
+    {
+      "pregunta": "¿Qué diferencia existe entre la recursividad de cola y la recursividad no de cola?",
+      "respuesta": "La recursividad de cola ocurre cuando la llamada recursiva es la última operación que realiza la función, permitiendo optimizaciones del compilador. La recursividad no de cola requiere operaciones adicionales después de la llamada recursiva, consumiendo más memoria en la pila de ejecución."
+    },
+    {
+      "pregunta": "¿Qué es la recursividad directa en programación?",
+      "respuesta": "La recursividad directa ocurre cuando un método o una función se llama directamente a sí misma. Es el tipo más básico de recursividad donde la función contiene una llamada explícita a su propio nombre dentro de su cuerpo."
+    },
+    {
+      "pregunta": "¿En qué se diferencia la recursividad directa de otros tipos de recursividad?",
+      "respuesta": "La recursividad directa es el tipo más básico de recursividad, donde una función se invoca a sí misma directamente. A diferencia de la recursividad indirecta, donde dos o más funciones se llaman entre sí formando un ciclo, en la recursividad directa la llamada es inmediata y explícita dentro de la misma función."
+    },
+    {
+      "pregunta": "¿Qué es la recursión y cómo se aplica en la función factorial mostrada?",
+      "respuesta": "La recursión es una técnica donde una función se llama a sí misma. En la función factorial, se aplica llamando a factorial(n-1) dentro de su propio cuerpo, hasta alcanzar el caso base cuando n es 0, momento en que retorna 1 y comienza a resolver las llamadas pendientes multiplicando n por el resultado de factorial(n-1)."
+    },
+    {
+      "pregunta": "¿Cuál es el caso base en esta implementación recursiva del factorial y por qué es necesario?",
+      "respuesta": "El caso base es cuando n == 0, que retorna 1. Es necesario porque detiene la recursión y evita un bucle infinito. Sin este caso base, la función seguiría llamándose indefinidamente, causando un desbordamiento de pila (stack overflow). Además, matemáticamente 0! = 1, lo que hace correcta esta implementación."
+    },
+    {
+      "pregunta": "¿Qué es la recursividad indirecta?",
+      "respuesta": "La recursividad indirecta es un tipo de recursión que ocurre cuando una función A llama a una función B, y esta función B a su vez llama de vuelta a la función A, creando un ciclo de llamadas mutuas entre ambas funciones."
+    },
+    {
+      "pregunta": "¿En qué se diferencia la recursividad indirecta de la recursividad directa?",
+      "respuesta": "En la recursividad directa, una función se llama a sí misma directamente. En cambio, en la recursividad indirecta, una función no se llama directamente a sí misma, sino que llama a otra función que eventualmente la invoca de vuelta, estableciendo una cadena de llamadas entre dos o más funciones."
+    },
+    {
+      "pregunta": "¿Qué es la recursividad de cola y cuál es su principal ventaja?",
+      "respuesta": "La recursividad de cola es un caso especial de recursividad donde la última operación de la función es la llamada recursiva. Su principal ventaja es que permite optimizar la recursión y mejorar la eficiencia, ya que el compilador puede eliminar el uso innecesario de la pila de llamadas."
+    },
+    {
+      "pregunta": "En el ejemplo de código proporcionado, ¿qué papel cumple el parámetro 'a' en la función recursiva de cola?",
+      "respuesta": "El parámetro 'a' actúa como acumulador que almacena el resultado parcial de la operación factorial. Tiene un valor por defecto de 1 y va acumulando el producto (n * a) en cada llamada recursiva, permitiendo que la función sea de cola al pasar el resultado calculado como argumento en lugar de realizar operaciones después del retorno."
+    },
+    {
+      "pregunta": "¿Qué es la recursividad no de cola?",
+      "respuesta": "Es un caso de recursividad donde la llamada recursiva no es la última operación que ejecuta la función. Esto implica que después de retornar de la llamada recursiva, aún quedan operaciones pendientes por realizar, como sumas, multiplicaciones u otras operaciones con el valor retornado."
+    },
+    {
+      "pregunta": "En el ejemplo 'return n + funcionrecursiva(n - 1);', ¿por qué se considera recursividad no de cola?",
+      "respuesta": "Se considera recursividad no de cola porque después de ejecutar la llamada recursiva 'funcionrecursiva(n - 1)', todavía se debe realizar una operación adicional: sumar el valor de 'n' al resultado retornado por la función recursiva. La última operación no es la llamada recursiva, sino la suma."
+    },
+    {
+      "pregunta": "¿Qué es la recursividad mutua en programación?",
+      "respuesta": "La recursividad mutua es un tipo de recursividad que ocurre cuando dos o más funciones se llaman entre sí de manera recursiva, formando un ciclo de llamadas donde cada función invoca a la otra hasta alcanzar un caso base."
+    },
+    {
+      "pregunta": "¿En qué se diferencia la recursividad mutua de la recursividad simple?",
+      "respuesta": "La recursividad simple ocurre cuando una función se llama a sí misma directamente, mientras que la recursividad mutua involucra dos o más funciones que se llaman mutuamente de forma cruzada, creando una cadena de llamadas recursivas entre diferentes funciones."
+    },
+    {
+      "pregunta": "¿Qué es una iteración en programación?",
+      "respuesta": "Una iteración es un bloque de código que se repite un número determinado de veces o bajo condiciones muy específicas. Permite ejecutar instrucciones de forma repetitiva sin necesidad de escribir el mismo código múltiples veces."
+    },
+    {
+      "pregunta": "¿Cuáles son los principales tipos de estructuras iterativas en programación?",
+      "respuesta": "Los principales tipos de estructuras iterativas son: for (ciclo con número definido de repeticiones), while (ciclo que se ejecuta mientras se cumpla una condición) y do-while (ciclo que ejecuta el código al menos una vez antes de evaluar la condición)."
+    },
+    {
+      "pregunta": "¿Qué son las iteraciones en programación?",
+      "respuesta": "Las iteraciones son bloques de código que se repiten un número determinado de veces o bajo condiciones muy específicas. Permiten ejecutar instrucciones de manera repetitiva sin necesidad de escribir el mismo código múltiples veces."
+    },
+    {
+      "pregunta": "¿Cuáles son ejemplos de estructuras de iteración en programación?",
+      "respuesta": "Los ejemplos más comunes de estructuras de iteración son: for (para un número determinado de repeticiones), while (mientras se cumpla una condición) y do-while (ejecuta al menos una vez y luego repite mientras se cumpla la condición)."
+    },
+    {
+      "pregunta": "¿Por qué la recursividad consume más memoria que la iteración?",
+      "respuesta": "La recursividad consume más memoria porque utiliza una pila de llamadas donde cada llamada recursiva agrega un nuevo nivel con su propio conjunto de variables y contexto, acumulando consumo de memoria con cada invocación."
+    },
+    {
+      "pregunta": "¿Cuál es la principal ventaja de la iteración sobre la recursividad en términos de recursos?",
+      "respuesta": "La principal ventaja de la iteración es que usa menos memoria, ya que no necesita mantener múltiples llamados en una pila como lo hace la recursividad, ejecutándose en un solo contexto de manera secuencial."
+    },
+    {
+      "pregunta": "¿Por qué la recursividad puede ser menos eficiente que la iteración en términos de desempeño?",
+      "respuesta": "La recursividad puede ser menos eficiente porque tiene que hacer múltiples llamados de funciones, lo cual consume más recursos del sistema. Sin embargo, esta ineficiencia se puede reducir utilizando recursividad con cola."
+    },
+    {
+      "pregunta": "¿Cuándo se recomienda utilizar iteración en lugar de recursividad?",
+      "respuesta": "Se recomienda utilizar iteración cuando se tiene un alto número de repeticiones, ya que es más eficiente al no requerir llamados a funciones adicionales, lo que resulta en un mejor desempeño del programa."
+    },
+    {
+      "pregunta": "¿Cuándo hace la recursividad que el código sea más fácil de leer?",
+      "respuesta": "La recursividad hace que el código sea más fácil de leer cuando el problema tiene una naturaleza recursiva, es decir, cuando el problema se puede descomponer naturalmente en subproblemas similares al problema original."
+    },
+    {
+      "pregunta": "¿Qué ventaja tiene la iteración sobre la recursividad en términos de comprensión del código?",
+      "respuesta": "La iteración a menudo es más fácil de entender mediante una iteración directa, aunque puede hacer que el código sea menos intuitivo en comparación con la recursividad cuando el problema tiene naturaleza recursiva."
+    },
+    {
+      "pregunta": "¿Cuándo se debe utilizar la recursividad en programación?",
+      "respuesta": "La recursividad se debe utilizar cuando tenemos problemas que se pueden dividir en subproblemas del mismo tipo, como en el caso de estructuras de árboles, cálculo de permutaciones y combinaciones."
+    },
+    {
+      "pregunta": "¿En qué situaciones es más apropiado usar iteración en lugar de recursividad?",
+      "respuesta": "La iteración es más apropiada cuando la repetición es una tarea simple que se ejecuta un número determinado de veces, como al recorrer una lista o una matriz mediante un ciclo definido."
+    },
+    {
+      "pregunta": "¿En qué tipo de problemas se debe utilizar la recursividad?",
+      "respuesta": "La recursividad se debe utilizar cuando tenemos problemas que se pueden dividir en subproblemas del mismo tipo, como por ejemplo: árboles, permutaciones y combinaciones."
+    },
+    {
+      "pregunta": "¿Cuándo es más apropiado usar iteración en lugar de recursividad?",
+      "respuesta": "La iteración se debe utilizar cuando la repetición es una tarea simple que se ejecuta un número determinado de veces, como recorrer una lista o una matriz mediante un ciclo definido."
+    },
+    {
+      "pregunta": "¿Cuál es la principal limitación de la recursividad en C++?",
+      "respuesta": "La recursividad depende de la pila de C++ y puede convertirse en un problema cuando la recursividad es muy profunda, ya que puede causar desbordamiento de pila (stack overflow) al agotar la memoria disponible para las llamadas recursivas."
+    },
+    {
+      "pregunta": "¿Qué ventaja tiene la iteración sobre la recursividad en términos de limitaciones?",
+      "respuesta": "La iteración no tiene limitaciones tan visibles como la recursividad porque no depende de una pila. Sin embargo, es importante considerar que existen algunos problemas que no pueden resolverse fácilmente con un ciclo y son más naturales de implementar mediante recursividad."
+    }
+  ]
+}

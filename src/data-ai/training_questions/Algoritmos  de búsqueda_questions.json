@@ -1,0 +1,181 @@
+{
+  "topic": "Algoritmos  de búsqueda",
+  "questions": [
+    {
+      "pregunta": "¿Qué es la búsqueda secuencial y cómo funciona?",
+      "respuesta": "La búsqueda secuencial es uno de los métodos de búsqueda más simples, donde los elementos se recorren en una lista o arreglo de manera lineal desde el primero hasta el último, comparando cada elemento hasta encontrar el valor buscado o llegar al final de la estructura."
+    },
+    {
+      "pregunta": "¿Cuál es la complejidad de la búsqueda secuencial cuando se quiere contar todos los elementos que coinciden?",
+      "respuesta": "Cuando se quieren contar cuántos elementos hay que coinciden con el valor buscado, la complejidad es de todo el recorrido, es decir, se deben revisar todos los elementos de la lista o arreglo sin poder detenerse anticipadamente."
+    },
+    {
+      "pregunta": "¿Cuándo es útil aplicar la búsqueda secuencial?",
+      "respuesta": "La búsqueda secuencial es útil en listas pequeñas y no ordenadas, donde no se requiere un algoritmo más complejo y el tamaño reducido de datos hace eficiente el recorrido lineal."
+    },
+    {
+      "pregunta": "¿Cómo funciona el algoritmo de búsqueda secuencial?",
+      "respuesta": "El algoritmo recorre la lista desde el índice 0 hasta n-1, comparando cada elemento a[i] con el valor x buscado. Si encuentra el elemento devuelve 1, y si termina el recorrido sin encontrarlo devuelve -1."
+    },
+    {
+      "pregunta": "¿Qué es la búsqueda secuencial?",
+      "respuesta": "La búsqueda secuencial es un algoritmo que recorre una estructura de datos elemento por elemento, desde el inicio hasta el final, comparando cada valor con el elemento buscado hasta encontrarlo o llegar al final de la estructura."
+    },
+    {
+      "pregunta": "¿Cuál es la principal ventaja y desventaja de la búsqueda secuencial?",
+      "respuesta": "La ventaja es su simplicidad de implementación y que funciona con datos ordenados o desordenados. La desventaja es su baja eficiencia en conjuntos grandes, ya que tiene una complejidad temporal de O(n), recorriendo potencialmente todos los elementos."
+    },
+    {
+      "pregunta": "¿Qué es la búsqueda binaria y cuál es su requisito principal?",
+      "respuesta": "La búsqueda binaria es un método eficiente para realizar búsquedas sobre arreglos o listas. Su requisito principal es que la lista debe estar ordenada para poder funcionar correctamente."
+    },
+    {
+      "pregunta": "¿Cuál es la ventaja principal de la búsqueda binaria sobre otros métodos de búsqueda?",
+      "respuesta": "La ventaja principal es que divide el espacio de búsqueda a la mitad en cada iteración, lo que reduce significativamente la cantidad de repeticiones necesarias, haciéndola más eficiente que métodos lineales."
+    },
+    {
+      "pregunta": "¿Qué es la búsqueda binaria y cuál es su principal requisito?",
+      "respuesta": "La búsqueda binaria es un método eficiente para realizar búsquedas sobre arreglos o listas. Su principal requisito es que la lista debe estar ordenada para poder funcionar correctamente."
+    },
+    {
+      "pregunta": "¿Cómo funciona el método de búsqueda binaria para mejorar la eficiencia?",
+      "respuesta": "La búsqueda binaria funciona dividiendo el espacio de búsqueda a la mitad en cada iteración, lo que reduce significativamente la cantidad de repeticiones necesarias para encontrar un elemento en comparación con otros métodos de búsqueda."
+    },
+    {
+      "pregunta": "¿Cómo funciona el algoritmo de búsqueda binaria?",
+      "respuesta": "La búsqueda binaria toma un índice en el valor medio del conjunto, compara ese valor con el que se desea encontrar. Si son iguales, finaliza la búsqueda. Si el valor buscado es mayor, continúa la búsqueda en la mitad superior; si es menor, busca en la mitad inferior. Este proceso se repite dividiendo sucesivamente en mitades hasta encontrar el valor deseado."
+    },
+    {
+      "pregunta": "¿Qué condición determina en qué mitad continuar la búsqueda en el algoritmo de búsqueda binaria?",
+      "respuesta": "La condición se basa en la comparación del valor medio con el valor buscado: si el valor buscado es mayor que el valor medio, se continúa en la mitad superior del conjunto; si es menor, se continúa en la mitad inferior. Si son iguales, la búsqueda finaliza exitosamente."
+    },
+    {
+      "pregunta": "¿Qué es la búsqueda binaria?",
+      "respuesta": "La búsqueda binaria es un algoritmo eficiente para encontrar un elemento en una lista ordenada. Funciona dividiendo repetidamente el espacio de búsqueda a la mitad, comparando el elemento buscado con el elemento central y descartando la mitad donde el elemento no puede estar. Tiene una complejidad temporal de O(log n)."
+    },
+    {
+      "pregunta": "¿Cuál es la ventaja principal de la búsqueda binaria comparada con la búsqueda lineal?",
+      "respuesta": "La ventaja principal es su eficiencia en listas grandes. Mientras que la búsqueda lineal tiene complejidad O(n) y debe revisar cada elemento, la búsqueda binaria tiene complejidad O(log n), reduciendo drásticamente el número de comparaciones necesarias. Por ejemplo, en una lista de 1000 elementos, la búsqueda binaria requiere como máximo 10 comparaciones, mientras que la lineal podría necesitar hasta 1000."
+    },
+    {
+      "pregunta": "¿Qué es el hashing y para qué se utiliza?",
+      "respuesta": "El hashing es una técnica de búsqueda rápida que se utiliza fundamentalmente para almacenar y acceder a datos de forma muy eficiente en estructuras de datos conocidas como tablas hash. Convierte una clave de entrada en un índice asociado a dicha clave."
+    },
+    {
+      "pregunta": "¿En qué situaciones es especialmente útil el hashing?",
+      "respuesta": "El hashing es especialmente útil cuando se trabaja con grandes cantidades de datos, ya que permite realizar operaciones de almacenamiento y acceso de manera muy eficiente mediante la conversión de claves en índices."
+    },
+    {
+      "pregunta": "¿Qué es una función hash y cuál es su propósito principal?",
+      "respuesta": "Una función hash es una función que toma un número o una cadena de texto como entrada y lo convierte en un índice dentro de una tabla hash. Su propósito principal es mapear datos de tamaño variable a valores de tamaño fijo que sirven como posiciones en una estructura de datos."
+    },
+    {
+      "pregunta": "¿Qué tipos de datos puede recibir como entrada una función hash?",
+      "respuesta": "Una función hash puede recibir como entrada números o cadenas de texto, transformándolos en índices que se utilizan para acceder a posiciones específicas dentro de una tabla hash."
+    },
+    {
+      "pregunta": "¿Qué significa que una función hash sea determinista?",
+      "respuesta": "Significa que si se le da la misma entrada dos veces, la función hash siempre producirá la misma salida. Esta propiedad es fundamental para garantizar la consistencia y predictibilidad del hashing."
+    },
+    {
+      "pregunta": "¿Cuál es el objetivo de la propiedad de uniformidad en una función hash?",
+      "respuesta": "El objetivo de la uniformidad es distribuir las claves de manera uniforme en la tabla hash, buscando minimizar las colisiones. Esto mejora el rendimiento al reducir la probabilidad de que múltiples claves se mapeen a la misma posición."
+    },
+    {
+      "pregunta": "¿Qué es una tabla hash?",
+      "respuesta": "Es una estructura de datos que consiste en un arreglo de buckets o contenedores, donde cada posición es accesible mediante un índice generado por una función hash. El resultado de esta función se convierte en el índice de la tabla y el valor que se desea guardar se almacena en el contenedor correspondiente."
+    },
+    {
+      "pregunta": "¿Cómo funciona el almacenamiento de valores en una tabla hash?",
+      "respuesta": "El almacenamiento funciona en dos pasos: primero, la función hash procesa la clave y genera un índice numérico; segundo, ese índice se utiliza para acceder a la posición específica del arreglo donde se almacenará el valor deseado en su contenedor correspondiente."
+    },
+    {
+      "pregunta": "¿Cuáles son los tres pasos principales en el proceso de búsqueda mediante hashing?",
+      "respuesta": "Los tres pasos principales son: 1) Aplicación de la función hash sobre la clave para obtener un índice, 2) Acceso al contenedor o bucket correspondiente a ese índice, y 3) Verificación del elemento encontrado, especialmente importante cuando existen colisiones que pueden almacenar múltiples elementos en el mismo bucket."
+    },
+    {
+      "pregunta": "¿Por qué es necesario el paso de verificación en la búsqueda por hashing?",
+      "respuesta": "El paso de verificación es necesario debido a las posibles colisiones. Una colisión ocurre cuando dos o más claves diferentes generan el mismo valor hash, por lo que varios elementos pueden almacenarse en el mismo bucket. La verificación asegura que el elemento recuperado sea exactamente el que se está buscando, comparando la clave original con la clave del elemento encontrado."
+    },
+    {
+      "pregunta": "¿Qué es la resolución de colisiones en estructuras de datos?",
+      "respuesta": "La resolución de colisiones es el proceso que se aplica cuando se generan dos índices iguales en una estructura de datos como una tabla hash. Permite manejar estos conflictos mediante diferentes métodos para garantizar que todos los elementos puedan ser almacenados correctamente."
+    },
+    {
+      "pregunta": "¿Cuáles son los dos métodos principales de resolución de colisiones y en qué se diferencian?",
+      "respuesta": "Los dos métodos principales son: 1) Encadenamiento, que almacena una lista de elementos por cada posición, permitiendo múltiples valores en el mismo índice. 2) Dirección abierta, que busca la siguiente posición disponible en base a tres métodos específicos, manteniendo un solo elemento por posición."
+    },
+    {
+      "pregunta": "¿Qué función hash se utiliza en el ejemplo para una tabla de 10 posiciones?",
+      "respuesta": "La función hash utilizada es: índice = clave % 10, que calcula el resto de dividir la clave entre 10 para determinar la posición en la tabla."
+    },
+    {
+      "pregunta": "Si insertamos el valor 44 en la tabla hash con la función índice = clave % 10, ¿en qué posición se almacenará?",
+      "respuesta": "El valor 44 se almacenará en la posición 4, ya que 44 % 10 = 4."
+    },
+    {
+      "pregunta": "¿Qué es Visual Studio?",
+      "respuesta": "Visual Studio es un entorno de desarrollo integrado (IDE) de Microsoft que permite crear aplicaciones para Windows, web, móviles y la nube. Proporciona herramientas avanzadas como depuración, IntelliSense, control de versiones y diseñadores visuales para programar en múltiples lenguajes como C#, C++, Python y JavaScript."
+    },
+    {
+      "pregunta": "¿Cuáles son las principales ventajas de utilizar Visual Studio para programación avanzada?",
+      "respuesta": "Las principales ventajas incluyen: IntelliSense para autocompletado inteligente de código, herramientas de depuración potentes con breakpoints y seguimiento de variables, integración nativa con Git, soporte para múltiples lenguajes y frameworks, extensibilidad mediante plugins, y herramientas de análisis de rendimiento y pruebas unitarias integradas."
+    },
+    {
+      "pregunta": "¿Qué es un unordered_map en C++ y cuál es su principal característica?",
+      "respuesta": "Un unordered_map es un contenedor asociativo de la biblioteca estándar de C++ que almacena pares clave-valor. Su principal característica es que utiliza una tabla hash internamente, lo que permite acceso, inserción y búsqueda de elementos en tiempo promedio constante O(1), a diferencia de map que mantiene los elementos ordenados con complejidad O(log n)."
+    },
+    {
+      "pregunta": "¿Cuál es la diferencia principal entre map y unordered_map en C++?",
+      "respuesta": "La diferencia principal es que map mantiene los elementos ordenados según la clave utilizando un árbol binario balanceado (generalmente Red-Black Tree), mientras que unordered_map no mantiene ningún orden y usa una tabla hash. Esto hace que unordered_map sea más rápido para búsquedas (O(1) vs O(log n)), pero map permite iteración ordenada y tiene mejor rendimiento en el peor caso."
+    },
+    {
+      "pregunta": "¿Qué es un unordered_map y cuáles son sus características principales?",
+      "respuesta": "Un unordered_map es un contenedor de datos asociativo y sin orden que permite el almacenamiento en pares clave-valor. Sus características principales son: no mantiene un orden específico de los elementos, utiliza una estructura de pares donde cada clave se asocia con un valor, y garantiza un acceso rápido a la información mediante el uso interno de tablas hash."
+    },
+    {
+      "pregunta": "¿Qué estructura utiliza internamente un unordered_map para garantizar un acceso rápido a los datos?",
+      "respuesta": "Un unordered_map utiliza internamente una tabla hash (hash table) para garantizar un acceso rápido a la información, lo que permite búsquedas, inserciones y eliminaciones en tiempo promedio constante O(1)."
+    },
+    {
+      "pregunta": "¿Qué operaciones básicas permite realizar un unordered_map?",
+      "respuesta": "Un unordered_map permite realizar tres operaciones básicas: inserción de elementos, búsqueda de valores asociados a claves, y borrado de elementos."
+    },
+    {
+      "pregunta": "¿Qué característica distintiva tiene unordered_map respecto al manejo de sus claves?",
+      "respuesta": "El unordered_map no mantiene ningún orden específico en las claves almacenadas, es decir, no tiene un enfoque hacia el manejo ordenado de las claves, a diferencia de estructuras como map que sí mantienen las claves ordenadas."
+    },
+    {
+      "pregunta": "¿Cuál es la sintaxis para declarar un unordered_map en C++ que almacene nombres como claves y edades como valores?",
+      "respuesta": "La sintaxis es: unordered_map<string, int> edades; donde 'string' es el tipo de dato de la clave y 'int' es el tipo de dato del valor."
+    },
+    {
+      "pregunta": "¿Qué hace el método insert() en un unordered_map y cuál es su comportamiento cuando la clave ya existe?",
+      "respuesta": "El método insert() añade un par clave-valor al unordered_map usando la sintaxis mimapa.insert({key, valor}). Si la clave ya existe, NO actualiza el valor existente, solo inserta cuando la clave es nueva."
+    },
+    {
+      "pregunta": "¿Cómo se actualiza o crea un nuevo registro en un unordered_map?",
+      "respuesta": "Se utiliza la sintaxis mimapa[key] = valor; donde 'key' es la clave y 'valor' es el dato que se desea almacenar. Si la clave ya existe, se actualiza su valor; si no existe, se crea un nuevo registro."
+    },
+    {
+      "pregunta": "¿Qué métodos existen para verificar el estado y eliminar elementos de un unordered_map?",
+      "respuesta": "Existen tres métodos principales: size() que devuelve el número de elementos en la tabla, erase(key) que elimina el elemento asociado a una clave específica, y empty() que retorna un valor booleano indicando si el unordered_map está vacío o no."
+    },
+    {
+      "pregunta": "¿Cuándo se debe usar una estructura de datos donde el orden de las claves no es importante?",
+      "respuesta": "Se debe usar cuando se busca velocidad en el acceso a los datos y se esperan muchas búsquedas. En estos casos, estructuras como tablas hash o diccionarios son ideales, ya que priorizan el rendimiento en operaciones de búsqueda sobre el mantenimiento del orden de inserción."
+    },
+    {
+      "pregunta": "¿Qué ventajas ofrece utilizar una estructura de datos optimizada para búsquedas cuando el orden no importa?",
+      "respuesta": "La principal ventaja es la velocidad en el acceso a los datos, con complejidad temporal O(1) en promedio para operaciones de búsqueda, inserción y eliminación. Esto resulta especialmente beneficioso cuando se esperan realizar muchas búsquedas, ya que el rendimiento se mantiene constante independientemente del tamaño de la estructura."
+    },
+    {
+      "pregunta": "¿Qué estructura de datos de C++ es más adecuada para implementar una agenda telefónica y por qué?",
+      "respuesta": "El unordered_map es la estructura más adecuada porque permite almacenar pares clave-valor, donde el nombre del contacto actúa como clave única y el número telefónico como valor. Ofrece búsquedas en tiempo promedio O(1), lo cual es muy eficiente para localizar contactos por nombre."
+    },
+    {
+      "pregunta": "¿Cómo se puede recorrer e imprimir todos los contactos almacenados en un unordered_map de una agenda telefónica?",
+      "respuesta": "Se puede utilizar un bucle for basado en rangos: 'for(const auto& contacto : agenda)' donde cada elemento tiene 'contacto.first' (el nombre) y 'contacto.second' (el número). Alternativamente, se pueden usar iteradores recorriendo desde 'agenda.begin()' hasta 'agenda.end()'."
+    }
+  ]
+}

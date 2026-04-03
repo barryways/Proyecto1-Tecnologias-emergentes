@@ -1,0 +1,53 @@
+{
+  "topic": "Arreglos de objetos",
+  "questions": [
+    {
+      "pregunta": "¿Qué es un arreglo de objetos en C++?",
+      "respuesta": "Es una estructura de datos que permite el almacenamiento de múltiples instancias de una clase o estructura en posiciones contiguas de memoria. Se maneja igual que cualquier otro arreglo en C++, pero en lugar de almacenar tipos primitivos, almacena objetos de un tipo creado por el programador."
+    },
+    {
+      "pregunta": "¿En qué se diferencia un arreglo de objetos de un arreglo de tipos primitivos en C++?",
+      "respuesta": "La diferencia principal es el tipo de datos que almacenan: mientras que un arreglo de tipos primitivos guarda datos básicos como int, float o char, un arreglo de objetos almacena instancias de clases o estructuras creadas por el programador. Sin embargo, su manejo y sintaxis son iguales en ambos casos."
+    },
+    {
+      "pregunta": "¿Cuándo es recomendable usar colecciones en programación orientada a objetos?",
+      "respuesta": "Es recomendable usar colecciones cuando se tiene una agrupación de entidades que representan diferentes tipos nativos como estudiantes, empleados, productos o personas, cuando se desean aplicar operaciones conjuntas sobre múltiples objetos, o cuando se trabaja con estructuras propias de la programación orientada a objetos."
+    },
+    {
+      "pregunta": "¿Qué ventaja principal ofrecen las colecciones al trabajar con múltiples objetos del mismo tipo?",
+      "respuesta": "La ventaja principal es que permiten aplicar operaciones conjuntas sobre todos los objetos contenidos en la colección de manera eficiente, facilitando el manejo y procesamiento de grupos de entidades como estudiantes, empleados o productos sin tener que tratar cada objeto individualmente."
+    },
+    {
+      "pregunta": "¿Qué significa que los arreglos sean homogéneos?",
+      "respuesta": "Significa que todos los elementos del arreglo son de la misma clase o tipo de dato. No se pueden mezclar diferentes tipos de datos en un mismo arreglo."
+    },
+    {
+      "pregunta": "¿Cuál es la principal restricción del tamaño en los arreglos?",
+      "respuesta": "El tamaño de un arreglo debe ser fijo desde su creación, lo que significa que una vez definido no puede modificarse dinámicamente durante la ejecución del programa."
+    },
+    {
+      "pregunta": "¿Cómo se accede a los atributos de una clase o estructura en programación?",
+      "respuesta": "Se accede a los atributos de una clase o estructura mediante el operador punto (.), colocándolo entre el nombre del objeto y el nombre del atributo que se desea acceder."
+    },
+    {
+      "pregunta": "¿Qué método se puede utilizar para inicializar los elementos de una estructura de forma automatizada?",
+      "respuesta": "Se puede inicializar elemento por elemento utilizando estructuras repetitivas como ciclos for, while o foreach, lo que permite asignar valores de manera eficiente sin tener que hacerlo manualmente uno por uno."
+    },
+    {
+      "pregunta": "¿Qué estructura de datos se necesita para almacenar 5 estudiantes con sus nombres y edades?",
+      "respuesta": "Se necesita una estructura de datos como un arreglo o lista de objetos de tipo Estudiante, donde cada objeto contiene dos atributos: nombre (tipo String) y edad (tipo int). Esta colección tendrá capacidad para 5 elementos."
+    },
+    {
+      "pregunta": "¿Qué ventaja ofrece utilizar constructores para ingresar la información de los estudiantes?",
+      "respuesta": "Los constructores permiten inicializar los objetos Estudiante de manera directa y garantizada en el momento de su creación, asegurando que cada estudiante tenga sus datos (nombre y edad) desde el inicio, evitando objetos con datos incompletos o nulos y promoviendo código más limpio y mantenible."
+    },
+    {
+      "pregunta": "¿Qué modificaciones se deben implementar en un programa para permitir el ingreso de información desde la pantalla por parte del usuario?",
+      "respuesta": "Se debe incorporar funciones de entrada de datos como input() en Python o Scanner en Java, permitiendo que el usuario ingrese la información de manera interactiva. Además, es necesario agregar validaciones para verificar que los datos ingresados sean del tipo correcto, no estén vacíos y cumplan con los criterios esperados del programa."
+    },
+    {
+      "pregunta": "¿Por qué es importante agregar validaciones cuando el usuario ingresa información en un programa?",
+      "respuesta": "Las validaciones son fundamentales para garantizar la integridad y seguridad del programa. Previenen errores de ejecución al verificar que los datos ingresados sean del tipo correcto, evitan valores fuera de rango, protegen contra entradas maliciosas y mejoran la experiencia del usuario al proporcionar mensajes claros cuando se ingresan datos incorrectos."
+    }
+  ]
+}
