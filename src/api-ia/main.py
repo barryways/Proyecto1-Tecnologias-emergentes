@@ -1,32 +1,30 @@
-import os
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from scalar_fastapi import get_scalar_api_reference
-from dotenv import load_dotenv
+
+from config import CORS_ORIGINS
+from database import init_database
 from routers import auth_router, chat_router
 
-load_dotenv()
 
-allowed_origins = [
-    origin.strip()
-    for origin in os.getenv(
-        "CORS_ORIGINS",
-        "http://localhost:5173,http://127.0.0.1:5173",
-    ).split(",")
-    if origin.strip()
-]
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    init_database()
+    yield
 
 app = FastAPI(
     docs_url="/api/docs",
     title="StudyBot API",
     description="API para autenticacion y chat estudiantil",
-    version="0.0.1"
+    version="0.0.1",
+    lifespan=lifespan,
 )
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allowed_origins or ["*"],
+    allow_origins=CORS_ORIGINS or ["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

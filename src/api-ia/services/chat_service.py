@@ -1,79 +1,77 @@
 from __future__ import annotations
 
-import csv
-import json
 from datetime import datetime, timezone
-from pathlib import Path
-from typing import Iterable
 from uuid import uuid4
 
+from fastapi import HTTPException, status
+from sqlalchemy import delete, select
+from sqlalchemy.orm import selectinload
+
+from database import SessionLocal, ensure_bootstrap_data
+from db_models import Conversacion, Mensaje, TipoMensaje
 from models.chat_schemas import ChatMessage, ConversationDetail
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-DATA_DIR = BASE_DIR / "data"
-CONVERSATIONS_FILE = DATA_DIR / "conversación.csv"
-CONVERSATION_HEADERS = [
-    "conversation_id",
-    "email",
-    "title",
-    "created_at",
-    "updated_at",
-    "messages_json",
-]
+
+def _to_api_datetime(value: datetime | None) -> datetime:
+    if value is None:
+        return datetime.now(timezone.utc)
+    if value.tzinfo is None:
+        return value.replace(tzinfo=timezone.utc)
+    return value.astimezone(timezone.utc)
 
 
-def _now_iso() -> str:
-    return datetime.now(timezone.utc).isoformat()
+def _to_db_datetime(value: datetime | None) -> datetime:
+    source = value or datetime.now(timezone.utc)
+    if source.tzinfo is None:
+        return source
+    return source.astimezone(timezone.utc).replace(tzinfo=None)
 
 
-def ensure_conversations_storage() -> None:
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
-    if CONVERSATIONS_FILE.exists():
-        return
-
-    with CONVERSATIONS_FILE.open("w", newline="", encoding="utf-8") as csv_file:
-        writer = csv.DictWriter(csv_file, fieldnames=CONVERSATION_HEADERS)
-        writer.writeheader()
-
-
-def _read_rows() -> list[dict[str, str]]:
-    ensure_conversations_storage()
-    with CONVERSATIONS_FILE.open("r", newline="", encoding="utf-8") as csv_file:
-        return [dict(row) for row in csv.DictReader(csv_file)]
-
-
-def _write_rows(rows: Iterable[dict[str, str]]) -> None:
-    ensure_conversations_storage()
-    with CONVERSATIONS_FILE.open("w", newline="", encoding="utf-8") as csv_file:
-        writer = csv.DictWriter(csv_file, fieldnames=CONVERSATION_HEADERS)
-        writer.writeheader()
-        writer.writerows(rows)
-
-
-def _derive_title(messages: list[dict[str, str]]) -> str:
+def _derive_title(messages: list[dict[str, object]]) -> str:
     first_user_message = next((item["content"] for item in messages if item["role"] == "user"), "")
-    if not first_user_message:
+    if not isinstance(first_user_message, str) or not first_user_message:
         return "Nueva conversacion"
     trimmed = " ".join(first_user_message.split())
     return trimmed[:57] + "..." if len(trimmed) > 60 else trimmed
 
 
-def _deserialize_row(row: dict[str, str]) -> ConversationDetail:
-    messages = json.loads(row.get("messages_json") or "[]")
+def _conversation_to_detail(conversation: Conversacion) -> ConversationDetail:
+    messages = [
+        ChatMessage(
+            role=message.tipo_mensaje.descripcion,
+            content=message.contenido,
+            timestamp=_to_api_datetime(message.fecha_hora),
+        )
+        for message in conversation.mensajes
+    ]
     return ConversationDetail(
-        conversation_id=row["conversation_id"],
-        title=row["title"],
-        created_at=datetime.fromisoformat(row["created_at"]),
-        updated_at=datetime.fromisoformat(row["updated_at"]),
+        conversation_id=conversation.id_conversacion,
+        title=conversation.titulo,
+        created_at=_to_api_datetime(conversation.fec_creacion),
+        updated_at=_to_api_datetime(conversation.fec_actualizacion),
         message_count=len(messages),
-        messages=[ChatMessage(**message) for message in messages],
+        messages=messages,
     )
 
 
-def list_conversations(email: str) -> list[ConversationDetail]:
-    rows = [row for row in _read_rows() if row["email"] == email]
-    conversations = [_deserialize_row(row) for row in rows]
-    return sorted(conversations, key=lambda item: item.updated_at, reverse=True)
+def _load_conversation(session, conversation_id: str) -> Conversacion | None:
+    return session.scalar(
+        select(Conversacion)
+        .options(selectinload(Conversacion.mensajes).selectinload(Mensaje.tipo_mensaje))
+        .where(Conversacion.id_conversacion == conversation_id)
+    )
+
+
+def list_conversations(user_id: int) -> list[ConversationDetail]:
+    with SessionLocal() as session:
+        ensure_bootstrap_data(session)
+        conversations = session.scalars(
+            select(Conversacion)
+            .options(selectinload(Conversacion.mensajes).selectinload(Mensaje.tipo_mensaje))
+            .where(Conversacion.id_usuario == user_id)
+            .order_by(Conversacion.fec_actualizacion.desc())
+        ).unique().all()
+        return [_conversation_to_detail(conversation) for conversation in conversations]
 
 
 def build_agent_reply(message: str, history: list[ChatMessage]) -> str:
@@ -87,19 +85,18 @@ def build_agent_reply(message: str, history: list[ChatMessage]) -> str:
 
 
 def save_conversation(
-    email: str,
+    user_id: int,
     message: str,
     history: list[ChatMessage],
     conversation_id: str | None = None,
 ) -> tuple[str, ConversationDetail]:
-    rows = _read_rows()
     assistant_reply = build_agent_reply(message, history)
-    timestamp = _now_iso()
+    timestamp = datetime.now(timezone.utc)
     normalized_history = [
         {
             "role": item.role,
             "content": item.content,
-            "timestamp": (item.timestamp or datetime.now(timezone.utc)).isoformat(),
+            "timestamp": _to_db_datetime(item.timestamp),
         }
         for item in history
     ]
@@ -109,37 +106,64 @@ def save_conversation(
             {
                 "role": "assistant",
                 "content": assistant_reply,
-                "timestamp": timestamp,
+                "timestamp": _to_db_datetime(timestamp),
             }
         )
 
     target_id = conversation_id or str(uuid4())
-    existing_row = next(
-        (row for row in rows if row["email"] == email and row["conversation_id"] == target_id),
-        None,
-    )
 
-    if existing_row:
-        created_at = existing_row["created_at"]
-        existing_row["title"] = _derive_title(normalized_history)
-        existing_row["updated_at"] = timestamp
-        existing_row["messages_json"] = json.dumps(normalized_history, ensure_ascii=False)
-    else:
-        created_at = timestamp
-        rows.append(
-            {
-                "conversation_id": target_id,
-                "email": email,
-                "title": _derive_title(normalized_history),
-                "created_at": created_at,
-                "updated_at": timestamp,
-                "messages_json": json.dumps(normalized_history, ensure_ascii=False),
-            }
-        )
+    with SessionLocal() as session:
+        ensure_bootstrap_data(session)
 
-    _write_rows(rows)
+        message_types = {
+            item.descripcion: item.id_tipo_mensaje
+            for item in session.scalars(select(TipoMensaje)).all()
+        }
+        if not {"user", "assistant", "system"}.issubset(message_types):
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="No se pudieron resolver los tipos de mensaje en la base de datos.",
+            )
 
-    saved_row = next(
-        row for row in rows if row["email"] == email and row["conversation_id"] == target_id
-    )
-    return assistant_reply, _deserialize_row(saved_row)
+        conversation = _load_conversation(session, target_id)
+        if conversation and conversation.id_usuario != user_id:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="No tienes permiso para modificar esta conversacion.",
+            )
+
+        if conversation is None:
+            conversation = Conversacion(
+                id_conversacion=target_id,
+                id_usuario=user_id,
+                titulo=_derive_title(normalized_history),
+                fec_actualizacion=_to_db_datetime(timestamp),
+            )
+            session.add(conversation)
+            session.flush()
+        else:
+            conversation.titulo = _derive_title(normalized_history)
+            conversation.fec_actualizacion = _to_db_datetime(timestamp)
+            session.execute(delete(Mensaje).where(Mensaje.id_conversacion == target_id))
+            session.flush()
+
+        for order, item in enumerate(normalized_history, start=1):
+            session.add(
+                Mensaje(
+                    id_conversacion=target_id,
+                    id_tipo_mensaje=message_types[str(item["role"])],
+                    contenido=str(item["content"]),
+                    fecha_hora=item["timestamp"],
+                    orden_mensaje=order,
+                )
+            )
+
+        session.commit()
+        saved_conversation = _load_conversation(session, target_id)
+        if saved_conversation is None:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="No fue posible recuperar la conversacion guardada.",
+            )
+
+        return assistant_reply, _conversation_to_detail(saved_conversation)

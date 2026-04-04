@@ -10,18 +10,18 @@ router = APIRouter(prefix="/chat", tags=["Chat"])
 
 @router.get("/conversations", response_model=list[ConversationDetail])
 async def get_conversations(
-    current_user: dict[str, str] = Depends(get_current_user),
+    current_user: dict[str, object] = Depends(get_current_user),
 ):
-    return list_conversations(current_user["email"])
+    return list_conversations(int(current_user["id_usuario"]))
 
 
 @router.post("/completions", response_model=ChatResponse)
 async def chat_completion(
     request: ChatRequest,
-    current_user: dict[str, str] = Depends(get_current_user),
+    current_user: dict[str, object] = Depends(get_current_user),
 ):
     assistant_reply, conversation = save_conversation(
-        email=current_user["email"],
+        user_id=int(current_user["id_usuario"]),
         message=request.message,
         history=request.history,
         conversation_id=request.conversation_id,

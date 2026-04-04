@@ -8,12 +8,11 @@ import { useAudioRecorder } from '../hooks/useAudioRecorder.js'
 import { useAuth } from '../hooks/useAuth.js'
 import { useSpeech } from '../hooks/useSpeech.js'
 import { fetchConversations, sendChatMessage, transcribeAudio } from '../services/api.js'
-import { clearConversationCache, loadConversationCache, saveConversationCache } from '../services/conversationStorage.js'
 
 function buildWelcomeMessage(firstName = 'estudiante') {
   return {
     role: 'assistant',
-    content: `Hola ${firstName}, soy StudyBot. Tus mensajes se están enviando al backend en Python para gestionar la conversación.`,
+    content: `Hola ${firstName}, soy StudyBot. En que duda puedo ayudarte hoy.`,
     timestamp: new Date().toISOString(),
   }
 }
@@ -63,12 +62,6 @@ function ChatPage() {
   } = useSpeech()
 
   useEffect(() => {
-    const cachedConversations = loadConversationCache(user?.email)
-    if (cachedConversations.length > 0) {
-      setConversations(cachedConversations)
-      setActiveConversationId(cachedConversations[0].conversation_id)
-    }
-
     let ignore = false
 
     const loadRemoteConversations = async () => {
@@ -78,7 +71,6 @@ function ChatPage() {
 
         startTransition(() => {
           setConversations(remoteConversations)
-          saveConversationCache(user?.email, remoteConversations)
 
           if (remoteConversations.length > 0) {
             setActiveConversationId((current) =>
@@ -114,7 +106,6 @@ function ChatPage() {
   const handleLogout = () => {
     cancelRecording()
     stopSpeaking()
-    clearConversationCache(user?.email)
     logout()
     navigate('/login', { replace: true })
   }
@@ -183,9 +174,7 @@ function ChatPage() {
 
       startTransition(() => {
         setConversations((current) => {
-          const updatedConversations = upsertConversation(current, syncedConversation)
-          saveConversationCache(user?.email, updatedConversations)
-          return updatedConversations
+          return upsertConversation(current, syncedConversation)
         })
         setActiveConversationId(syncedConversation.conversation_id)
         setDraftMessages([buildWelcomeMessage(user?.first_name)])
