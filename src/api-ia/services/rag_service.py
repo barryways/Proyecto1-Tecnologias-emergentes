@@ -15,7 +15,7 @@ def initialize_rag_service(path_dataset: str, collection_name: str) -> chromadb.
     :return:
     """
 
-    client = chromadb.PersistentClient(path="data/chroma_db")
+    client = chromadb.EphemeralClient()
     embedding_function = embedding_functions.SentenceTransformerEmbeddingFunction(
         model_name=EMBEDDING_MODEL
     )
