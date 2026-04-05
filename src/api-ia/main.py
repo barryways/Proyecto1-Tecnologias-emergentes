@@ -12,7 +12,7 @@ app = FastAPI(
     version="0.0.1"
 )
 
-@app.get("/", include_in_schema=False)
+@app.api_route("/", methods=["GET", "HEAD"], include_in_schema=False)
 def scalar_docs():
     return get_scalar_api_reference(
         openapi_url="/openapi.json",

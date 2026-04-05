@@ -5,6 +5,9 @@ from services.rag_service import search_context
 anthropic_client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 
 def ask_tutor(question: str, collection) -> str:
+    if not question:
+        raise ValueError("La pregunta no puede estar vacía")
+
     context = search_context(collection, question)
 
     if context is None:
