@@ -1,8 +1,11 @@
+
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from scalar_fastapi import get_scalar_api_reference
+import logging
+from dotenv import load_dotenv
 
 from config import CORS_ORIGINS
 from database import init_database
@@ -13,6 +16,10 @@ from routers import auth_router, chat_router
 async def lifespan(_: FastAPI):
     init_database()
     yield
+
+
+load_dotenv()
+logger = logging.getLogger(__name__)
 
 app = FastAPI(
     docs_url="/api/docs",
@@ -30,7 +37,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/", include_in_schema=False)
+@app.api_route("/", methods=["GET", "HEAD"], include_in_schema=False)
 def scalar_docs():
     return get_scalar_api_reference(
         openapi_url="/openapi.json",
@@ -39,3 +46,8 @@ def scalar_docs():
 
 app.include_router(auth_router.router)
 app.include_router(chat_router.router)
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="127.0.0.1", port=8001, reload=False)
