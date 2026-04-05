@@ -33,3 +33,27 @@ def unificar_datasets(carpeta: str):
     print(f"\n✅ Total: {len(dataset_final)} pares pregunta-respuesta")
     print(f"📁 JSON  → {json_path}")
     print(f"📁 JSONL → {jsonl_path}")
+
+def claude_to_openai():
+    SYSTEM_PROMPT = """Eres un tutor virtual del curso de Programación Avanzada.
+    IMPORTANTE:
+    - NO entregues código completo listo para ejecutar
+    - Puedes dar pseudocódigo o fragmentos parciales explicativos
+    - Responde SIEMPRE en formato Markdown
+    - Si la pregunta está fuera del curso responde:
+      'Esa pregunta está fuera del contenido del curso.'
+    - Responde en español de manera clara y didáctica"""
+
+    with open("dataset/dataset_final.json", "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    with open("dataset/dataset_openai.jsonl", "w", encoding="utf-8") as f:
+        for item in data["data"]:
+            entry = {
+                "messages": [
+                    {"role": "system", "content": SYSTEM_PROMPT},
+                    {"role": "user", "content": item["pregunta"]},
+                    {"role": "assistant", "content": item["respuesta"]}
+                ]
+            }
+            f.write(json.dumps(entry, ensure_ascii=False) + "\n")
