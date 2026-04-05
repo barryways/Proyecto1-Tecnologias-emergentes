@@ -10,11 +10,14 @@ function getRecognitionLanguage() {
   if (typeof navigator === 'undefined') return 'es-ES'
 
   const preferredLanguage = navigator.language?.toLowerCase() || ''
+  if (preferredLanguage.startsWith('es-gt')) {
+    return 'es-GT'
+  }
   if (preferredLanguage.startsWith('es')) {
     return navigator.language
   }
 
-  return 'es-ES'
+  return 'es-GT'
 }
 
 function mapRecognitionError(errorCode) {
@@ -28,9 +31,11 @@ function mapRecognitionError(errorCode) {
     case 'no-speech':
       return 'No se detectó voz. Intenta hablar más cerca del micrófono.'
     case 'network':
-      return 'El reconocimiento de voz falló por red. Algunos navegadores requieren conexión a Internet para dictado.'
+      return 'El reconocimiento de voz del navegador falló por red.'
     case 'language-not-supported':
-      return 'El idioma configurado para dictado no es compatible en este navegador.'
+      return 'El navegador no tiene soporte local para el idioma del dictado.'
+    case 'language-unavailable':
+      return 'El paquete local de idioma para dictado no está disponible todavía.'
     case 'aborted':
       return 'El dictado se canceló antes de completarse.'
     default:
@@ -40,14 +45,75 @@ function mapRecognitionError(errorCode) {
 
 function createRecognitionInstance() {
   const SpeechRecognitionCtor = getSpeechRecognition()
-  if (!SpeechRecognitionCtor) return null
+  if (!SpeechRecognitionCtor) return { recognition: null, SpeechRecognitionCtor: null }
 
   const recognition = new SpeechRecognitionCtor()
   recognition.lang = getRecognitionLanguage()
   recognition.interimResults = true
   recognition.continuous = false
   recognition.maxAlternatives = 1
-  return recognition
+  return { recognition, SpeechRecognitionCtor }
+}
+
+async function ensureOnDeviceRecognition(SpeechRecognitionCtor, recognition) {
+  if (!recognition || !SpeechRecognitionCtor) {
+    return { ok: false, reason: 'Tu navegador no soporta reconocimiento de voz.' }
+  }
+
+  if (!('processLocally' in recognition)) {
+    return {
+      ok: false,
+      reason: 'Este navegador no soporta dictado local en el dispositivo.',
+    }
+  }
+
+  recognition.processLocally = true
+
+  if (typeof SpeechRecognitionCtor.available !== 'function') {
+    return { ok: true }
+  }
+
+  try {
+    const availability = await SpeechRecognitionCtor.available({
+      langs: [recognition.lang],
+      processLocally: true,
+    })
+
+    if (availability === 'available') {
+      return { ok: true }
+    }
+
+    if (availability === 'downloadable' && typeof SpeechRecognitionCtor.install === 'function') {
+      const installed = await SpeechRecognitionCtor.install({
+        langs: [recognition.lang],
+        processLocally: true,
+      })
+
+      if (installed) {
+        return { ok: true }
+      }
+    }
+
+    if (availability === 'downloading') {
+      return {
+        ok: false,
+        reason: 'El navegador todavía está descargando el paquete de voz local.',
+      }
+    }
+
+    return {
+      ok: false,
+      reason: 'El navegador no tiene disponible dictado local para este idioma.',
+    }
+  } catch (error) {
+    return {
+      ok: false,
+      reason:
+        error instanceof Error
+          ? error.message
+          : 'No fue posible preparar el dictado local en este navegador.',
+    }
+  }
 }
 
 function pickVoice(voices) {
@@ -124,12 +190,18 @@ export function useSpeech() {
     return { ok: true, toggledOff: false }
   }
 
-  const startListening = ({ onTranscript, onError }) => {
-    const recognition = createRecognitionInstance()
+  const startListening = async ({ onTranscript, onError }) => {
+    const { recognition, SpeechRecognitionCtor } = createRecognitionInstance()
 
     if (!recognition) {
-      onError?.('Tu navegador no soporta reconocimiento de voz.')
-      return
+      onError?.('Tu navegador no soporta reconocimiento de voz.', 'unsupported')
+      return { ok: false, mode: 'unsupported' }
+    }
+
+    const onDeviceReady = await ensureOnDeviceRecognition(SpeechRecognitionCtor, recognition)
+    if (!onDeviceReady.ok) {
+      onError?.(onDeviceReady.reason, 'local-unavailable')
+      return { ok: false, mode: 'fallback', reason: onDeviceReady.reason }
     }
 
     recognition.onresult = (event) => {
@@ -143,7 +215,7 @@ export function useSpeech() {
 
     recognition.onerror = (event) => {
       setIsListening(false)
-      onError?.(mapRecognitionError(event.error))
+      onError?.(mapRecognitionError(event.error), event.error)
     }
 
     recognition.onend = () => {
@@ -156,14 +228,16 @@ export function useSpeech() {
     try {
       setIsListening(true)
       recognition.start()
+      return { ok: true, mode: 'local' }
     } catch (error) {
       recognitionRef.current = null
       setIsListening(false)
-      onError?.(
+      const message =
         error instanceof Error
           ? `No se pudo iniciar el dictado. ${error.message}`
-          : 'No se pudo iniciar el dictado en este navegador.',
-      )
+          : 'No se pudo iniciar el dictado en este navegador.'
+      onError?.(message, 'start-failed')
+      return { ok: false, mode: 'fallback', reason: message }
     }
   }
 

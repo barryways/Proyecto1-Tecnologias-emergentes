@@ -2,19 +2,18 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
+import logging
+import os
 from uuid import uuid4
 
 from fastapi import HTTPException, status
+from openai import OpenAI
 from sqlalchemy import delete, select
 from sqlalchemy.orm import selectinload
 
 from database import SessionLocal, ensure_bootstrap_data
 from db_models import Conversacion, Mensaje, TipoMensaje
 from models.chat_schemas import ChatMessage, ConversationDetail
-
-import os
-import logging
-from openai import OpenAI
 
 
 def _to_api_datetime(value: datetime | None) -> datetime:
@@ -67,6 +66,31 @@ def _load_conversation(session, conversation_id: str) -> Conversacion | None:
     )
 
 
+def _normalize_openai_history(history: list[ChatMessage], message: str) -> list[dict[str, str]]:
+    normalized_messages: list[dict[str, str]] = []
+
+    for item in history:
+        content = item.content.strip()
+        if not content:
+            continue
+        normalized_messages.append(
+            {
+                "role": item.role,
+                "content": content,
+            }
+        )
+
+    trimmed_message = message.strip()
+    if trimmed_message and (
+        not normalized_messages
+        or normalized_messages[-1]["role"] != "user"
+        or normalized_messages[-1]["content"] != trimmed_message
+    ):
+        normalized_messages.append({"role": "user", "content": trimmed_message})
+
+    return normalized_messages
+
+
 def list_conversations(user_id: int) -> list[ConversationDetail]:
     with SessionLocal() as session:
         ensure_bootstrap_data(session)
@@ -79,14 +103,86 @@ def list_conversations(user_id: int) -> list[ConversationDetail]:
         return [_conversation_to_detail(conversation) for conversation in conversations]
 
 
-def build_agent_reply(message: str, history: list[ChatMessage]) -> str:
-    prompt_length = len(history)
-    return (
-        "Respuesta generada desde el backend Python.\n\n"
-        f"Tu consulta fue: {message}\n"
-        f"Mensajes en el contexto: {prompt_length}.\n\n"
-        "Aqui puedes conectar despues tu modelo real para enriquecer la respuesta del agente."
-    )
+def _get_openai_client() -> tuple[OpenAI, str]:
+    api_key = os.getenv("OPENAI_API_KEY", "").strip()
+    model_id = os.getenv("OPENAI_MODEL_ID", "").strip()
+
+    if not api_key:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Falta configurar OPENAI_API_KEY en el backend.",
+        )
+
+    if not model_id:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Falta configurar OPENAI_MODEL_ID en el backend.",
+        )
+
+    return OpenAI(api_key=api_key), model_id
+
+
+def ask_tutor(
+    message: str,
+    history: list[ChatMessage],
+    max_tokens: int | None = 1024,
+) -> str:
+    trimmed_message = message.strip()
+    if not trimmed_message:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="La pregunta no puede estar vacía.",
+        )
+
+    openai_client, model_id = _get_openai_client()
+    messages = [
+        {
+            "role": "system",
+            "content": (
+                "Eres un tutor virtual del curso de Programacion Avanzada. "
+                "Responde unicamente basandote en el contexto del curso.\n\n"
+                "FORMATO DE RESPUESTA:\n"
+                "- Responde siempre en formato Markdown\n"
+                "- Usa ## para titulos de secciones\n"
+                "- Usa **negrita** para conceptos importantes\n"
+                "- Usa listas con - para enumerar puntos\n"
+                "- Usa bloques de codigo con ```cpp o ```pseudocode para ejemplos de codigo\n\n"
+                "IMPORTANTE:\n"
+                "- No entregues codigo completo listo para ejecutar\n"
+                "- Puedes dar pseudocodigo o fragmentos parciales explicativos\n"
+                "- Explica que hacer pero no como hacerlo con codigo exacto\n"
+                "- Si la pregunta esta fuera del curso responde: "
+                "'Esa pregunta esta fuera del contenido del curso.'\n"
+                "- Responde siempre en espanol de manera clara y didactica"
+            ),
+        },
+        *_normalize_openai_history(history, trimmed_message),
+    ]
+
+    request_options: dict[str, object] = {
+        "model": model_id,
+        "messages": messages,
+    }
+    if max_tokens:
+        request_options["max_tokens"] = max_tokens
+
+    try:
+        response = openai_client.chat.completions.create(**request_options)
+    except Exception as exc:
+        _logger.exception("No fue posible obtener respuesta del modelo de OpenAI.")
+        raise HTTPException(
+            status_code=status.HTTP_502_BAD_GATEWAY,
+            detail="No fue posible obtener respuesta del modelo de IA.",
+        ) from exc
+
+    content = response.choices[0].message.content if response.choices else None
+    if not content:
+        raise HTTPException(
+            status_code=status.HTTP_502_BAD_GATEWAY,
+            detail="El modelo de IA no devolvio contenido.",
+        )
+
+    return content
 
 
 def save_conversation(
@@ -94,9 +190,11 @@ def save_conversation(
     message: str,
     history: list[ChatMessage],
     conversation_id: str | None = None,
+    max_tokens: int | None = 1024,
 ) -> tuple[str, ConversationDetail]:
-    assistant_reply = build_agent_reply(message, history)
     timestamp = datetime.now(timezone.utc)
+    trimmed_message = message.strip()
+    assistant_reply = ask_tutor(message=trimmed_message, history=history, max_tokens=max_tokens)
     normalized_history = [
         {
             "role": item.role,
@@ -105,6 +203,19 @@ def save_conversation(
         }
         for item in history
     ]
+
+    if trimmed_message and (
+        not normalized_history
+        or normalized_history[-1]["role"] != "user"
+        or str(normalized_history[-1]["content"]).strip() != trimmed_message
+    ):
+        normalized_history.append(
+            {
+                "role": "user",
+                "content": trimmed_message,
+                "timestamp": _to_db_datetime(timestamp),
+            }
+        )
 
     if not normalized_history or normalized_history[-1]["role"] != "assistant":
         normalized_history.append(
@@ -175,45 +286,4 @@ def save_conversation(
 
 
 _logger = logging.getLogger(__name__)
-openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-fine_tuned_model = os.getenv("OPENAI_MODEL_ID")
-
-def ask_tutor(question: str) -> str:
-    if not question:
-        raise ValueError("La pregunta no puede estar vacía")
-
-    response = openai_client.chat.completions.create(
-        model=fine_tuned_model,
-        messages=[
-            {
-                "role": "system",
-                "content":
-                    """
-                        Eres un tutor virtual del curso de Programación Avanzada.
-                        Responde ÚNICAMENTE basándote en el contexto del curso.
-                        
-                        FORMATO DE RESPUESTA:
-                        - Responde SIEMPRE en formato Markdown
-                        - Usa ## para títulos de secciones
-                        - Usa **negrita** para conceptos importantes
-                        - Usa listas con - para enumerar puntos
-                        - Usa bloques de código con ```cpp o ```pseudocode para ejemplos de código
-                        
-                        IMPORTANTE:
-                        - NO entregues código completo listo para ejecutar
-                        - Puedes dar pseudocódigo o fragmentos parciales explicativos
-                        - Explica qué hacer pero no cómo hacerlo con código exacto
-                        - Si la pregunta está fuera del curso responde:
-                          'Esa pregunta está fuera del contenido del curso.'
-                        - Responde siempre en español de manera clara y didáctica
-                    """
-            },
-            {
-                "role": "user",
-                "content": question
-            }
-        ]
-    )
-
-    return response.choices[0].message.content
 

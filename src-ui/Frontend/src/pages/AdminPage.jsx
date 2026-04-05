@@ -27,9 +27,6 @@ function AdminPage() {
           <div className="admin-page__card">
             <p className="admin-page__eyebrow">Próximamente</p>
             <h2>Dashboard vacío por ahora</h2>
-            <p>
-              Dejé este espacio listo para que agregues módulos administrativos más adelante.
-            </p>
             <button type="button" onClick={handleLogout}>
               Cerrar sesión
             </button>

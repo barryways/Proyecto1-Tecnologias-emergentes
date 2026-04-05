@@ -1,4 +1,6 @@
-import { startTransition, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { useNavigate } from 'react-router-dom'
 import './ChatPage.css'
 import Footer from '../components/Footer.jsx'
@@ -30,6 +32,31 @@ function upsertConversation(conversations, nextConversation) {
   return sortConversations([nextConversation, ...filtered])
 }
 
+function buildPendingAssistantMessage() {
+  return {
+    role: 'assistant',
+    content: '',
+    timestamp: `${new Date().toISOString()}-pending`,
+    isPending: true,
+  }
+}
+
+function buildFallbackConversation(serverConversation, nextMessages, assistantReply) {
+  const remoteMessages = Array.isArray(serverConversation?.messages)
+    ? serverConversation.messages.filter((message) => !message?.isPending)
+    : []
+  const fallbackMessages = [...nextMessages, assistantReply]
+  const resolvedMessages =
+    remoteMessages.length >= fallbackMessages.length ? remoteMessages : fallbackMessages
+
+  return {
+    ...serverConversation,
+    messages: resolvedMessages,
+    message_count: resolvedMessages.length,
+    updated_at: serverConversation?.updated_at ?? assistantReply.timestamp,
+  }
+}
+
 function VoiceIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -45,6 +72,7 @@ function ChatPage() {
   const navigate = useNavigate()
   const { user, token, logout } = useAuth()
   const dictationBaseRef = useRef('')
+  const messagesEndRef = useRef(null)
   const [conversations, setConversations] = useState([])
   const [activeConversationId, setActiveConversationId] = useState(null)
   const [draftMessages, setDraftMessages] = useState(() => [buildWelcomeMessage(user?.first_name)])
@@ -59,6 +87,7 @@ function ChatPage() {
     isSpeechSynthesisSupported,
     speakMessage,
     stopSpeaking,
+    stopListening,
   } = useSpeech()
 
   useEffect(() => {
@@ -69,17 +98,15 @@ function ChatPage() {
         const remoteConversations = await fetchConversations(token)
         if (ignore) return
 
-        startTransition(() => {
-          setConversations(remoteConversations)
+        setConversations(remoteConversations)
 
-          if (remoteConversations.length > 0) {
-            setActiveConversationId((current) =>
-              current && remoteConversations.some((item) => item.conversation_id === current)
-                ? current
-                : remoteConversations[0].conversation_id,
-            )
-          }
-        })
+        if (remoteConversations.length > 0) {
+          setActiveConversationId((current) =>
+            current && remoteConversations.some((item) => item.conversation_id === current)
+              ? current
+              : remoteConversations[0].conversation_id,
+          )
+        }
       } catch (requestError) {
         if (!ignore) {
           setError(
@@ -103,8 +130,13 @@ function ChatPage() {
   )
   const visibleMessages = activeConversation?.messages ?? draftMessages
 
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+  }, [visibleMessages, isLoading])
+
   const handleLogout = () => {
     cancelRecording()
+    stopListening()
     stopSpeaking()
     logout()
     navigate('/login', { replace: true })
@@ -112,6 +144,7 @@ function ChatPage() {
 
   const handleNewConversation = () => {
     cancelRecording()
+    stopListening()
     stopSpeaking()
     setActiveConversationId(null)
     setDraftMessages([buildWelcomeMessage(user?.first_name)])
@@ -121,6 +154,7 @@ function ChatPage() {
 
   const handleSelectConversation = (conversationId) => {
     cancelRecording()
+    stopListening()
     stopSpeaking()
     setActiveConversationId(conversationId)
     setError('')
@@ -131,6 +165,7 @@ function ChatPage() {
     if (!trimmed || isLoading) return
 
     cancelRecording()
+    stopListening()
 
     const baseMessages = activeConversation?.messages ?? draftMessages
     const nextMessages = [
@@ -141,6 +176,7 @@ function ChatPage() {
         timestamp: new Date().toISOString(),
       },
     ]
+    const optimisticMessages = [...nextMessages, buildPendingAssistantMessage()]
 
     setError('')
     setInput('')
@@ -152,15 +188,15 @@ function ChatPage() {
           conversation.conversation_id === activeConversation.conversation_id
             ? {
                 ...conversation,
-                messages: nextMessages,
+                messages: optimisticMessages,
                 updated_at: new Date().toISOString(),
-                message_count: nextMessages.length,
+                message_count: optimisticMessages.length,
               }
             : conversation,
         ),
       )
     } else {
-      setDraftMessages(nextMessages)
+      setDraftMessages(optimisticMessages)
     }
 
     try {
@@ -170,15 +206,20 @@ function ChatPage() {
         history: nextMessages,
       })
 
-      const syncedConversation = response.conversation
+      const assistantReply = {
+        role: 'assistant',
+        content: response.content,
+        timestamp: new Date().toISOString(),
+      }
+      const syncedConversation = buildFallbackConversation(
+        response.conversation,
+        nextMessages,
+        assistantReply,
+      )
 
-      startTransition(() => {
-        setConversations((current) => {
-          return upsertConversation(current, syncedConversation)
-        })
-        setActiveConversationId(syncedConversation.conversation_id)
-        setDraftMessages([buildWelcomeMessage(user?.first_name)])
-      })
+      setConversations((current) => upsertConversation(current, syncedConversation))
+      setActiveConversationId(syncedConversation.conversation_id)
+      setDraftMessages([buildWelcomeMessage(user?.first_name)])
     } catch (requestError) {
       if (activeConversation) {
         setConversations((current) =>
@@ -230,6 +271,55 @@ function ChatPage() {
     }
   }
 
+  const transcribeRecordedAudio = async (audioBlob) => {
+    if (!audioBlob) {
+      setError('No se pudo recuperar el audio grabado.')
+      return false
+    }
+
+    try {
+      setError('')
+      setIsTranscribing(true)
+      const response = await transcribeAudio(token, audioBlob)
+      const baseText = dictationBaseRef.current || ''
+      const nextText = `${baseText}${response.text}`.trim()
+      setInput(nextText)
+      dictationBaseRef.current = nextText ? `${nextText} ` : ''
+      return true
+    } catch (requestError) {
+      setError(
+        requestError instanceof Error
+          ? requestError.message
+          : 'No fue posible transcribir el audio grabado.',
+      )
+      return false
+    } finally {
+      setIsTranscribing(false)
+    }
+  }
+
+  const startBackendDictation = async () => {
+    try {
+      setError('')
+      stopListening()
+      dictationBaseRef.current = input.trim() ? `${input.trim()} ` : ''
+      await startRecording({
+        autoStop: true,
+        onAutoStop: (audioBlob) => {
+          void transcribeRecordedAudio(audioBlob)
+        },
+      })
+      return true
+    } catch (requestError) {
+      setError(
+        requestError instanceof Error
+          ? requestError.message
+          : 'No fue posible iniciar la grabación de audio.',
+      )
+      return false
+    }
+  }
+
   const handleVoiceInput = () => {
     const run = async () => {
       if (isTranscribing) {
@@ -237,43 +327,12 @@ function ChatPage() {
       }
 
       if (isRecording) {
-        try {
-          setError('')
-          setIsTranscribing(true)
-          const audioBlob = await stopRecording()
-
-          if (!audioBlob) {
-            setError('No se pudo recuperar el audio grabado.')
-            return
-          }
-
-          const response = await transcribeAudio(token, audioBlob)
-          const baseText = input.trim() ? `${input.trim()} ` : ''
-          const nextText = `${baseText}${response.text}`.trim()
-          setInput(nextText)
-          dictationBaseRef.current = nextText ? `${nextText} ` : ''
-        } catch (requestError) {
-          setError(
-            requestError instanceof Error
-              ? requestError.message
-              : 'No fue posible transcribir el audio grabado.',
-          )
-        } finally {
-          setIsTranscribing(false)
-        }
+        const audioBlob = await stopRecording()
+        await transcribeRecordedAudio(audioBlob)
         return
       }
 
-      try {
-        setError('')
-        await startRecording()
-      } catch (requestError) {
-        setError(
-          requestError instanceof Error
-            ? requestError.message
-            : 'No fue posible iniciar la grabación de audio.',
-        )
-      }
+      await startBackendDictation()
     }
 
     run()
@@ -301,11 +360,10 @@ function ChatPage() {
             <div className="chat-page__status">
               <div>
                 <strong>Canal conectado</strong>
-                <span>Las consultas se envían por HTTP al backend de `src/api-ia`.</span>
               </div>
               <div className="chat-page__voice-summary">
                 <span>{isSpeechSynthesisSupported ? 'Audio activo' : 'Audio no disponible'}</span>
-                <span>{isRecordingSupported ? 'Dictado por backend activo' : 'Dictado no disponible'}</span>
+                <span>{isRecordingSupported ? 'Dictado por voz activo' : 'Dictado no disponible'}</span>
               </div>
             </div>
 
@@ -325,22 +383,39 @@ function ChatPage() {
                           : ''
                       }`}
                       onClick={() => handleSpeakMessage(message, index)}
-                      disabled={!isSpeechSynthesisSupported}
+                      disabled={!isSpeechSynthesisSupported || message.isPending}
                       title="Reproducir mensaje"
                     >
                       <VoiceIcon />
                     </button>
                   </div>
-                  <p>{message.content}</p>
+                  {message.isPending ? (
+                    <div className="chat-bubble__typing" aria-live="polite">
+                      <span />
+                      <span />
+                      <span />
+                    </div>
+                  ) : (
+                    <div className="chat-bubble__content">
+                      {message.role === 'assistant' ? (
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          components={{
+                            a: ({ ...props }) => (
+                              <a {...props} target="_blank" rel="noreferrer noopener" />
+                            ),
+                          }}
+                        >
+                          {message.content}
+                        </ReactMarkdown>
+                      ) : (
+                        <p>{message.content}</p>
+                      )}
+                    </div>
+                  )}
                 </article>
               ))}
-
-              {isLoading && (
-                <article className="chat-bubble assistant is-loading">
-                  <span className="chat-bubble__role">Asistente</span>
-                  <p>Generando respuesta desde el backend...</p>
-                </article>
-              )}
+              <div ref={messagesEndRef} />
             </div>
 
             <div className="chat-page__composer">
@@ -364,7 +439,11 @@ function ChatPage() {
                   className={`chat-page__voice-input ${isRecording ? 'is-listening' : ''}`}
                   onClick={handleVoiceInput}
                   disabled={!isRecordingSupported || isTranscribing}
-                  title={isRecording ? 'Detener grabación y transcribir' : 'Grabar audio para dictado'}
+                  title={
+                    isRecording
+                      ? 'Detener grabacion y transcribir'
+                      : 'Hablar para dictar al mensaje'
+                  }
                 >
                   <VoiceIcon />
                 </button>

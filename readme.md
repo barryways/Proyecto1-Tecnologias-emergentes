@@ -6,10 +6,49 @@ Proyecto con backend en FastAPI y frontend en React para autenticación y chat e
 
 ### Backend
 
+#### diclaimer para backend con venv
+
+Configuración de entorno virtual en Windows
+📦 Crear entorno virtual
+
+Abre una terminal en la carpeta del proyecto y ejecuta:
+
+python -m venv venv
+
+Esto creará una carpeta llamada venv con el entorno virtual.
+
+⚡ Activar entorno virtual
+En CMD:
+venv\Scripts\activate
+En PowerShell:
+venv\Scripts\Activate.ps1
+⚠️ Problema común en PowerShell (Execution Policy)
+
+Si aparece un error de permisos al activar el entorno, ejecuta:
+
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+Luego intenta activar nuevamente:
+
+venv\Scripts\Activate.ps1
+✅ Verificar que está activo
+
+Si todo salió bien, verás algo como esto en tu terminal:
+
+(venv) C:\ruta\de\tu\proyecto>
+❌ Desactivar entorno virtual
+
+Para salir del entorno virtual:
+
+deactivate
+
+
+
 1. Edita `src/api-ia/.env` con los datos reales de tu instancia MySQL en AWS.
 2. Instala dependencias con `python -m pip install -r src/api-ia/requirements.txt`.
 3. Asegúrate de haber ejecutado el script SQL de creación de `studybot_db` en tu base de datos.
 4. Inicia el backend desde `src/api-ia` con `uvicorn main:app --reload`.
+5. Dale  `uvicorn main:app --reload --host 0.0.0.0 --port 8000  `
 
 Variables importantes del backend:
 

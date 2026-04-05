@@ -19,6 +19,21 @@ def _get_model_path() -> Path:
     return Path(configured_path).resolve() if configured_path else DEFAULT_MODEL_DIR
 
 
+def _resolve_model_root(model_path: Path) -> Path:
+    required_entries = ("am", "conf", "graph", "ivector")
+
+    if all((model_path / entry).exists() for entry in required_entries):
+        return model_path
+
+    nested_candidates = [item for item in model_path.iterdir() if item.is_dir()]
+    if len(nested_candidates) == 1:
+        nested_path = nested_candidates[0]
+        if all((nested_path / entry).exists() for entry in required_entries):
+            return nested_path
+
+    return model_path
+
+
 def _get_model() -> Model:
     global _MODEL_CACHE
 
@@ -32,8 +47,28 @@ def _get_model() -> Model:
             ),
         )
 
+    model_root = _resolve_model_root(model_path)
+    required_entries = ("am", "conf", "graph", "ivector")
+    if not all((model_root / entry).exists() for entry in required_entries):
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=(
+                "El modelo local de Vosk no esta completo. "
+                f"Descarga y extrae el modelo en: {model_path}"
+            ),
+        )
+
     if _MODEL_CACHE is None:
-        _MODEL_CACHE = Model(str(model_path))
+        try:
+            _MODEL_CACHE = Model(str(model_root))
+        except Exception as exc:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail=(
+                    "No fue posible cargar el modelo local de voz. "
+                    f"Verifica el contenido instalado en: {model_root}"
+                ),
+            ) from exc
 
     return _MODEL_CACHE
 

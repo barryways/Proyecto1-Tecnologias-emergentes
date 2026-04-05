@@ -84,6 +84,10 @@ export function useAudioRecorder() {
   const sourceNodeRef = useRef(null)
   const processorNodeRef = useRef(null)
   const audioChunksRef = useRef([])
+  const recordingOptionsRef = useRef({})
+  const recordingStartedAtRef = useRef(0)
+  const silenceStartedAtRef = useRef(null)
+  const stopInProgressRef = useRef(false)
   const [isRecording, setIsRecording] = useState(false)
   const [isRecordingSupported] = useState(
     () => typeof navigator !== 'undefined' && Boolean(navigator.mediaDevices?.getUserMedia),
@@ -103,9 +107,52 @@ export function useAudioRecorder() {
     }
   }, [])
 
-  const startRecording = async () => {
+  const finalizeRecording = async () => {
+    if (stopInProgressRef.current) {
+      return null
+    }
+
+    stopInProgressRef.current = true
+
+    try {
+      processorNodeRef.current?.disconnect()
+      sourceNodeRef.current?.disconnect()
+      mediaStreamRef.current?.getTracks()?.forEach((track) => track.stop())
+
+      const audioContext = audioContextRef.current
+      if (!audioContext) {
+        return null
+      }
+
+      const merged = mergeFloat32Chunks(audioChunksRef.current)
+      const resampled = downsampleBuffer(merged, audioContext.sampleRate, 16000)
+      const wavBlob = encodeWav(resampled, 16000)
+
+      await audioContext.close()
+
+      audioContextRef.current = null
+      mediaStreamRef.current = null
+      sourceNodeRef.current = null
+      processorNodeRef.current = null
+      audioChunksRef.current = []
+      recordingOptionsRef.current = {}
+      recordingStartedAtRef.current = 0
+      silenceStartedAtRef.current = null
+      setIsRecording(false)
+
+      return wavBlob
+    } finally {
+      stopInProgressRef.current = false
+    }
+  }
+
+  const startRecording = async (options = {}) => {
     if (!isRecordingSupported) {
       throw new Error('Tu navegador no soporta grabación de audio local.')
+    }
+
+    if (isRecording || stopInProgressRef.current) {
+      return
     }
 
     const stream = await navigator.mediaDevices.getUserMedia({
@@ -120,11 +167,70 @@ export function useAudioRecorder() {
     const audioContext = new AudioContextCtor()
     const sourceNode = audioContext.createMediaStreamSource(stream)
     const processorNode = audioContext.createScriptProcessor(4096, 1, 1)
+    const {
+      autoStop = false,
+      silenceThreshold = 0.015,
+      silenceDurationMs = 1500,
+      minRecordingMs = 1200,
+      onAutoStop,
+    } = options
 
     audioChunksRef.current = []
+    recordingOptionsRef.current = {
+      autoStop,
+      silenceThreshold,
+      silenceDurationMs,
+      minRecordingMs,
+      onAutoStop,
+    }
+    recordingStartedAtRef.current = Date.now()
+    silenceStartedAtRef.current = null
+
     processorNode.onaudioprocess = (event) => {
       const inputData = event.inputBuffer.getChannelData(0)
       audioChunksRef.current.push(new Float32Array(inputData))
+
+      if (!recordingOptionsRef.current.autoStop || stopInProgressRef.current) {
+        return
+      }
+
+      let sumSquares = 0
+      for (let index = 0; index < inputData.length; index += 1) {
+        sumSquares += inputData[index] * inputData[index]
+      }
+
+      const rms = Math.sqrt(sumSquares / inputData.length)
+      const now = Date.now()
+
+      if (rms > recordingOptionsRef.current.silenceThreshold) {
+        silenceStartedAtRef.current = null
+        return
+      }
+
+      if (!silenceStartedAtRef.current) {
+        silenceStartedAtRef.current = now
+        return
+      }
+
+      const recordingElapsed = now - recordingStartedAtRef.current
+      const silenceElapsed = now - silenceStartedAtRef.current
+
+      if (
+        recordingElapsed >= recordingOptionsRef.current.minRecordingMs &&
+        silenceElapsed >= recordingOptionsRef.current.silenceDurationMs
+      ) {
+        const onAutoStopCallback = recordingOptionsRef.current.onAutoStop
+        Promise.resolve()
+          .then(() => finalizeRecording())
+          .then((audioBlob) => {
+            if (audioBlob) {
+              onAutoStopCallback?.(audioBlob)
+            }
+          })
+          .catch(() => {
+            // noop
+          })
+      }
     }
 
     sourceNode.connect(processorNode)
@@ -141,26 +247,7 @@ export function useAudioRecorder() {
     if (!isRecording) {
       return null
     }
-
-    processorNodeRef.current?.disconnect()
-    sourceNodeRef.current?.disconnect()
-    mediaStreamRef.current?.getTracks()?.forEach((track) => track.stop())
-
-    const audioContext = audioContextRef.current
-    const merged = mergeFloat32Chunks(audioChunksRef.current)
-    const resampled = downsampleBuffer(merged, audioContext.sampleRate, 16000)
-    const wavBlob = encodeWav(resampled, 16000)
-
-    await audioContext.close()
-
-    audioContextRef.current = null
-    mediaStreamRef.current = null
-    sourceNodeRef.current = null
-    processorNodeRef.current = null
-    audioChunksRef.current = []
-    setIsRecording(false)
-
-    return wavBlob
+    return finalizeRecording()
   }
 
   const cancelRecording = async () => {
@@ -176,6 +263,9 @@ export function useAudioRecorder() {
     sourceNodeRef.current = null
     processorNodeRef.current = null
     audioChunksRef.current = []
+    recordingOptionsRef.current = {}
+    recordingStartedAtRef.current = 0
+    silenceStartedAtRef.current = null
     setIsRecording(false)
   }
 

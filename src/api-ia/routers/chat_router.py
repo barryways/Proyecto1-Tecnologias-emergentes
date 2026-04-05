@@ -25,6 +25,7 @@ async def chat_completion(
         message=request.message,
         history=request.history,
         conversation_id=request.conversation_id,
+        max_tokens=request.max_tokens,
     )
     return ChatResponse(content=assistant_reply, conversation=conversation)
 
