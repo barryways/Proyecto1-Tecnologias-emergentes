@@ -1,11 +1,24 @@
+import logging
 from fastapi import FastAPI
-from scalar_fastapi import get_scalar_api_reference
 from dotenv import load_dotenv
 from routers import chat_router
+from contextlib import asynccontextmanager
+from scalar_fastapi import get_scalar_api_reference
+from dependencies import get_collection_tutor_advanced_programming
 
 load_dotenv()
+logger = logging.getLogger(__name__)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    get_collection_tutor_advanced_programming()
+    logger.info("✅ Server started")
+    yield
+    logger.info("🛑 Cerrando aplicación...")
 
 app = FastAPI(
+    lifespan=lifespan,
     docs_url="/api/docs",
     title="Chat API",
     description="API con Claude",

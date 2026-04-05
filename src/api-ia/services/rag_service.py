@@ -1,9 +1,11 @@
+import logging
 import os
 import json
 import chromadb
 from chromadb.utils import embedding_functions
 
 # Define models to convert text to vector
+_logger = logging.getLogger(__name__)
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"
 
 def initialize_rag_service(path_dataset: str, collection_name: str) -> chromadb.Collection:
@@ -19,6 +21,7 @@ def initialize_rag_service(path_dataset: str, collection_name: str) -> chromadb.
     embedding_function = embedding_functions.SentenceTransformerEmbeddingFunction(
         model_name=EMBEDDING_MODEL
     )
+    _logger.info("ChromaDB: Función configurada ✅")
 
     collections = [c.name for c in client.list_collections()]
     if collection_name in collections:
@@ -28,14 +31,18 @@ def initialize_rag_service(path_dataset: str, collection_name: str) -> chromadb.
             embedding_function=embedding_function
         )
 
+
     with open(path_dataset, "r", encoding="utf-8") as f:
         data = json.load(f)
 
+    _logger.info("ChromaDB: Cargando dataset...")
     items = data["data"]
     collection = client.create_collection(
         name=collection_name,
         embedding_function=embedding_function
     )
+
+    _logger.info("ChromaDB: Ingresando agregar la colección ...")
     collection.add(
         ids=[
             str(i)
@@ -51,7 +58,7 @@ def initialize_rag_service(path_dataset: str, collection_name: str) -> chromadb.
         ]
     )
 
-    print("ChromaDB: Colección se ha cargado ✅")
+    _logger.info("ChromaDB: Colección se ha cargado ✅")
     return collection
 
 def search_context(collection: chromadb.Collection, question: str, n_results: int = 3) -> str:
