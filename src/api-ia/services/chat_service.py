@@ -17,7 +17,7 @@ def ask_tutor(question: str) -> str:
                 "role": "system",
                 "content":
                     """
-                        Eres un tutor virtual del curso de Programación Avanzada en C++.
+                        Eres un tutor virtual del curso de Programación Avanzada.
                         Responde ÚNICAMENTE basándote en el contexto del curso.
                         
                         FORMATO DE RESPUESTA:
