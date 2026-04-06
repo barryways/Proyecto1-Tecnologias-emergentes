@@ -438,7 +438,7 @@ function ChatPage() {
                       : ''
                   }}
                   onKeyDown={handleKeyDown}
-                  placeholder="Escribe una consulta para el agente..."
+                  placeholder="Escribe consulta para el asistente..."
                 />
                 <button
                   type="button"
@@ -454,7 +454,11 @@ function ChatPage() {
                   <VoiceIcon />
                 </button>
                 <button type="button" className="chat-page__send-btn" onClick={handleSend} disabled={isLoading || !input.trim()}>
-                  {isLoading ? '...' : 'Enviar'}
+                  <svg className="chat-page__send-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                  </svg>
+                  <span className="chat-page__send-label">{isLoading ? '...' : 'Enviar'}</span>
                 </button>
               </div>
             </div>
