@@ -37,6 +37,7 @@
   background: linear-gradient(135deg, rgba(92, 179, 255, 0.15), rgba(233, 191, 94, 0.15));
   color: var(--color-text);
   cursor: pointer;
+  border-radius: 3rem;
 }
 
 .side-panel__section {
@@ -59,6 +60,7 @@
   flex-direction: column;
   gap: 0.65rem;
   overflow-y: auto;
+  padding: 0.25rem 0.1rem;
 }
 
 .side-panel__item,
@@ -96,4 +98,137 @@
   transform: translateY(-1px);
   border-color: var(--color-border-strong);
   background: rgba(92, 179, 255, 0.08);
+}
+
+/* Drawer header row (brand + close button) */
+.side-panel__drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Close button — hidden on desktop, shown on mobile */
+.side-panel__close-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-text-soft);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  line-height: 1;
+}
+
+.side-panel__close-btn:hover {
+  color: var(--color-text);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* User card — hidden on desktop, shown on mobile */
+.side-panel__user-card {
+  display: none;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.side-panel__avatar {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: #07111f;
+  font-weight: 800;
+  font-size: 0.88rem;
+}
+
+.side-panel__user-info strong,
+.side-panel__user-info span {
+  display: block;
+}
+
+.side-panel__user-info span {
+  color: var(--color-text-soft);
+  font-size: 0.8rem;
+}
+
+/* Logout button — hidden on desktop, shown on mobile */
+.side-panel__logout-btn {
+  display: none;
+  width: 100%;
+  border: 1px solid rgba(255, 157, 148, 0.3);
+  border-radius: 3rem;
+  padding: 0.9rem 1rem;
+  background: rgba(255, 157, 148, 0.1);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  font-size: inherit;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.side-panel__logout-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 157, 148, 0.5);
+}
+
+.side-panel__logout-btn svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* Backdrop */
+.side-panel__backdrop {
+  display: none;
+}
+
+/* ── Mobile drawer ── */
+@media (max-width: 980px) {
+  .side-panel {
+    position: fixed;
+    top: 0;
+    left: -340px;
+    width: 300px;
+    height: 100vh;
+    z-index: 200;
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    transition: left 0.28s ease;
+    overflow-y: auto;
+    min-height: unset;
+  }
+
+  .side-panel.is-open {
+    left: 0;
+  }
+
+  .side-panel__close-btn,
+  .side-panel__user-card,
+  .side-panel__logout-btn {
+    display: flex;
+  }
+
+  .side-panel__backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 199;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(2px);
+  }
 }

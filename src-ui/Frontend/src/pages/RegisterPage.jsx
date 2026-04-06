@@ -45,8 +45,7 @@ function RegisterPage() {
     <main className="register-page route-shell">
       <section className="register-card">
         <div className="register-card__intro">
-          <p className="register-card__eyebrow">Registro</p>
-          <h1>Crea tu cuenta estudiantil</h1>
+          <h1>Crea tu cuenta</h1>
           <p>Necesitamos tus datos básicos para habilitar el acceso al chat institucional.</p>
         </div>
 

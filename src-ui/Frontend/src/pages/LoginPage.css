@@ -1,7 +1,34 @@
 .login-page {
-  display: grid;
-  place-items: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
   padding: 2rem;
+}
+
+.login-page__copyright {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  color: var(--color-text-soft);
+  font-size: 0.78rem;
+}
+
+.login-page__logo {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  margin: 0;
+  color: var(--color-accent);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
 }
 
 .login-card {
@@ -19,13 +46,11 @@
   margin: 0;
 }
 
-.login-card__eyebrow {
-  margin: 0 0 0.6rem;
-  color: var(--color-accent);
-  letter-spacing: 0.12em;
+.login-card__intro h1 {
   text-transform: uppercase;
-  font-size: 0.82rem;
+  text-align: center;
 }
+
 
 .login-card__intro p:last-child {
   margin-top: 0.9rem;
@@ -54,6 +79,44 @@
   color: var(--color-text);
 }
 
+.login-card__input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.login-card__input-wrap input {
+  padding-right: 3rem;
+}
+
+.login-card__toggle-pw {
+  position: absolute;
+  right: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-soft);
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.login-card__toggle-pw:hover {
+  color: var(--color-text);
+}
+
+.login-card__toggle-pw svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .login-card input:focus {
   outline: none;
   border-color: var(--color-primary);
@@ -64,16 +127,17 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.8rem;
+  margin-top: 1rem;
 }
 
 .login-card__actions button {
   border: none;
-  border-radius: var(--radius-sm);
   padding: 0.95rem 1rem;
   background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
   color: #07111f;
   font-weight: 800;
   cursor: pointer;
+  border-radius: 3rem;
 }
 
 .login-card__actions .secondary {
@@ -98,6 +162,7 @@
 .login-card__footer {
   margin-top: 1.25rem;
   color: var(--color-text-soft);
+  text-align: center;
 }
 
 .login-card__footer a {

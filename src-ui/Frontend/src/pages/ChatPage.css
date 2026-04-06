@@ -318,7 +318,7 @@
 .chat-page__composer-row {
   display: flex;
   gap: 0.8rem;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .chat-page__composer textarea {
@@ -339,15 +339,33 @@
   box-shadow: 0 0 0 3px rgba(92, 179, 255, 0.16);
 }
 
-.chat-page__composer button {
-  border: none;
-  border-radius: var(--radius-md);
+.chat-page__send-btn {
   padding: 0.95rem 1.15rem;
   min-width: 92px;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-  color: #07111f;
   font-weight: 800;
   cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  opacity: 0.6;
+  border-radius: 5rem;
+  background: linear-gradient(135deg, rgba(92, 179, 255, 0.15), rgba(233, 191, 94, 0.15));
+  color: white;
+  border: thin solid;
+  border-color: gray;
+}
+
+.chat-page__send-btn:not(:disabled) {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+.chat-page__send-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  opacity: 1;
+}
+
+.chat-page__send-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .chat-page__voice-input {
@@ -356,6 +374,8 @@
   color: var(--color-text);
   cursor: pointer;
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  height: 3.5rem;
+  width: 3.5rem;
 }
 
 .chat-page__voice-input:hover:not(:disabled),
@@ -365,7 +385,7 @@
   background: rgba(233, 191, 94, 0.14);
 }
 
-.chat-page__composer button:disabled {
+.chat-page__voice-input:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
@@ -373,6 +393,15 @@
 @media (max-width: 980px) {
   .chat-page__layout {
     grid-template-columns: 1fr;
+  }
+
+  /* SidePanel is position:fixed on mobile, takes no grid space */
+  .chat-page__layout > aside {
+    display: none;
+  }
+
+  .chat-page__layout > aside.is-open {
+    display: flex;
   }
 }
 

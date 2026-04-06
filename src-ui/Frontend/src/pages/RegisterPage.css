@@ -25,6 +25,11 @@
 .register-card__intro p,
 .register-card__footer {
   margin: 0;
+  text-align: center;
+}
+
+.register-card__intro h1 {
+  text-transform: uppercase;
 }
 
 .register-card__intro p:last-child {
@@ -68,12 +73,13 @@
 
 .register-card button {
   border: none;
-  border-radius: var(--radius-sm);
   padding: 1rem 1.1rem;
   background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
   color: #07111f;
   font-weight: 800;
   cursor: pointer;
+  border-radius: 3rem;
+  margin-top: 2rem;
 }
 
 .register-card button:disabled {

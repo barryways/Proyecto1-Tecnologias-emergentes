@@ -75,6 +75,7 @@ function ChatPage() {
   const messagesEndRef = useRef(null)
   const [conversations, setConversations] = useState([])
   const [activeConversationId, setActiveConversationId] = useState(null)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   const [draftMessages, setDraftMessages] = useState(() => [buildWelcomeMessage(user?.first_name)])
   const [input, setInput] = useState('')
   const [error, setError] = useState('')
@@ -346,6 +347,7 @@ function ChatPage() {
           subtitle="Sesión estudiantil"
           user={user}
           onLogout={handleLogout}
+          onMenuOpen={() => setSidebarOpen(true)}
         />
 
         <div className="chat-page__layout">
@@ -354,6 +356,10 @@ function ChatPage() {
             activeConversationId={activeConversationId}
             onSelectConversation={handleSelectConversation}
             onNewConversation={handleNewConversation}
+            isOpen={sidebarOpen}
+            onClose={() => setSidebarOpen(false)}
+            user={user}
+            onLogout={handleLogout}
           />
 
           <section className="chat-page__panel">
@@ -447,7 +453,7 @@ function ChatPage() {
                 >
                   <VoiceIcon />
                 </button>
-                <button type="button" onClick={handleSend} disabled={isLoading || !input.trim()}>
+                <button type="button" className="chat-page__send-btn" onClick={handleSend} disabled={isLoading || !input.trim()}>
                   {isLoading ? '...' : 'Enviar'}
                 </button>
               </div>
