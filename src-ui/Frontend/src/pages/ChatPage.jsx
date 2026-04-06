@@ -438,7 +438,7 @@ function ChatPage() {
                       : ''
                   }}
                   onKeyDown={handleKeyDown}
-                  placeholder="Escribe consulta para el asistente..."
+                  placeholder="Escribe consulta..."
                 />
                 <button
                   type="button"
