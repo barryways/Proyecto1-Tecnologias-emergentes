@@ -25,9 +25,17 @@ if __name__ == '__main__':
         init_fine_tuning()
     elif opcion == '6':
         '''
+            - 1
             ✅ File uploaded successfully. [ID] = file-9rXPEKnzZ51ErSA7Tc1BSU
             ✅ Job created successfully. [ID] = ftjob-5gUEKMUsoR30vKzwITp08A7z
+            
+            - 2
+            ✅ File uploaded successfully. [ID] = file-97zHjzG4mbaezu6HThiBHw
+            ✅ Job created successfully. [ID] = ftjob-SiXHd3Y9UFvMkpKQ9ic6hleW
+            
+            - 3
+            ✅ Job created successfully. [ID] = ftjob-VxXQpjtNCotKNpEZox6szbAw
         '''
-        status_fine_tuning(job_id='ftjob-5gUEKMUsoR30vKzwITp08A7z')
+        status_fine_tuning(job_id='ftjob-VxXQpjtNCotKNpEZox6szbAw')
     else:
         print('Opción incorrecta ✖️✖')
