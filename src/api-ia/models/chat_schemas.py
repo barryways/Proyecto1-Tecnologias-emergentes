@@ -1,4 +1,5 @@
 from datetime import datetime
+from decimal import Decimal
 from typing import Literal, Optional
 
 from pydantic import BaseModel, Field
@@ -30,3 +31,33 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     content: str
     conversation: ConversationDetail
+
+
+class UsuarioResumen(BaseModel):
+    id_usuario: int
+    nombre: str
+    apellido: str
+
+
+class ConsultaDetalle(BaseModel):
+    tokens_entrada: int
+    tokens_salida: int
+    tokens_totales: int
+    modelo: str
+    costo_entrada: Decimal
+    costo_salida: Decimal
+    costo_total: Decimal
+    fec_consumo: str
+
+
+class ResumenConsumo(BaseModel):
+    costo_total: Decimal
+    tokens_totales: int
+    total_consultas: int
+
+
+class DashboardConsumo(BaseModel):
+    nombre_completo: str
+    resumen: ResumenConsumo
+    ultimo_consumo: Optional[str]
+    ultimas_consultas: list[ConsultaDetalle]

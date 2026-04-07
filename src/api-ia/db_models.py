@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 from datetime import datetime
+from decimal import Decimal
 
-from sqlalchemy import BigInteger, ForeignKey, Index, Integer, String, Text, UniqueConstraint, text
+from sqlalchemy import BigInteger, ForeignKey, Index, Integer, Numeric, String, Text, UniqueConstraint, text
 from sqlalchemy.dialects.mysql import LONGTEXT, TIMESTAMP
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
@@ -51,6 +52,10 @@ class Usuario(Base):
 
     rol: Mapped[RolUsuario] = relationship(back_populates="usuarios")
     conversaciones: Mapped[list["Conversacion"]] = relationship(
+        back_populates="usuario",
+        cascade="all, delete-orphan",
+    )
+    consumos: Mapped[list["ConsumoUsuario"]] = relationship(
         back_populates="usuario",
         cascade="all, delete-orphan",
     )
@@ -125,3 +130,32 @@ class Mensaje(Base):
 
     conversacion: Mapped[Conversacion] = relationship(back_populates="mensajes")
     tipo_mensaje: Mapped[TipoMensaje] = relationship(back_populates="mensajes")
+
+
+class ConsumoUsuario(Base):
+    __tablename__ = "consumo_usuario"
+    __table_args__ = (
+        Index("idx_consumo_usuario", "id_usuario"),
+        Index("idx_consumo_fecha", "fec_consumo"),
+        Index("idx_consumo_usuario_fecha", "id_usuario", "fec_consumo"),
+    )
+
+    id_consumo: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
+    id_usuario: Mapped[int] = mapped_column(
+        ForeignKey("usuario.id_usuario", onupdate="CASCADE", ondelete="CASCADE"),
+        nullable=False,
+    )
+    tokens_entrada: Mapped[int] = mapped_column(Integer, nullable=False)
+    tokens_salida: Mapped[int] = mapped_column(Integer, nullable=False)
+    tokens_totales: Mapped[int] = mapped_column(Integer, nullable=False)
+    modelo: Mapped[str] = mapped_column(String(50), nullable=False, default="gpt-3.5-turbo")
+    costo_entrada: Mapped[Decimal] = mapped_column(Numeric(10, 8), nullable=False)
+    costo_salida: Mapped[Decimal] = mapped_column(Numeric(10, 8), nullable=False)
+    costo_total: Mapped[Decimal] = mapped_column(Numeric(10, 8), nullable=False)
+    fec_consumo: Mapped[datetime] = mapped_column(
+        TIMESTAMP,
+        nullable=False,
+        server_default=text("CURRENT_TIMESTAMP"),
+    )
+
+    usuario: Mapped["Usuario"] = relationship(back_populates="consumos")

@@ -48,6 +48,14 @@ export function sendChatMessage(token, payload) {
   })
 }
 
+export function fetchUsuarios(token) {
+  return request('/chat/usuarios', { token })
+}
+
+export function fetchTokens(token, userId) {
+  return request(`/chat/tokens/${userId}`, { token })
+}
+
 export async function transcribeAudio(token, audioBlob) {
   const formData = new FormData()
   formData.append('audio', audioBlob, 'dictado.wav')

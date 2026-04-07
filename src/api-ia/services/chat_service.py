@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
+from decimal import Decimal
 import logging
 import os
 from uuid import uuid4
@@ -12,8 +13,10 @@ from sqlalchemy import delete, select
 from sqlalchemy.orm import selectinload
 
 from database import SessionLocal, ensure_bootstrap_data
-from db_models import Conversacion, Mensaje, TipoMensaje
-from models.chat_schemas import ChatMessage, ConversationDetail
+from db_models import Conversacion, ConsumoUsuario, Mensaje, TipoMensaje, Usuario
+from models.chat_schemas import ChatMessage, ConsultaDetalle, DashboardConsumo, ResumenConsumo, UsuarioResumen, ConversationDetail
+
+_logger = logging.getLogger(__name__)
 
 
 def _to_api_datetime(value: datetime | None) -> datetime:
@@ -103,6 +106,50 @@ def list_conversations(user_id: int) -> list[ConversationDetail]:
         return [_conversation_to_detail(conversation) for conversation in conversations]
 
 
+# Costo en USD por token para cada modelo (entrada, salida)
+_MODEL_COSTS: dict[str, tuple[Decimal, Decimal]] = {
+    "gpt-3.5-turbo":  (Decimal("0.0000005"),  Decimal("0.0000015")),
+    "gpt-4o":         (Decimal("0.000005"),    Decimal("0.000015")),
+    "gpt-4o-mini":    (Decimal("0.00000015"),  Decimal("0.0000006")),
+    "gpt-4-turbo":    (Decimal("0.00001"),     Decimal("0.00003")),
+    "gpt-4":          (Decimal("0.00003"),     Decimal("0.00006")),
+}
+
+# Costo en USD por token para modelos fine-tuneados (entrada, salida)
+_FINE_TUNED_COSTS: dict[str, tuple[Decimal, Decimal]] = {
+    "gpt-3.5-turbo":  (Decimal("0.000003"),   Decimal("0.000006")),
+    "gpt-4o-mini":    (Decimal("0.0000003"),   Decimal("0.0000012")),
+    "gpt-4o":         (Decimal("0.000025"),    Decimal("0.000075")),
+}
+
+
+def _resolve_model_costs(model: str) -> tuple[Decimal, Decimal]:
+    # Modelo fine-tuneado: ft:<base-model>:<org>::<id>
+    if model.startswith("ft:"):
+        base = model.split(":")[1]  # ej. "gpt-3.5-turbo-0125"
+        for key, rates in _FINE_TUNED_COSTS.items():
+            if base.startswith(key):
+                return rates
+        _logger.warning("Modelo fine-tuneado '%s' (base: '%s') no tiene costos definidos, se usara 0.", model, base)
+        return Decimal("0"), Decimal("0")
+
+    if model in _MODEL_COSTS:
+        return _MODEL_COSTS[model]
+    for key, rates in _MODEL_COSTS.items():
+        if model.startswith(key):
+            return rates
+
+    _logger.warning("Modelo '%s' no tiene costos definidos, se usara 0.", model)
+    return Decimal("0"), Decimal("0")
+
+
+def _calculate_costs(model: str, prompt_tokens: int, completion_tokens: int) -> tuple[Decimal, Decimal, Decimal]:
+    input_rate, output_rate = _resolve_model_costs(model)
+    costo_entrada = (Decimal(prompt_tokens) * input_rate).quantize(Decimal("0.00000001"))
+    costo_salida = (Decimal(completion_tokens) * output_rate).quantize(Decimal("0.00000001"))
+    return costo_entrada, costo_salida, (costo_entrada + costo_salida).quantize(Decimal("0.00000001"))
+
+
 def _get_openai_client() -> tuple[OpenAI, str]:
     api_key = os.getenv("OPENAI_API_KEY", "").strip()
     model_id = os.getenv("OPENAI_MODEL_ID", "").strip()
@@ -126,7 +173,7 @@ def ask_tutor(
     message: str,
     history: list[ChatMessage],
     max_tokens: int | None = 1024,
-) -> str:
+) -> tuple[str, object, str]:
     trimmed_message = message.strip()
     if not trimmed_message:
         raise HTTPException(
@@ -182,7 +229,7 @@ def ask_tutor(
             detail="El modelo de IA no devolvio contenido.",
         )
 
-    return content
+    return content, response.usage, model_id
 
 
 def save_conversation(
@@ -194,7 +241,7 @@ def save_conversation(
 ) -> tuple[str, ConversationDetail]:
     timestamp = datetime.now(timezone.utc)
     trimmed_message = message.strip()
-    assistant_reply = ask_tutor(message=trimmed_message, history=history, max_tokens=max_tokens)
+    assistant_reply, openai_usage, model_id = ask_tutor(message=trimmed_message, history=history, max_tokens=max_tokens)
     normalized_history = [
         {
             "role": item.role,
@@ -274,6 +321,27 @@ def save_conversation(
                 )
             )
 
+        if openai_usage is not None:
+            prompt_tokens = getattr(openai_usage, "prompt_tokens", 0) or 0
+            completion_tokens = getattr(openai_usage, "completion_tokens", 0) or 0
+            total_tokens = getattr(openai_usage, "total_tokens", 0) or 0
+            costo_entrada, costo_salida, costo_total = _calculate_costs(
+                model_id, prompt_tokens, completion_tokens
+            )
+            session.add(
+                ConsumoUsuario(
+                    id_usuario=user_id,
+                    tokens_entrada=prompt_tokens,
+                    tokens_salida=completion_tokens,
+                    tokens_totales=total_tokens,
+                    modelo=model_id,
+                    costo_entrada=costo_entrada,
+                    costo_salida=costo_salida,
+                    costo_total=costo_total,
+                    fec_consumo=_to_db_datetime(timestamp),
+                )
+            )
+
         session.commit()
         saved_conversation = _load_conversation(session, target_id)
         if saved_conversation is None:
@@ -285,5 +353,68 @@ def save_conversation(
         return assistant_reply, _conversation_to_detail(saved_conversation)
 
 
-_logger = logging.getLogger(__name__)
+def get_consumo_usuario(user_id: int) -> DashboardConsumo:
+    from sqlalchemy import func
+
+    with SessionLocal() as session:
+        usuario = session.scalar(select(Usuario).where(Usuario.id_usuario == user_id))
+        if usuario is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuario no encontrado.")
+
+        totales = session.execute(
+            select(
+                func.coalesce(func.sum(ConsumoUsuario.tokens_totales), 0).label("tokens_totales"),
+                func.coalesce(func.sum(ConsumoUsuario.costo_total), Decimal("0")).label("costo_total"),
+                func.count(ConsumoUsuario.id_consumo).label("total_consultas"),
+                func.max(ConsumoUsuario.fec_consumo).label("ultimo_consumo"),
+            ).where(ConsumoUsuario.id_usuario == user_id)
+        ).one()
+
+        ultimas = session.scalars(
+            select(ConsumoUsuario)
+            .where(ConsumoUsuario.id_usuario == user_id)
+            .order_by(ConsumoUsuario.fec_consumo.desc())
+            .limit(10)
+        ).all()
+
+    def _fmt(dt: datetime | None) -> str | None:
+        if dt is None:
+            return None
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+
+    return DashboardConsumo(
+        nombre_completo=f"{usuario.nombre} {usuario.apellido}",
+        resumen=ResumenConsumo(
+            costo_total=Decimal(str(totales.costo_total or "0")),
+            tokens_totales=int(totales.tokens_totales or 0),
+            total_consultas=int(totales.total_consultas or 0),
+        ),
+        ultimo_consumo=_fmt(totales.ultimo_consumo),
+        ultimas_consultas=[
+            ConsultaDetalle(
+                tokens_entrada=r.tokens_entrada,
+                tokens_salida=r.tokens_salida,
+                tokens_totales=r.tokens_totales,
+                modelo=r.modelo,
+                costo_entrada=r.costo_entrada,
+                costo_salida=r.costo_salida,
+                costo_total=r.costo_total,
+                fec_consumo=_fmt(r.fec_consumo) or "",
+            )
+            for r in ultimas
+        ],
+    )
+
+
+def list_usuarios() -> list[UsuarioResumen]:
+    with SessionLocal() as session:
+        usuarios = session.scalars(
+            select(Usuario).order_by(Usuario.nombre, Usuario.apellido)
+        ).all()
+    return [
+        UsuarioResumen(id_usuario=u.id_usuario, nombre=u.nombre, apellido=u.apellido)
+        for u in usuarios
+    ]
 

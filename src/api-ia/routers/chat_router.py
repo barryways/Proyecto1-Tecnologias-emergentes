@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, File, UploadFile
 
-from models.chat_schemas import ChatRequest, ChatResponse, ConversationDetail
+from models.chat_schemas import ChatRequest, ChatResponse, DashboardConsumo, ConversationDetail, UsuarioResumen
 from models.stt_schemas import TranscriptionResponse
 from services.auth_service import get_current_user
-from services.chat_service import list_conversations, save_conversation
+from services.chat_service import get_consumo_usuario, list_conversations, list_usuarios, save_conversation
 from services.stt_service import transcribe_wav_audio
 
 router = APIRouter(prefix="/chat", tags=["Chat"])
@@ -28,6 +28,18 @@ async def chat_completion(
         max_tokens=request.max_tokens,
     )
     return ChatResponse(content=assistant_reply, conversation=conversation)
+
+
+@router.get("/usuarios", response_model=list[UsuarioResumen])
+async def get_usuarios():
+    return list_usuarios()
+
+
+@router.get("/tokens/{user_id}", response_model=DashboardConsumo)
+async def get_token_usage(
+    user_id: int
+):
+    return get_consumo_usuario(user_id)
 
 
 @router.post("/transcriptions", response_model=TranscriptionResponse)
