@@ -126,3 +126,30 @@ erDiagram
     CONVERSACION ||--o{ MENSAJE : contiene
     TIPO_MENSAJE ||--o{ MENSAJE : clasifica
 ```
+
+## .env
+
+```
+    CORS_ORIGINS=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174
+    JWT_SECRET=
+    JWT_LIFETIME_DAYS=1
+    DATABASE_URL=
+    DB_HOST=
+    DB_PORT=
+    DB_NAME=
+    DB_USER=
+    DB_PASSWORD=
+    DB_SSL_ENABLED=false
+    DB_SSL_CA=
+    DB_ECHO=false
+    OPENAI_API_KEY=''
+    OPENAI_MODEL_ID=''
+    API_KEY=''
+    APP_ENV=development
+    PORT=8000
+    AUTH_DEFAULT_ADMIN_EMAIL=
+    AUTH_DEFAULT_ADMIN_PASSWORD=
+    AUTH_DEFAULT_ADMIN_FIRST_NAME=
+    AUTH_DEFAULT_ADMIN_LAST_NAME=
+    AUTH_DEFAULT_ADMIN_STUDENT_ID=
+```
